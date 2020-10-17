@@ -96,7 +96,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
-        'DATABASE_PORT': '5432',
+        'DATABASE_PORT': '',
     }
 }
 db_from_env = dj_database_url.config()
