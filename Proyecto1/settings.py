@@ -29,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2%ef25k)lv$yfpvo8&)y3)e06njb@cf+p^_obp#fl#o+mpd1xj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
@@ -140,12 +140,12 @@ USE_TZ = True
 
 # STATIC_ROOT = '/home/ITACHIGRIAS/Proyecto1/static/'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "/static/"),)
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, "/static/"),)
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, "static"),
 # )
 #
-STATIC_ROOT = os.path.join(BASE_DIR, "/static/")
+# STATIC_ROOT = os.path.join(BASE_DIR, "/static/")
 
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 #
