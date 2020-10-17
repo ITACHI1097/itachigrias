@@ -16,10 +16,10 @@ import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+#
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,7 +29,7 @@ STATICFILES_DIRS = (
 SECRET_KEY = '2%ef25k)lv$yfpvo8&)y3)e06njb@cf+p^_obp#fl#o+mpd1xj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
@@ -136,11 +136,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-
-# STATIC_ROOT = '/home/yanfriends_server/static/'
 # STATIC_URL = '/static/'
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, "/static/"),)
+
+STATIC_ROOT = '/home/ITACHIGRIAS/Proyecto1/static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "/static/"),)
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, "static"),
 # )
