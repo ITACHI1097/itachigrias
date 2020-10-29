@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Login</title>
+  <title>Login-ITACHI</title>
 
   <!-- Custom fonts for this template-->
   <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -48,7 +48,7 @@
                   <form class="user" method="POST" action="">
                       {% csrf_token %}
                     <div class="form-group">
-                      <input type="text" name="username" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Uauario...">
+                      <input type="text" name="username" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Usuario...">
                     </div>
                     <div class="form-group">
                       <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña...">
@@ -63,10 +63,10 @@
                       <p id="messages">{{ message }}</p>
                   {% endfor %}
                   <div class="text-center">
-                    <a class="small" href="http://127.0.0.1:8000/reset_password">Me Olvide la Contraseña</a>
+                    <a class="small" href="{% url 'reset_password' %}">Me Olvide la Contraseña</a>
                   </div>
                   <div class="text-center">
-                    <a class="small" href="http://127.0.0.1:8000/register">Crea una Cuenta!</a>
+                    <a class="small" href="{% url 'register' %}">Crea una Cuenta!</a>
                   </div>
                 </div>
               </div>

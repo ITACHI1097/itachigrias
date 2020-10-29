@@ -7,7 +7,7 @@
       {% block slidebar %}
           {% block button_dashboard %}
               <li class="nav-item active">
-                <a class="nav-link" href="http://127.0.0.1:8000/obando">
+                <a class="nav-link" href="{% url 'obando' %}">
                   <i class="fas fa-fw fa-tachometer-alt"></i>
                   <span>Dashboard</span></a>
               </li>
@@ -42,7 +42,7 @@
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Graficas:</h6>
-                <a class="collapse-item" href="http://127.0.0.1:8000/gestionC/">Gestion de Grafica</a>
+                <a class="collapse-item" href="{% url 'gestionC' %}">Gestion de Grafica</a>
 
               </div>
             </div>
@@ -75,7 +75,7 @@
           </li>
           <!-- Nav Item - Charts -->
           <li class="nav-item">
-            <a class="nav-link" href="http://127.0.0.1:8000/grafic/" >
+            <a class="nav-link" href="{% url 'grafic' %}" >
               <i class="fas fa-fw fa-chart-area"></i>
               <span>Charts</span></a>
           </li>

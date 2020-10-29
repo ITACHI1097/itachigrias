@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Register</title>
+  <title>Register-ITACHI</title>
 
   <!-- Custom fonts for this template-->
   <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -64,10 +64,10 @@
               <hr>
               {{ form.errors }}
               <div class="text-center">
-                <a class="small" href="http://127.0.0.1:8000/reset_password">Me Olvide la Contraseña</a>
+                <a class="small" href="{% url 'reset_password' %}">Me Olvide la Contraseña</a>
               </div>
               <div class="text-center">
-                <a class="small" href="http://127.0.0.1:8000/login">¿Ya Tienes una Cuenta? Login!</a>
+                <a class="small" href="{% url 'login' %}">¿Ya Tienes una Cuenta? Login!</a>
               </div>
             </div>
           </div>

@@ -39,7 +39,7 @@
     <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="http://127.0.0.1:8000/inicio">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'obando' %}">
         <div class="sidebar-brand-icon rotate-n-15">
           <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-lightning-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
@@ -53,7 +53,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="http://127.0.0.1:8000/obando">
+        <a class="nav-link" href="{% url 'obando' %}">
           <i class="fas fa-house-damage"></i>
           <span>Inicio</span></a>
       </li>
@@ -118,7 +118,7 @@
                     <div class="card-body">
                       <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                          <a href="http://127.0.0.1:8000/obando" class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ir->></a>
+                          <a href="{% url 'obando' %}" class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ir->></a>
                           <div class="h5 mb-0 font-weight-bold text-gray-800">Exprovincia de Obando</div>
                         </div>
                         <div class="col-auto">
