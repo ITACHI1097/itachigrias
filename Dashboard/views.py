@@ -1,6 +1,10 @@
 import cgi
+import codecs
+import csv
 
 from django.shortcuts import render, redirect
+from .forms import FormEntrada
+from .models import Entrada
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -72,6 +76,32 @@ def obando(request):
 @login_required(login_url='login')
 def grafic(request):
     return render(request, "Dashboard/grafic.html")
+
+@login_required(login_url='login')
+def subir(request):
+    if request.method == 'POST':
+         form = FormEntrada(request.POST, request.FILES)
+         if form.is_valid():
+
+            insert = Entrada()
+            insert.archivo = request.FILES.get('file')
+            deli=request.POST.get('delimitador')
+            insert.save()
+            f = codecs.open('media/'+str(insert.archivo), encoding='utf-8',)
+            f2 = open(str('media/icfes/data.txt'), 'a+')
+            for line in f:
+                f2.write(line.replace(deli,';'))
+            f.close()
+            f2.close()
+            f2 = open(str('media/icfes/data.txt'), 'r')
+            mensaje = f2.read()
+            print(mensaje)
+            f2.close()
+            return render(request, "Dashboard/subir.html")
+         else:
+             messages.error(request, "Error al procesar el formulario")
+    else:
+        return render(request, "Dashboard/subir.html")
 
 
 @login_required(login_url='login')

@@ -18,6 +18,8 @@ from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from Dashboard import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 # from Dashboard.views import Prueba
 
 urlpatterns = [
@@ -41,6 +43,7 @@ urlpatterns = [
     path('estu-edad/', views.est_edad, name='estu-edad'),
     path('desemp-ciu-edad/', views.desemp_ciu_edad, name='desemp-ciu-edad'),
     path('grafic/', views.grafic, name='grafic'),
+    path('subir/', views.subir, name='subir'),
     path('crear/', views.crear),
     # path('grafic/Dashboard/prueba.html', views.prueba)
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='Dashboard/password_reset.html'), name='reset_password'),
@@ -50,4 +53,7 @@ urlpatterns = [
 
 ]
 
-urlpatterns += staticfiles_urlpatterns()
+# urlpatterns += staticfiles_urlpatterns()
+#
+# if settings.DEBUG:
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

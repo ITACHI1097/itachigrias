@@ -1,12 +1,24 @@
 import psycopg2
 from django.db.models import Count, Avg
 from django.forms import *
+from .models import Entrada
 from Dashboard.models import DimEstudiantes, FactSaber11
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
 
+class CustomClearableFileInput(ClearableFileInput):
+    template_with_clear = '<br>  <label for="%(clear_checkbox_id)s">%(clear_checkbox_label)s</label> %(clear)s'
+
+
+class FormEntrada(ModelForm):
+    class Meta:
+        model = Entrada
+        fields = ('archivo',)
+        widgets = {
+            'archivo': CustomClearableFileInput
+        }
 
 
 

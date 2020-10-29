@@ -1,0 +1,47 @@
+
+{% extends "Dashboard/obando.html" %}
+        <!-- Begin Page Content -->
+        {% block head %}
+
+
+
+        {% endblock %}
+        {% block body %}
+        <body id="page-top"></body>
+        {% endblock %}
+        {% block content %}
+        <div class="container-fluid" ></div>
+            <form action="" method="POST" enctype="multipart/form-data" >
+            <div class="row">
+            {% csrf_token %}
+                <div class="col">
+            <input type="file" id="file" name="file" class="btn btn-outline-primary" />
+                </div>
+            </div>
+                <div class="card-body" >
+            <div class="row">
+                <label>Delimitador</label>
+            </div>
+
+                <div class="row">
+            <select id="delimitador" name="delimitador" class="form-control col-md-2 select2">
+
+                      <option value="¬">¬</option>
+                      <option value=",">,</option>
+                      <option value=";">;</option>
+                      <option value="\t">[TAB]</option>
+                      <option value="|">|</option>
+                      <option value="/">/</option>
+            </select>
+            </div>
+               <div class="row">
+            <input type="submit" value="submit" class="btn btn-outline-primary"/>
+               </div>
+
+            </div>
+
+            </form>
+        </div>
+
+        {% endblock %}
+          <!-- Content Row -->
