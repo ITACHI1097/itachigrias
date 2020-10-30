@@ -1,6 +1,7 @@
 import cgi
 import codecs
 import csv
+import pandas as pd
 
 from django.shortcuts import render, redirect
 from .forms import FormEntrada
@@ -18,6 +19,11 @@ from Dashboard.models import DimEstudiantes
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 import psycopg2, psycopg2.extras
+
+import os
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Create your views here.
@@ -83,6 +89,7 @@ def subir(request):
          form = FormEntrada(request.POST, request.FILES)
          if form.is_valid():
 
+            encabezados = []
             insert = Entrada()
             insert.archivo = request.FILES.get('file')
             deli=request.POST.get('delimitador')
@@ -94,9 +101,112 @@ def subir(request):
             f.close()
             f2.close()
             f2 = open(str('media/icfes/data.txt'), 'r')
-            mensaje = f2.read()
+            mensaje = f2.readline()
             print(mensaje)
             f2.close()
+            df = pd.read_csv(str(BASE_DIR+'/media/icfes/data.txt'), encoding='unicode_escape', sep=";", dtype='unicode')
+            df = df.drop(df[df['ESTU_DEPTO_PRESENTACION'] != 'NARIÑO'].index)
+            df = df.drop(df[(df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152022000084') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152210000261') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152215000138') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152215000511') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152224000019') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152227000010') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152227000222') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152317000035') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152317000078') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152323000063') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152323000161') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152356000166') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152356000182') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152356000191') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152356000204') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152356000212') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152356000221') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152356000409') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152356000581') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152356000735') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152356001367') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152356001901') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152560000124') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152573000093') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152585000161') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152585000188') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152585000374') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152585000439') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252210000096') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252215000035') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252215000451') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252215000469') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252224000145') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252227000057') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252227000138') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252227000162') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252227000189') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252227000791') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252227000863') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252227000880') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252227000936') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252287000218') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252317000081') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252317000404') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252317000412') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252323000190') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252352000069') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252352000140') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252352000166') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252352000263') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252356000101') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252356000535') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252356000888') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252356001001') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252356001019') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252356001035') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252356001485') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252356001663') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252560000030') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252560000048') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252560000099') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252560000340') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252573000195') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252573000209') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '252585000352') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '286320001413') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352215000587') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352287000018') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356000033') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356000131') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356000149') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356000157') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356000173') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356000467') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356001048') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356001421') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356001561') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356001819') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356001927') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356001951') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356001978') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '352356002001') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '452022000118') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '452215000441') &
+                            (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '452215000492') ].index)
+
+            # df.columns = [c.lower() for c in df.columns]
+            from sqlalchemy import create_engine
+            engine = create_engine('postgresql://postgres:1234@localhost:5432/icfes-1')
+
+            df.to_sql("table_temp", engine)
+            # conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+            # cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            # # sql = "delete from table_temp where 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152022000084'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152210000261'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152215000138'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152215000511'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152224000019'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152227000010'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152227000222'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152317000035'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152317000078'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152323000063'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152323000161'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152356000166'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152356000182'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152356000191'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152356000204'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152356000212'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152356000221'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152356000409'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152356000581'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152356000735'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152356001367'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152356001901'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152560000124'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152573000093'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152585000161'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152585000188'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152585000374'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'152585000439'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252210000096'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252215000035'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252215000451'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252215000469'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252224000145'and  'COLE_COD_DANE_ESTABLECIMIENTO'<>'252227000057'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252227000138'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252227000162'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252227000189'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252227000308'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252227000791'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252227000863'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252227000880'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252227000936'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252287000218'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252317000081'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252317000404'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252317000412'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252323000190'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252352000069'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252352000140'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252352000166'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252352000263'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252356000101'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252356000535'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252356000888'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252356001001'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252356001019'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252356001035'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252356001485'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252356001663'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252560000030'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252560000048'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252560000099'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252560000340'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252573000195'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252573000209'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'252585000352'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'286320001413'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352215000587'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352287000018'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356000033'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356000131'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356000149'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356000157'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356000173'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356000467'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356001048'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356001421'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356001561'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356001819'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356001927'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356001951'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356001978'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'352356002001'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'452022000118'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'452215000441'and 'COLE_COD_DANE_ESTABLECIMIENTO'<>'452215000492';"
+            # sql = "select 'COLE_CODIGO_ICFES' from table_temp where 'COLE_CODIGO_ICFES'='011502'"
+            # cur.execute(sql)
+            # row = cur.fetchall()
+            # print(row)
+            # cur.close()
+            # conn.close()
+            # print(df)
             return render(request, "Dashboard/subir.html")
          else:
              messages.error(request, "Error al procesar el formulario")
