@@ -278,7 +278,36 @@ def subir(request):
                 UPDATE table_temp SET "PUNT_SOCIALES_CIUDADANAS"='00' WHERE "PUNT_SOCIALES_CIUDADANAS" IS NULL;
                 UPDATE table_temp SET "PUNT_GLOBAL"='00' WHERE "PUNT_GLOBAL" IS NULL;
                 UPDATE table_temp SET "PUNT_LECTURA_CRITICA"='00' WHERE "PUNT_LECTURA_CRITICA" IS NULL;
-                update table_temp set "COLE_MCPIO_UBICACION"='GUAlMATAN', "COLE_DEPTO_UBICACION"='NARIÑO', "COLE_JORNADA"='M', "COLE_CALENDARIO"='A', "COLE_NATURALEZA"='OFICIAL', "COLE_CARACTER"='ACADEMICO' where "COLE_CODIGO_ICFES"='011619' OR "COLE_CODIGO_ICFES"='031385' OR "COLE_CODIGO_ICFES"='111070';"""
+                update table_temp set "COLE_MCPIO_UBICACION"='GUAlMATAN', "COLE_DEPTO_UBICACION"='NARIÑO', "COLE_JORNADA"='M', "COLE_CALENDARIO"='A', "COLE_NATURALEZA"='OFICIAL', "COLE_CARACTER"='ACADEMICO' where "COLE_CODIGO_ICFES"='011619' OR "COLE_CODIGO_ICFES"='031385' OR "COLE_CODIGO_ICFES"='111070';
+                ---Transformacion
+                ALTER TABLE table_temp ALTER COLUMN "ESTU_FECHANACIMIENTO" TYPE date USING (trim("ESTU_FECHANACIMIENTO")::date);
+                ALTER TABLE table_temp ADD "ANO_NACIMIENTO" int;
+                UPDATE table_temp SET "ANO_NACIMIENTO"=(SELECT EXTRACT(YEAR FROM "ESTU_FECHANACIMIENTO")) WHERE "ANO_NACIMIENTO" IS NULL;
+                --ALTER TABLE table_temp ALTER COLUMN "ANO_NACIMIENTO" TYPE int USING (trim("ANO_NACIMIENTO")::int);
+                ALTER TABLE table_temp ADD "ANO" int;
+                UPDATE table_temp SET "ANO"='2017' WHERE "PERIODO"='20171' or "PERIODO"='20172';
+                UPDATE table_temp SET "ANO"='2018' WHERE "PERIODO"='20181' or "PERIODO"='20182';
+                UPDATE table_temp SET "ANO"='2019' WHERE "PERIODO"='20191' or "PERIODO"='20192';
+                UPDATE table_temp SET "ANO"='2020' WHERE "PERIODO"='20201' or "PERIODO"='20202';
+                UPDATE table_temp SET "ANO"='2021' WHERE "PERIODO"='20211' or "PERIODO"='20212';
+                UPDATE table_temp SET "ANO"='2022' WHERE "PERIODO"='20221' or "PERIODO"='20222';
+                UPDATE table_temp SET "ANO"='2023' WHERE "PERIODO"='20231' or "PERIODO"='20232';
+                UPDATE table_temp SET "ANO"='2024' WHERE "PERIODO"='20241' or "PERIODO"='20242';
+                UPDATE table_temp SET "ANO"='2025' WHERE "PERIODO"='20251' or "PERIODO"='20252';
+                UPDATE table_temp SET "ANO"='2026' WHERE "PERIODO"='20261' or "PERIODO"='20262';
+                UPDATE table_temp SET "ANO"='2027' WHERE "PERIODO"='20271' or "PERIODO"='20272';
+                UPDATE table_temp SET "ANO"='2028' WHERE "PERIODO"='20281' or "PERIODO"='20282';
+                UPDATE table_temp SET "ANO"='2029' WHERE "PERIODO"='20291' or "PERIODO"='20292';
+                UPDATE table_temp SET "ANO"='2030' WHERE "PERIODO"='20301' or "PERIODO"='20302';
+                --ALTER TABLE table_temp ALTER COLUMN "ANO" TYPE int USING (trim("ANO")::int);
+                ALTER TABLE table_temp ADD "ESTU_EDAD" int;
+                UPDATE table_temp SET "ESTU_EDAD"="ANO"-"ANO_NACIMIENTO";
+                ALTER TABLE table_temp ADD "ESTU_RANGOEDAD" text;
+                UPDATE table_temp SET "ESTU_RANGOEDAD"='MENORES DE 17' WHERE "ESTU_EDAD" < 17;
+                UPDATE table_temp SET "ESTU_RANGOEDAD"='17' WHERE "ESTU_EDAD" = 17;
+                UPDATE table_temp SET "ESTU_RANGOEDAD"='18 Y 19' WHERE "ESTU_EDAD" = 17 OR "ESTU_EDAD" = 18;
+                UPDATE table_temp SET "ESTU_RANGOEDAD"='20 A 28' WHERE "ESTU_EDAD" >= 20 OR "ESTU_EDAD" <=28;
+                UPDATE table_temp SET "ESTU_RANGOEDAD"='MAYORES DE 28' WHERE "ESTU_EDAD" > 28;"""
                 cur.execute(sql)
             except (Exception, psycopg2.OperationalError) as error:
                 print(error)
