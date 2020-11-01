@@ -214,6 +214,8 @@ def subir(request):
                 UPDATE table_temp SET "FAMI_TIENELAVADORA"='1' WHERE "FAMI_TIENELAVADORA"='Si';
                 UPDATE table_temp SET "FAMI_TIENESERVICIOTV"='0' WHERE "FAMI_TIENESERVICIOTV"='No' OR "FAMI_TIENESERVICIOTV" IS NULL;
                 UPDATE table_temp SET "FAMI_TIENESERVICIOTV"='1' WHERE "FAMI_TIENESERVICIOTV"='Si';
+                UPDATE table_temp SET "FAMI_TIENECONSOLAVIDEOJUEGOS"='0' WHERE "FAMI_TIENECONSOLAVIDEOJUEGOS"='No' OR "FAMI_TIENECONSOLAVIDEOJUEGOS" IS NULL;
+                UPDATE table_temp SET "FAMI_TIENECONSOLAVIDEOJUEGOS"='1' WHERE "FAMI_TIENECONSOLAVIDEOJUEGOS"='Si';
                 UPDATE table_temp SET "FAMI_EDUCACIONMADRE" = '1' Where "FAMI_EDUCACIONMADRE" = 'Ninguno' OR "FAMI_EDUCACIONMADRE"='No Aplica' OR "FAMI_EDUCACIONMADRE" IS NULL ;
                 UPDATE table_temp SET "FAMI_EDUCACIONMADRE" = '2' Where "FAMI_EDUCACIONMADRE" = 'Primaria incompleta';
                 UPDATE table_temp SET "FAMI_EDUCACIONMADRE" = '3' Where "FAMI_EDUCACIONMADRE" = 'Primaria completa';
@@ -254,20 +256,32 @@ def subir(request):
                 UPDATE table_temp SET "FAMI_CUARTOSHOGAR"='4' where "FAMI_CUARTOSHOGAR"='Cuatro';
                 UPDATE table_temp SET "FAMI_CUARTOSHOGAR"='5' where "FAMI_CUARTOSHOGAR"='Cinco';
                 UPDATE table_temp SET "FAMI_CUARTOSHOGAR"='6' where "FAMI_CUARTOSHOGAR"='Seis o mas';
-                UPDATE table_temp SET "COLE_GENERO"='F' WHERE "COLE_GENERO"='FEMENINO';
-                UPDATE table_temp SET "COLE_GENERO"='X' WHERE "COLE_GENERO"='MIXTO';
-                UPDATE table_temp SET "COLE_JORNADA"='M' WHERE "COLE_JORNADA"='MAÑANA';
-                UPDATE table_temp SET "COLE_JORNADA"='N' WHERE "COLE_JORNADA"='NOCHE';
-                UPDATE table_temp SET "COLE_JORNADA"='S' WHERE "COLE_JORNADA"='SABATINA';
-                UPDATE table_temp SET "COLE_JORNADA"='U' WHERE "COLE_JORNADA"='UNICA';
-                UPDATE table_temp SET "COLE_JORNADA"='T' WHERE "COLE_JORNADA"='TARDE';
+                UPDATE table_temp SET "COLE_JORNADA"='MANANA' WHERE "COLE_JORNADA"='MAÑANA';
+                UPDATE table_temp SET "COLE_AREA_UBICACION"='R' WHERE "COLE_AREA_UBICACION"='RURAL';
+                UPDATE table_temp SET "COLE_AREA_UBICACION"='U' WHERE "COLE_AREA_UBICACION"='URBANO';
                 UPDATE table_temp SET "COLE_CARACTER"='ACADEMICO' WHERE "COLE_CARACTER"='ACADÉMICO';
                 UPDATE table_temp SET "COLE_CARACTER"='TECNICO' WHERE "COLE_CARACTER"='TÉCNICO';
                 UPDATE table_temp SET "COLE_CARACTER"='ACADEMICO Y TECNICO' WHERE "COLE_CARACTER"='TÉCNICO/ACADÉMICO';
                 UPDATE table_temp SET "DESEMP_C_NATURALES"='00' WHERE "DESEMP_C_NATURALES" IS NULL;
+                UPDATE table_temp SET "DESEMP_C_NATURALES"='INSUFICIENTE' WHERE "DESEMP_C_NATURALES"='1';
+                UPDATE table_temp SET "DESEMP_C_NATURALES"='MINIMO' WHERE "DESEMP_C_NATURALES"='2';
+                UPDATE table_temp SET "DESEMP_C_NATURALES"='SATISFACTORIO' WHERE "DESEMP_C_NATURALES"='3';
+                UPDATE table_temp SET "DESEMP_C_NATURALES"='AVANZADO' WHERE "DESEMP_C_NATURALES"='4';
                 UPDATE table_temp SET "DESEMP_LECTURA_CRITICA"='00' WHERE "DESEMP_LECTURA_CRITICA" IS NULL;
+                UPDATE table_temp SET "DESEMP_LECTURA_CRITICA"='INSUFICIENTE' WHERE "DESEMP_LECTURA_CRITICA"='1';
+                UPDATE table_temp SET "DESEMP_LECTURA_CRITICA"='MINIMO' WHERE "DESEMP_LECTURA_CRITICA"='2';
+                UPDATE table_temp SET "DESEMP_LECTURA_CRITICA"='SATISFACTORIO' WHERE "DESEMP_LECTURA_CRITICA"='3';
+                UPDATE table_temp SET "DESEMP_LECTURA_CRITICA"='AVANZADO' WHERE "DESEMP_LECTURA_CRITICA"='4';
                 UPDATE table_temp SET "DESEMP_MATEMATICAS"='00' WHERE "DESEMP_MATEMATICAS" IS NULL;
+                UPDATE table_temp SET "DESEMP_MATEMATICAS"='INSUFICIENTE' WHERE "DESEMP_MATEMATICAS"='1';
+                UPDATE table_temp SET "DESEMP_MATEMATICAS"='MINIMO' WHERE "DESEMP_MATEMATICAS"='2';
+                UPDATE table_temp SET "DESEMP_MATEMATICAS"='SATISFACTORIO' WHERE "DESEMP_MATEMATICAS"='3';
+                UPDATE table_temp SET "DESEMP_MATEMATICAS"='AVANZADO' WHERE "DESEMP_MATEMATICAS"='4';
                 UPDATE table_temp SET "DESEMP_SOCIALES_CIUDADANAS"='00' WHERE "DESEMP_SOCIALES_CIUDADANAS" IS NULL;
+                UPDATE table_temp SET "DESEMP_SOCIALES_CIUDADANAS"='INSUFICIENTE' WHERE "DESEMP_SOCIALES_CIUDADANAS"='1';
+                UPDATE table_temp SET "DESEMP_SOCIALES_CIUDADANAS"='MINIMO' WHERE "DESEMP_SOCIALES_CIUDADANAS"='2';
+                UPDATE table_temp SET "DESEMP_SOCIALES_CIUDADANAS"='SATISFACTORIO' WHERE "DESEMP_SOCIALES_CIUDADANAS"='3';
+                UPDATE table_temp SET "DESEMP_SOCIALES_CIUDADANAS"='AVANZADO' WHERE "DESEMP_SOCIALES_CIUDADANAS"='4';
                 UPDATE table_temp SET "PERCENTIL_C_NATURALES"='00' WHERE "PERCENTIL_C_NATURALES" IS NULL;
                 UPDATE table_temp SET "PERCENTIL_GLOBAL"='00' WHERE "PERCENTIL_GLOBAL" IS NULL;
                 UPDATE table_temp SET "PERCENTIL_INGLES"='00' WHERE "PERCENTIL_INGLES" IS NULL;
@@ -279,35 +293,274 @@ def subir(request):
                 UPDATE table_temp SET "PUNT_GLOBAL"='00' WHERE "PUNT_GLOBAL" IS NULL;
                 UPDATE table_temp SET "PUNT_LECTURA_CRITICA"='00' WHERE "PUNT_LECTURA_CRITICA" IS NULL;
                 update table_temp set "COLE_MCPIO_UBICACION"='GUAlMATAN', "COLE_DEPTO_UBICACION"='NARIÑO', "COLE_JORNADA"='M', "COLE_CALENDARIO"='A', "COLE_NATURALEZA"='OFICIAL', "COLE_CARACTER"='ACADEMICO' where "COLE_CODIGO_ICFES"='011619' OR "COLE_CODIGO_ICFES"='031385' OR "COLE_CODIGO_ICFES"='111070';
+                UPDATE table_temp SET "COLE_MCPIO_UBICACION"='CUASPUD CARLOSAMA' WHERE "COLE_MCPIO_UBICACION"='CUASPUD (CARLOSAMA)' OR "COLE_MCPIO_UBICACION"='CUASPÚD';
+                UPDATE table_temp SET "COLE_MCPIO_UBICACION"='POTOSI' WHERE "COLE_MCPIO_UBICACION"='POTOSÍ';
+                UPDATE table_temp SET "COLE_MCPIO_UBICACION"='CORDOBA' WHERE "COLE_MCPIO_UBICACION"='CÓRDOBA';
+                UPDATE table_temp SET "ESTU_GENERO"='FEMENINO' WHERE "ESTU_GENERO"='F';
+                UPDATE table_temp SET "ESTU_GENERO"='MASCULINO' WHERE "ESTU_GENERO"='M';
+                UPDATE table_temp SET "FAMI_NUMLIBROS"='MAS DE 100 LIBROS' WHERE "FAMI_NUMLIBROS"='MÁS DE 100 LIBROS';
+                
                 ---Transformacion
                 ALTER TABLE table_temp ALTER COLUMN "ESTU_FECHANACIMIENTO" TYPE date USING (trim("ESTU_FECHANACIMIENTO")::date);
+                ALTER TABLE table_temp ALTER COLUMN "PUNT_GLOBAL" TYPE int USING (trim("PUNT_GLOBAL")::int);
+                ALTER TABLE table_temp ALTER COLUMN "PUNT_LECTURA_CRITICA" TYPE int USING (trim("PUNT_LECTURA_CRITICA")::int);
+                ALTER TABLE table_temp ALTER COLUMN "PUNT_MATEMATICAS" TYPE int USING (trim("PUNT_MATEMATICAS")::int);
+                ALTER TABLE table_temp ALTER COLUMN "PUNT_C_NATURALES" TYPE int USING (trim("PUNT_C_NATURALES")::int);
+                ALTER TABLE table_temp ALTER COLUMN "PUNT_SOCIALES_CIUDADANAS" TYPE int USING (trim("PUNT_SOCIALES_CIUDADANAS")::int);
+                ALTER TABLE table_temp ALTER COLUMN "PUNT_INGLES" TYPE int USING (trim("PUNT_INGLES")::int);
                 ALTER TABLE table_temp ADD "ANO_NACIMIENTO" int;
                 UPDATE table_temp SET "ANO_NACIMIENTO"=(SELECT EXTRACT(YEAR FROM "ESTU_FECHANACIMIENTO")) WHERE "ANO_NACIMIENTO" IS NULL;
                 --ALTER TABLE table_temp ALTER COLUMN "ANO_NACIMIENTO" TYPE int USING (trim("ANO_NACIMIENTO")::int);
                 ALTER TABLE table_temp ADD "ANO" int;
                 UPDATE table_temp SET "ANO"='2017' WHERE "PERIODO"='20171' or "PERIODO"='20172';
                 UPDATE table_temp SET "ANO"='2018' WHERE "PERIODO"='20181' or "PERIODO"='20182';
-                UPDATE table_temp SET "ANO"='2019' WHERE "PERIODO"='20191' or "PERIODO"='20192';
-                UPDATE table_temp SET "ANO"='2020' WHERE "PERIODO"='20201' or "PERIODO"='20202';
-                UPDATE table_temp SET "ANO"='2021' WHERE "PERIODO"='20211' or "PERIODO"='20212';
-                UPDATE table_temp SET "ANO"='2022' WHERE "PERIODO"='20221' or "PERIODO"='20222';
-                UPDATE table_temp SET "ANO"='2023' WHERE "PERIODO"='20231' or "PERIODO"='20232';
-                UPDATE table_temp SET "ANO"='2024' WHERE "PERIODO"='20241' or "PERIODO"='20242';
-                UPDATE table_temp SET "ANO"='2025' WHERE "PERIODO"='20251' or "PERIODO"='20252';
-                UPDATE table_temp SET "ANO"='2026' WHERE "PERIODO"='20261' or "PERIODO"='20262';
-                UPDATE table_temp SET "ANO"='2027' WHERE "PERIODO"='20271' or "PERIODO"='20272';
-                UPDATE table_temp SET "ANO"='2028' WHERE "PERIODO"='20281' or "PERIODO"='20282';
-                UPDATE table_temp SET "ANO"='2029' WHERE "PERIODO"='20291' or "PERIODO"='20292';
-                UPDATE table_temp SET "ANO"='2030' WHERE "PERIODO"='20301' or "PERIODO"='20302';
+                UPDATE table_temp SET "ANO"='2019' WHERE "PERIODO"='20191' or "PERIODO"='20192' or "PERIODO" = '20193' or "PERIODO"='20194' or "PERIODO"='20195' or "PERIODO"='20196';
+                UPDATE table_temp SET "ANO"='2020' WHERE "PERIODO"='20201' or "PERIODO"='20202' or "PERIODO" = '20203' or "PERIODO"='20204' or "PERIODO"='20205' or "PERIODO"='20206';
+                UPDATE table_temp SET "ANO"='2021' WHERE "PERIODO"='20211' or "PERIODO"='20212' or "PERIODO" = '20213' or "PERIODO"='20214' or "PERIODO"='20215' or "PERIODO"='20216';
+                UPDATE table_temp SET "ANO"='2022' WHERE "PERIODO"='20221' or "PERIODO"='20222' or "PERIODO" = '20223' or "PERIODO"='20224' or "PERIODO"='20225' or "PERIODO"='20226';
+                UPDATE table_temp SET "ANO"='2023' WHERE "PERIODO"='20231' or "PERIODO"='20232' or "PERIODO" = '20233' or "PERIODO"='20234' or "PERIODO"='20235' or "PERIODO"='20236';
+                UPDATE table_temp SET "ANO"='2024' WHERE "PERIODO"='20241' or "PERIODO"='20242' or "PERIODO" = '20243' or "PERIODO"='20244' or "PERIODO"='20245' or "PERIODO"='20246';
+                UPDATE table_temp SET "ANO"='2025' WHERE "PERIODO"='20251' or "PERIODO"='20252' or "PERIODO" = '20253' or "PERIODO"='20254' or "PERIODO"='20255' or "PERIODO"='20256';
+                UPDATE table_temp SET "ANO"='2026' WHERE "PERIODO"='20261' or "PERIODO"='20262' or "PERIODO" = '20263' or "PERIODO"='20264' or "PERIODO"='20265' or "PERIODO"='20266';
+                UPDATE table_temp SET "ANO"='2027' WHERE "PERIODO"='20271' or "PERIODO"='20272' or "PERIODO" = '20273' or "PERIODO"='20274' or "PERIODO"='20275' or "PERIODO"='20276';
+                UPDATE table_temp SET "ANO"='2028' WHERE "PERIODO"='20281' or "PERIODO"='20282' or "PERIODO" = '20283' or "PERIODO"='20284' or "PERIODO"='20285' or "PERIODO"='20286';
+                UPDATE table_temp SET "ANO"='2029' WHERE "PERIODO"='20291' or "PERIODO"='20292' or "PERIODO" = '20293' or "PERIODO"='20294' or "PERIODO"='20295' or "PERIODO"='20296';
+                UPDATE table_temp SET "ANO"='2030' WHERE "PERIODO"='20301' or "PERIODO"='20302' or "PERIODO" = '20303' or "PERIODO"='20304' or "PERIODO"='20305' or "PERIODO"='20306';
                 --ALTER TABLE table_temp ALTER COLUMN "ANO" TYPE int USING (trim("ANO")::int);
                 ALTER TABLE table_temp ADD "ESTU_EDAD" int;
                 UPDATE table_temp SET "ESTU_EDAD"="ANO"-"ANO_NACIMIENTO";
                 ALTER TABLE table_temp ADD "ESTU_RANGOEDAD" text;
                 UPDATE table_temp SET "ESTU_RANGOEDAD"='MENORES DE 17' WHERE "ESTU_EDAD" < 17;
                 UPDATE table_temp SET "ESTU_RANGOEDAD"='17' WHERE "ESTU_EDAD" = 17;
-                UPDATE table_temp SET "ESTU_RANGOEDAD"='18 Y 19' WHERE "ESTU_EDAD" = 17 OR "ESTU_EDAD" = 18;
-                UPDATE table_temp SET "ESTU_RANGOEDAD"='20 A 28' WHERE "ESTU_EDAD" >= 20 OR "ESTU_EDAD" <=28;
-                UPDATE table_temp SET "ESTU_RANGOEDAD"='MAYORES DE 28' WHERE "ESTU_EDAD" > 28;"""
+                UPDATE table_temp SET "ESTU_RANGOEDAD"='18 Y 19' WHERE "ESTU_EDAD" = 18 OR "ESTU_EDAD" = 19;
+                UPDATE table_temp SET "ESTU_RANGOEDAD"='20 A 28' WHERE "ESTU_EDAD" >= 20 AND "ESTU_EDAD" <=28;
+                UPDATE table_temp SET "ESTU_RANGOEDAD"='MAYORES DE 28' WHERE "ESTU_EDAD" > 28;
+                ALTER TABLE table_temp ADD "FAMI_NIVEL_EDUCA_PADRES" int;
+                ALTER TABLE table_temp ALTER COLUMN "FAMI_EDUCACIONMADRE" TYPE int USING (trim("FAMI_EDUCACIONMADRE")::int);
+                ALTER TABLE table_temp ALTER COLUMN "FAMI_EDUCACIONPADRE" TYPE int USING (trim("FAMI_EDUCACIONPADRE")::int);
+                UPDATE table_temp SET "FAMI_NIVEL_EDUCA_PADRES" = "FAMI_EDUCACIONPADRE";
+                UPDATE table_temp SET "FAMI_NIVEL_EDUCA_PADRES" = "FAMI_EDUCACIONMADRE" WHERE "FAMI_EDUCACIONMADRE">"FAMI_EDUCACIONPADRE";
+                ALTER TABLE table_temp ADD "FAMI_EDUCAPADRES" text;
+                UPDATE table_temp SET "FAMI_EDUCAPADRES" = 'NINGUNO' Where "FAMI_NIVEL_EDUCA_PADRES" = '1';
+                UPDATE table_temp SET "FAMI_EDUCAPADRES" = 'PRIMARIA INCOMPLETA' Where "FAMI_NIVEL_EDUCA_PADRES" = '2';
+                UPDATE table_temp SET "FAMI_EDUCAPADRES" = 'PRIMARIA COMPLETA' Where "FAMI_NIVEL_EDUCA_PADRES" = '3';
+                UPDATE table_temp SET "FAMI_EDUCAPADRES" = 'SECUNDARIA BACHILLERATO IMCOMPLETO' Where "FAMI_NIVEL_EDUCA_PADRES" = '4';
+                UPDATE table_temp SET "FAMI_EDUCAPADRES" = 'SECUNDARIA BACHILLERATO COMPLETO' Where "FAMI_NIVEL_EDUCA_PADRES" = '5';
+                UPDATE table_temp SET "FAMI_EDUCAPADRES" = 'EDUCACION TECNICA O TECNOLOGICA INCOMPLETA' Where "FAMI_NIVEL_EDUCA_PADRES" = '6';
+                UPDATE table_temp SET "FAMI_EDUCAPADRES" = 'EDUCACION TECNICA O TECNOLOGICA COMPLETA' Where "FAMI_NIVEL_EDUCA_PADRES" = '7';
+                UPDATE table_temp SET "FAMI_EDUCAPADRES" = 'EDUCACION PROFECIONAL INCOMPLETA' Where "FAMI_NIVEL_EDUCA_PADRES" = '8';
+                UPDATE table_temp SET "FAMI_EDUCAPADRES" = 'EDUCACION PROFECIONAL COMPLETA' Where "FAMI_NIVEL_EDUCA_PADRES" = '9';
+                UPDATE table_temp SET "FAMI_EDUCAPADRES" = 'POSTGRADO' Where "FAMI_NIVEL_EDUCA_PADRES" = '10';
+                UPDATE table_temp SET "FAMI_EDUCAPADRES" = 'NO SABE' Where "FAMI_NIVEL_EDUCA_PADRES" = '11';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'HOGAR' WHERE "FAMI_TRABAJOLABORPADRE"='Trabaja en el hogar, no trabaja o estudia';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'EMPLEADO OBRERO U OPERARIO' WHERE "FAMI_TRABAJOLABORPADRE"='Es operario de máquinas o conduce vehículos (taxita, chofer)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'EMPLEADO CON CARGO COMO DIRECTOR O GERENTE GENERAL' WHERE "FAMI_TRABAJOLABORPADRE"='Trabaja como profesional (por ejemplo médico, abogado, ingeniero)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'EMPLEADO DE NIVEL AUXILIAR O ADMINISTRATIVO' WHERE "FAMI_TRABAJOLABORPADRE"='Tiene un trabajo de tipo auxiliar administrativo (por ejemplo, secretario o asistente)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'EMPLEADO DE NIVEL DIRECTIVO' WHERE "FAMI_TRABAJOLABORPADRE"='Trabaja como profesional (por ejemplo médico, abogado, ingeniero)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'EMPLEADO DE NIVEL TECNICO O PROFESIONAL' WHERE "FAMI_TRABAJOLABORPADRE"='Tiene un trabajo de tipo auxiliar administrativo (por ejemplo, secretario o asistente)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'PROFESIONAL INDEPENDIENTE' WHERE "FAMI_TRABAJOLABORPADRE"='Trabaja como profesional (por ejemplo médico, abogado, ingeniero)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'EMPRESARIO' WHERE "FAMI_TRABAJOLABORPADRE"='Es dueño de un negocio grande, tiene un cargo de nivel directivo o gerencial';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'OTRA ACTIVIDAD U OCUPACION' WHERE "FAMI_TRABAJOLABORPADRE"='Trabaja como personal de limpieza, mantenimiento, seguridad o construcción' OR "FAMI_TRABAJOLABORPADRE"='Es vendedor o trabaja en atención al público' OR "FAMI_TRABAJOLABORPADRE"='Es agricultor, pesquero o jornalero' OR "FAMI_TRABAJOLABORPADRE"='No aplica' OR "FAMI_TRABAJOLABORPADRE"='No sabe' OR "FAMI_TRABAJOLABORPADRE" IS NULL;
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'PENSIONADO' WHERE "FAMI_TRABAJOLABORPADRE"='Pensionado';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'PEQUENO EMPRESARIO' WHERE "FAMI_TRABAJOLABORPADRE"='Es dueño de un negocio pequeño (tiene pocos empleados o no tiene, por ejemplo tienda, papelería, etc';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORPADRE" = 'TRABAJADOR POR CUENTA PROPIA' WHERE "FAMI_TRABAJOLABORPADRE"='Trabaja por cuenta propia (por ejemplo plomero, electricista)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'HOGAR' WHERE "FAMI_TRABAJOLABORMADRE"='Trabaja en el hogar, no trabaja o estudia';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'EMPLEADO OBRERO U OPERARIO' WHERE "FAMI_TRABAJOLABORMADRE"='Es operario de máquinas o conduce vehículos (taxita, chofer)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'EMPLEADO CON CARGO COMO DIRECTOR O GERENTE GENERAL' WHERE "FAMI_TRABAJOLABORMADRE"='Trabaja como profesional (por ejemplo médico, abogado, ingeniero)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'EMPLEADO DE NIVEL AUXILIAR O ADMINISTRATIVO' WHERE "FAMI_TRABAJOLABORMADRE"='Tiene un trabajo de tipo auxiliar administrativo (por ejemplo, secretario o asistente)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'EMPLEADO DE NIVEL DIRECTIVO' WHERE "FAMI_TRABAJOLABORMADRE"='Trabaja como profesional (por ejemplo médico, abogado, ingeniero)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'EMPLEADO DE NIVEL TECNICO O PROFESIONAL' WHERE "FAMI_TRABAJOLABORMADRE"='Tiene un trabajo de tipo auxiliar administrativo (por ejemplo, secretario o asistente)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'PROFESIONAL INDEPENDIENTE' WHERE "FAMI_TRABAJOLABORMADRE"='Trabaja como profesional (por ejemplo médico, abogado, ingeniero)';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'EMPRESARIO' WHERE "FAMI_TRABAJOLABORMADRE"='Es dueño de un negocio grande, tiene un cargo de nivel directivo o gerencial';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'OTRA ACTIVIDAD U OCUPACION' WHERE "FAMI_TRABAJOLABORMADRE"='Trabaja como personal de limpieza, mantenimiento, seguridad o construcción' OR "FAMI_TRABAJOLABORMADRE"='Es vendedor o trabaja en atención al público' OR "FAMI_TRABAJOLABORMADRE"='Es agricultor, pesquero o jornalero' OR "FAMI_TRABAJOLABORMADRE"='No aplica' OR "FAMI_TRABAJOLABORMADRE"='No sabe' OR "FAMI_TRABAJOLABORMADRE" IS NULL;
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'PENSIONADO' WHERE "FAMI_TRABAJOLABORMADRE"='Pensionado';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'PEQUENO EMPRESARIO' WHERE "FAMI_TRABAJOLABORMADRE"='Es dueño de un negocio pequeño (tiene pocos empleados o no tiene, por ejemplo tienda, papelería, etc';
+                UPDATE table_temp SET "FAMI_TRABAJOLABORMADRE" = 'TRABAJADOR POR CUENTA PROPIA' WHERE "FAMI_TRABAJOLABORMADRE"='Trabaja por cuenta propia (por ejemplo plomero, electricista)';
+                ALTER TABLE table_temp ADD "ECO_CONDICION_VIVE" text;
+                ALTER TABLE table_temp ADD "IND_ECO_CONDICION_VIVE" decimal;
+                ALTER TABLE table_temp ALTER COLUMN "FAMI_PERSONASHOGAR" TYPE int USING (trim("FAMI_PERSONASHOGAR")::int);
+                ALTER TABLE table_temp ALTER COLUMN "FAMI_CUARTOSHOGAR" TYPE int USING (trim("FAMI_CUARTOSHOGAR")::int);
+                UPDATE table_temp SET "IND_ECO_CONDICION_VIVE" = ("FAMI_PERSONASHOGAR")/("FAMI_CUARTOSHOGAR");
+                UPDATE table_temp SET "ECO_CONDICION_VIVE" = 'SIN HACINAMIENTO' Where  "IND_ECO_CONDICION_VIVE" <= 2.4 ;
+                UPDATE table_temp SET "ECO_CONDICION_VIVE" = 'HACINAMIENTO MEDIO' Where "IND_ECO_CONDICION_VIVE" >=  2.5  AND "IND_ECO_CONDICION_VIVE"<=4.9;
+                UPDATE table_temp SET "ECO_CONDICION_VIVE" = 'HACINAMIENTO CRITICO' Where  "IND_ECO_CONDICION_VIVE" >  4.9 ;
+                ALTER TABLE table_temp ALTER COLUMN "FAMI_TIENECONSOLAVIDEOJUEGOS" TYPE int USING (trim("FAMI_TIENECONSOLAVIDEOJUEGOS")::int);
+                ALTER TABLE table_temp ALTER COLUMN "FAMI_TIENECOMPUTADOR" TYPE int USING (trim("FAMI_TIENECOMPUTADOR")::int);
+                ALTER TABLE table_temp ALTER COLUMN "FAMI_TIENEINTERNET" TYPE int USING (trim("FAMI_TIENEINTERNET")::int);
+                ALTER TABLE table_temp ALTER COLUMN "FAMI_TIENESERVICIOTV" TYPE int USING (trim("FAMI_TIENESERVICIOTV")::int);
+                ALTER TABLE table_temp ADD "IND_ECO_CONDICION_TIC" int;
+                ALTER TABLE table_temp ADD "ECO_CONDICION_TIC" text;
+                UPDATE table_temp SET "IND_ECO_CONDICION_TIC" = ("FAMI_TIENECONSOLAVIDEOJUEGOS")+("FAMI_TIENECOMPUTADOR")+("FAMI_TIENEINTERNET")+("FAMI_TIENESERVICIOTV");
+                UPDATE table_temp SET "ECO_CONDICION_TIC" = 'BUENA' WHERE "IND_ECO_CONDICION_TIC"= '5' OR "IND_ECO_CONDICION_TIC"= '4';
+                UPDATE table_temp SET "ECO_CONDICION_TIC" = 'REGULAR' WHERE "IND_ECO_CONDICION_TIC"= '2' OR "IND_ECO_CONDICION_TIC"= '3';
+                UPDATE table_temp SET "ECO_CONDICION_TIC" = 'MALA' WHERE "IND_ECO_CONDICION_TIC"= '0' OR "IND_ECO_CONDICION_TIC"= '1';
+                ALTER TABLE table_temp ALTER COLUMN "FAMI_TIENELAVADORA" TYPE int USING (trim("FAMI_TIENELAVADORA")::int);
+                ALTER TABLE table_temp ALTER COLUMN "FAMI_TIENEHORNOMICROOGAS" TYPE int USING (trim("FAMI_TIENEHORNOMICROOGAS")::int);
+                ALTER TABLE table_temp ADD "IND_ECO_CONDICION_ELECTRODOMESTICOS" int;
+                ALTER TABLE table_temp ADD "ECO_CONDICION_ELECTRODOMESTICOS" text;
+                UPDATE table_temp SET "IND_ECO_CONDICION_ELECTRODOMESTICOS" = ("FAMI_TIENELAVADORA")+("FAMI_TIENEHORNOMICROOGAS")+("FAMI_TIENESERVICIOTV");
+                UPDATE table_temp SET "ECO_CONDICION_ELECTRODOMESTICOS" = 'BUENA' WHERE "IND_ECO_CONDICION_ELECTRODOMESTICOS"= '3';
+                UPDATE table_temp SET "ECO_CONDICION_ELECTRODOMESTICOS" = 'REGULAR' WHERE "IND_ECO_CONDICION_ELECTRODOMESTICOS"= '2';
+                UPDATE table_temp SET "ECO_CONDICION_ELECTRODOMESTICOS" = 'MALA' WHERE "IND_ECO_CONDICION_ELECTRODOMESTICOS"= '0' OR "IND_ECO_CONDICION_ELECTRODOMESTICOS"= '1';
+                ALTER TABLE table_temp ADD "PROM_REND" int;
+                UPDATE table_temp SET "PROM_REND" = ("PUNT_GLOBAL")/5;
+                ALTER TABLE table_temp ALTER COLUMN "ANO" SET DATA TYPE text;
+                do $$
+                declare
+                conta1 integer;
+                uno integer;
+                conta integer;
+                orden_sql text;
+                orden_sql1 text;
+                orden_sql2 text;
+                orden_sql3 text;
+                orden_sql4 text;
+                orden_sql5 text;
+                orden_sql6 text;
+                orden_sql7 text;
+                orden_sql8 text;
+                begin
+                conta1 := count(*) from fact_saber11;
+                uno := 1;
+                conta := conta1+uno;
+                orden_sql := 'create sequence sequen start with '|| conta ||' increment by 1 maxvalue 99999999 minvalue '|| conta ||' cycle';
+                execute orden_sql;
+                orden_sql1 := 'create sequence sequen1 start with '|| conta ||' increment by 1 maxvalue 99999999 minvalue '|| conta ||' cycle';
+                execute orden_sql1;
+                orden_sql2 := 'create sequence sequen2 start with '|| conta ||' increment by 1 maxvalue 99999999 minvalue '|| conta ||' cycle';
+                execute orden_sql2;
+                orden_sql3 := 'create sequence sequen3 start with '|| conta ||' increment by 1 maxvalue 99999999 minvalue '|| conta ||' cycle';
+                execute orden_sql3;
+                orden_sql4 := 'create sequence sequen4 start with '|| conta ||' increment by 1 maxvalue 99999999 minvalue '|| conta ||' cycle';
+                execute orden_sql4;
+                orden_sql5 := 'create sequence sequen5 start with '|| conta ||' increment by 1 maxvalue 99999999 minvalue '|| conta ||' cycle';
+                execute orden_sql5;
+                orden_sql6 := 'create sequence sequen6 start with '|| conta ||' increment by 1 maxvalue 99999999 minvalue '|| conta ||' cycle';
+                execute orden_sql6;
+                orden_sql7 := 'create sequence sequen7 start with '|| conta ||' increment by 1 maxvalue 99999999 minvalue '|| conta ||' cycle';
+                execute orden_sql7;
+                orden_sql8 := 'create sequence sequen8 start with '|| conta ||' increment by 1 maxvalue 99999999 minvalue '|| conta ||' cycle';
+                execute orden_sql8;
+                end $$;
+                alter table fact_saber11 alter column id_estudiante set default nextval('sequen');
+                alter table fact_saber11 alter column id_institucion set default nextval('sequen1');
+                alter table fact_saber11 alter column id_lugar set default nextval('sequen2');
+                alter table fact_saber11 alter column id_pru_c_nat set default nextval('sequen3');
+                alter table fact_saber11 alter column id_pru_ingles set default nextval('sequen4');
+                alter table fact_saber11 alter column id_pru_lec_crit set default nextval('sequen5');
+                alter table fact_saber11 alter column id_pru_mat set default nextval('sequen6');
+                alter table fact_saber11 alter column id_pru_soc_ciu set default nextval('sequen7');
+                alter table fact_saber11 alter column id_tiempo set default nextval('sequen8');
+                ---incersion de datos
+                insert into dim_estudiantes(
+                eco_condicion_electrodomesticos,
+                eco_condicion_tic,
+                eco_condicion_vive,
+                estu_consecutivo,
+                estu_genero,
+                estu_rango_edad,
+                fami_estrato_vivienda,
+                fami_max_nivel_educa_padres,
+                fami_ocup_madre,
+                fami_ocup_padre)
+                select
+                "ECO_CONDICION_ELECTRODOMESTICOS",
+                "ECO_CONDICION_TIC",
+                "ECO_CONDICION_VIVE",
+                "ESTU_CONSECUTIVO",
+                "ESTU_GENERO",
+                "ESTU_RANGOEDAD",
+                "FAMI_ESTRATOVIVIENDA",
+                "FAMI_EDUCAPADRES",
+                "FAMI_TRABAJOLABORMADRE",
+                "FAMI_TRABAJOLABORPADRE"
+                from table_temp;
+                insert into dim_instituciones (
+                cole_bilingue,
+                cole_caracter,
+                cole_genero,
+                cole_jornada,
+                cole_naturaleza,
+                cole_nombre_sede,
+                cole_calendario)
+                select
+                "COLE_BILINGUE",
+                "COLE_CARACTER",
+                "COLE_GENERO",
+                "COLE_JORNADA",
+                "COLE_NATURALEZA",
+                "COLE_NOMBRE_SEDE",
+                "COLE_CALENDARIO"
+                from table_temp;
+                insert into dim_lugares (
+                cole_area_ubicacion,
+                cole_mcpio_ubicacion,
+                estu_mcpio_presentacion,
+                estu_reside_mcpio)
+                select
+                "COLE_AREA_UBICACION",
+                "COLE_MCPIO_UBICACION",
+                "ESTU_MCPIO_PRESENTACION",
+                "ESTU_MCPIO_RESIDE"
+                from table_temp;
+                insert into dim_pru_c_nat (
+                desemp_c_naturales)
+                select
+                "DESEMP_C_NATURALES"
+                from table_temp;
+                insert into dim_pru_ingles (
+                desemp_ingles)
+                select
+                "DESEMP_INGLES"
+                from table_temp;
+                insert into dim_pru_lec_crit (
+                desemp_lec_crit)
+                select
+                "DESEMP_LECTURA_CRITICA"
+                from table_temp;
+                insert into dim_pru_mat (
+                desemp_mat)
+                select
+                "DESEMP_MATEMATICAS"
+                from table_temp;
+                insert into dim_pru_soc_ciu (
+                desemp_soc_ciu)
+                select
+                "DESEMP_SOCIALES_CIUDADANAS"
+                from table_temp;
+                insert into dim_tiempo (
+                ano)
+                select
+                "ANO"
+                from table_temp;
+                insert into fact_saber11 (
+                punt_global,
+                prom_rend,
+                punt_c_nat,
+                punt_ingles,
+                punt_lec_crit,
+                punt_mat, 
+                punt_soc_ciu) 
+                select 
+                "PUNT_GLOBAL", 
+                "PROM_REND",
+                "PUNT_C_NATURALES",
+                "PUNT_INGLES",
+                "PUNT_LECTURA_CRITICA",
+                "PUNT_MATEMATICAS",
+                "PUNT_SOCIALES_CIUDADANAS"
+                from table_temp;
+                drop sequence sequen cascade;
+                drop sequence sequen1 cascade;
+                drop sequence sequen2 cascade;
+                drop sequence sequen3 cascade;
+                drop sequence sequen4 cascade;
+                drop sequence sequen5 cascade;
+                drop sequence sequen6 cascade;
+                drop sequence sequen7 cascade;
+                drop sequence sequen8 cascade;
+                DROP TABLE table_temp;"""
+
                 cur.execute(sql)
             except (Exception, psycopg2.OperationalError) as error:
                 print(error)
@@ -316,6 +569,8 @@ def subir(request):
             cur.close()
             conn.commit()
             conn.close()
+            from shutil import rmtree
+            rmtree(BASE_DIR+'/media/icfes')
             # print(df)
             return render(request, "Dashboard/subir.html")
          else:
@@ -346,7 +601,7 @@ def gestionHtml(request):
 
     conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    sql = "select distinct(ano) from dim_tiempo;"
+    sql = "select distinct(ano) from dim_tiempo order by ano;"
     cur.execute(sql)
     row = cur.fetchall()
     cur.close()
@@ -382,7 +637,7 @@ def Gestion(request):
     puntaje = request.GET['puntaje']
     inst = request.GET['inst']
     ano = request.GET['ano']
-    periodo = request.GET['periodo']
+    # periodo = request.GET['periodo']
     if (ano == "TODOS"):
         if (message == "TODOS"):
             result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
@@ -409,7 +664,7 @@ def Gestion(request):
                 dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por inst)
                 contador.append(entry['conta'])
     else:
-        if (periodo == 'TODOS'):
+        # if (periodo == 'TODOS'):
             if (message == "TODOS"):
                 result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
                                                                                                conta=Count(
@@ -435,32 +690,32 @@ def Gestion(request):
                     label.append(entry['id_institucion__cole_nombre_sede'])  # guarda nombre de departamento ya agrupado
                     dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por inst)
                     contador.append(entry['conta'])
-        else:
-            if (message == "TODOS"):
-                result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
-                                                                                               conta=Count(
-                                                                                                   puntaje)).filter(
-                    id_tiempo__periodo=periodo).order_by('-prom')
-                for entry in result:
-                    label.append(entry['id_lugar__cole_mcpio_ubicacion'])  # guarda nombre del departamento ya agrupado
-                    dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por municipio)
-                    contador.append(entry['conta'])
-            else:
-                if (inst == "General"):
-                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
-                                                                                                     conta=Count(
-                                                                                                         puntaje)).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_tiempo__periodo=periodo).order_by('-prom')
-                else:
-                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
-                                                                                                     conta=Count(
-                                                                                                         puntaje)).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_tiempo__periodo=periodo,
-                        id_institucion__cole_nombre_sede=inst).order_by('-prom')
-                for entry in result:
-                    label.append(entry['id_institucion__cole_nombre_sede'])  # guarda nombre de departamento ya agrupado
-                    dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por inst)
-                    contador.append(entry['conta'])
+        # else:
+        #     if (message == "TODOS"):
+        #         result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
+        #                                                                                        conta=Count(
+        #                                                                                            puntaje)).filter(
+        #             id_tiempo__periodo=periodo).order_by('-prom')
+        #         for entry in result:
+        #             label.append(entry['id_lugar__cole_mcpio_ubicacion'])  # guarda nombre del departamento ya agrupado
+        #             dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por municipio)
+        #             contador.append(entry['conta'])
+        #     else:
+        #         if (inst == "General"):
+        #             result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
+        #                                                                                              conta=Count(
+        #                                                                                                  puntaje)).filter(
+        #                 id_lugar__cole_mcpio_ubicacion=message, id_tiempo__periodo=periodo).order_by('-prom')
+        #         else:
+        #             result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
+        #                                                                                              conta=Count(
+        #                                                                                                  puntaje)).filter(
+        #                 id_lugar__cole_mcpio_ubicacion=message, id_tiempo__periodo=periodo,
+        #                 id_institucion__cole_nombre_sede=inst).order_by('-prom')
+        #         for entry in result:
+        #             label.append(entry['id_institucion__cole_nombre_sede'])  # guarda nombre de departamento ya agrupado
+        #             dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por inst)
+        #             contador.append(entry['conta'])
 
     return JsonResponse(data={
 
@@ -492,7 +747,7 @@ def gestionCHtml(request):
 
     conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    sql = "select distinct(ano) from dim_tiempo;"
+    sql = "select distinct(ano) from dim_tiempo order by ano;"
     cur.execute(sql)
     row = cur.fetchall()
     cur.close()
@@ -528,7 +783,7 @@ def GestionC(request):
     categoria = request.GET['categoria']
     inst = request.GET['inst']
     ano = request.GET['ano']
-    periodo = request.GET['periodo']
+    # periodo = request.GET['periodo']
     if (ano == "TODOS"):
         if (message == "TODOS"):
             result = FactSaber11.objects.values(categoria).annotate(conta=Count('id_estudiante')).order_by(categoria)
@@ -540,7 +795,7 @@ def GestionC(request):
                 result = FactSaber11.objects.values(categoria).annotate(conta=Count('id_estudiante')).filter(
                     id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(categoria)
     else:
-        if (periodo == 'TODOS'):
+        # if (periodo == 'TODOS'):
             if (message == "TODOS"):
                 result = FactSaber11.objects.values(categoria).annotate(conta=Count('id_estudiante')).filter(
                     id_tiempo__ano=ano).order_by(categoria)
@@ -552,18 +807,18 @@ def GestionC(request):
                     result = FactSaber11.objects.values(categoria).annotate(conta=Count('id_estudiante')).filter(
                         id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,
                         id_institucion__cole_nombre_sede=inst).order_by(categoria)
-        else:
-            if (message == "TODOS"):
-                result = FactSaber11.objects.values(categoria).annotate(conta=Count('id_estudiante')).filter(
-                    id_tiempo__periodo=periodo).order_by(categoria)
-            else:
-                if (inst == "General"):
-                    result = FactSaber11.objects.values(categoria).annotate(conta=Count('id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_tiempo__periodo=periodo).order_by(categoria)
-                else:
-                    result = FactSaber11.objects.values(categoria).annotate(conta=Count('id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_tiempo__periodo=periodo,
-                        id_institucion__cole_nombre_sede=inst).order_by(categoria)
+        # else:
+        #     if (message == "TODOS"):
+        #         result = FactSaber11.objects.values(categoria).annotate(conta=Count('id_estudiante')).filter(
+        #             id_tiempo__periodo=periodo).order_by(categoria)
+        #     else:
+        #         if (inst == "General"):
+        #             result = FactSaber11.objects.values(categoria).annotate(conta=Count('id_estudiante')).filter(
+        #                 id_lugar__cole_mcpio_ubicacion=message, id_tiempo__periodo=periodo).order_by(categoria)
+        #         else:
+        #             result = FactSaber11.objects.values(categoria).annotate(conta=Count('id_estudiante')).filter(
+        #                 id_lugar__cole_mcpio_ubicacion=message, id_tiempo__periodo=periodo,
+        #                 id_institucion__cole_nombre_sede=inst).order_by(categoria)
 
     for entry in result:
         label.append(entry[categoria])  # guarda nombre de la categoria segun corresponda
@@ -638,7 +893,7 @@ def punt_anio(request):
     puntaje = []
 
     result = FactSaber11.objects.values('id_tiempo__ano').annotate(Count('id_tiempo__ano'),
-                                                                   prom=Avg('punt_global')).order_by('prom')
+                                                                   prom=Avg('punt_global')).order_by('id_tiempo__ano')
     for entry in result:
         puntaje.append(entry['prom'])
         label.append(entry['id_tiempo__ano'])

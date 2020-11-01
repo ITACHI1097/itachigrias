@@ -5,7 +5,7 @@ $(document).ready(function (){
                     var graf = document.getElementById("graf").value;
                     var punt = document.getElementById("puntaje").options[document.getElementById("puntaje").selectedIndex].text;
                     var ano = document.getElementById("ano").options[document.getElementById("ano").selectedIndex].text;
-                    var periodo = document.getElementById("periodo").options[document.getElementById("periodo").selectedIndex].text;
+                    // var periodo = document.getElementById("periodo").options[document.getElementById("periodo").selectedIndex].text;
                     var muni = document.getElementById("municipio").options[document.getElementById("municipio").selectedIndex].text;
                     var inst = document.getElementById("inst").options[document.getElementById("inst").selectedIndex].text;
                     $.ajax({
@@ -109,7 +109,7 @@ $(document).ready(function (){
                                 },
                                 title: {
                                   display: true,
-                                  text: 'PUNTAJE: '+punt +'      AÑO: '+ano+'        PERIODO: '+periodo+'        MUNICIPIO: '+muni+'     INSTITUCION: '+inst
+                                  text: 'PUNTAJE: '+punt +'      AÑO: '+ano+'        MUNICIPIO: '+muni+'     INSTITUCION: '+inst
                                 },
                                 scales: {
                                      yAxes: [{

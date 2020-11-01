@@ -6,7 +6,7 @@ $(document).ready(function (){
                     // var combo = document.getElementById("graf");
                     var categoria = document.getElementById("categoria").options[document.getElementById("categoria").selectedIndex].text;
                     var ano = document.getElementById("ano").options[document.getElementById("ano").selectedIndex].text;
-                    var periodo = document.getElementById("periodo").options[document.getElementById("periodo").selectedIndex].text;
+                    // var periodo = document.getElementById("periodo").options[document.getElementById("periodo").selectedIndex].text;
                     var muni = document.getElementById("municipio").options[document.getElementById("municipio").selectedIndex].text;
                     var inst = document.getElementById("inst").options[document.getElementById("inst").selectedIndex].text;
                     $.ajax({
@@ -111,7 +111,7 @@ $(document).ready(function (){
                                 },
                                 title: {
                                   display: true,
-                                  text: 'CATEGORIA: '+categoria +'      AÑO: '+ano+'        PERIODO: '+periodo+'        MUNICIPIO: '+muni+'     INSTITUCION: '+inst
+                                  text: 'CATEGORIA: '+categoria +'      AÑO: '+ano+'        MUNICIPIO: '+muni+'     INSTITUCION: '+inst
                                 },
                                 // scales: {
                                 //      yAxes: [{

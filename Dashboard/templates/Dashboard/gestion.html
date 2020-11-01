@@ -41,31 +41,31 @@
 
                         {% endfor %}
                     </select>
-                    <label for="exampleFormControlSelect1">Periodo</label>
-                    <select id="periodo" name="periodo" class="form-control col-md-5 select2">
-                        <script>
-                            var options = {
-                                    "TODOS": [""],
-                                    "2012" : ["2012_1","2012_2"],
-                                    '2013' : ["2013_1","2013_2"],
-                                    '2014' : ["2014_1","2014_2"],
-                                    '2015' : ["2015_1","2015_2"],
-                                    '2016' : ["2016_1","2016_2"],
-                            }
-                            $(function(){
-                                var fillSecondary = function(){
-                                    var selected = $('#ano').val();
-                                    $('#periodo').empty();
-                                    $('#periodo').append('<option>TODOS</option>');
-                                    options[selected].forEach(function(element,index){
-                                        $('#periodo').append('<option value="'+element+'">'+element+'</option>');
-                                    });
-                                }
-                                $('#ano').change(fillSecondary);
-                                fillSecondary();
-                            });
-                        </script>
-                    </select>
+{#                    <label for="exampleFormControlSelect1">Periodo</label>#}
+{#                    <select id="periodo" name="periodo" class="form-control col-md-5 select2">#}
+{#                        <script>#}
+{#                            var options = {#}
+{#                                    "TODOS": [""],#}
+{#                                    "2012" : ["2012_1","2012_2"],#}
+{#                                    '2013' : ["2013_1","2013_2"],#}
+{#                                    '2014' : ["2014_1","2014_2"],#}
+{#                                    '2015' : ["2015_1","2015_2"],#}
+{#                                    '2016' : ["2016_1","2016_2"],#}
+{#                            }#}
+{#                            $(function(){#}
+{#                                var fillSecondary = function(){#}
+{#                                    var selected = $('#ano').val();#}
+{#                                    $('#periodo').empty();#}
+{#                                    $('#periodo').append('<option>TODOS</option>');#}
+{#                                    options[selected].forEach(function(element,index){#}
+{#                                        $('#periodo').append('<option value="'+element+'">'+element+'</option>');#}
+{#                                    });#}
+{#                                }#}
+{#                                $('#ano').change(fillSecondary);#}
+{#                                fillSecondary();#}
+{#                            });#}
+{#                        </script>#}
+{#                    </select>#}
                 </div>
                 <div class="col">
                     <label for="exampleFormControlSelect1">Municipio</label>
