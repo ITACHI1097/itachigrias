@@ -125,3 +125,10 @@ select column_name from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='your_table_
 #elimina carpeta desde python
 from shutil import rmtree
 rmtree("carpeta")
+
+
+
+puntaje departamental 2019= 244
+puntaje nacional 2014 = 250
+puntaje nacional 2015 = 250
+puntaje nacional 2015 = 250

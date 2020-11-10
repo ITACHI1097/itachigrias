@@ -4,9 +4,12 @@ import csv
 import pandas as pd
 
 from django.shortcuts import render, redirect
+
+from .decorators import unauthenticated_user, allowed_users
 from .forms import FormEntrada
 from .models import Entrada
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, TemplateView
@@ -31,59 +34,61 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def inicio(request):
     return render(request, "Dashboard/base_0.html")
 
-
+@unauthenticated_user
 def loginPage(request):
-    if request.user.is_authenticated:
-        return redirect('obando')
-    else:
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = authenticate(request, username=username, password=password)
 
-            if user is not None:
-                login(request, user)
-                return redirect('obando')
-            else:
-                messages.info(request, 'Usuario o Contraseña Incorrectos')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
 
-        context = {}
-        return render(request, "Dashboard/login.html", context)
+        if user is not None:
+            login(request, user)
+            return redirect('obando')
+        else:
+            messages.info(request, 'Usuario o Contraseña Incorrectos')
+
+    context = {}
+    return render(request, "Dashboard/login.html", context)
 
 
 def logoutUser(request):
     logout(request)
     return redirect('login')
 
-
+@unauthenticated_user
 def registerPage(request):
-    if request.user.is_authenticated:
-        return redirect('obando')
-    else:
-        form = CreateUserForm()
+    form = CreateUserForm()
 
-        if request.method == 'POST':
-            form = CreateUserForm(request.POST)
-            if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get('username')
-                messages.success(request, 'Registro Exitoso para el Usuario: ' + user)
-                return redirect('login')
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
 
-        context = {'form': form}
-        return render(request, "Dashboard/register.html", context)
+            group = Group.objects.get(name='usuario')
+            user.groups.add(group)
+
+            messages.success(request, 'Registro Exitoso para el Usuario: ' + username)
+            return redirect('login')
+
+    context = {'form': form}
+    return render(request, "Dashboard/register.html", context)
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def obando(request):
     return render(request, "Dashboard/obando.html")
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def grafic(request):
     return render(request, "Dashboard/grafic.html")
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def subir(request):
     if request.method == 'POST':
          form = FormEntrada(request.POST, request.FILES)
@@ -580,6 +585,7 @@ def subir(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def gestionHtml(request):
     conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -628,6 +634,7 @@ def gestionHtml(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def Gestion(request):
     label = []
     dato = []
@@ -726,6 +733,7 @@ def Gestion(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def gestionCHtml(request):
     conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -774,6 +782,7 @@ def gestionCHtml(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def GestionC(request):
     label = []
     dato = []
@@ -832,11 +841,13 @@ def GestionC(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def crear(request):
     return render(request, "Dashboard/crear.html")
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def grafic_principal(request):
     label = []
     data = []
@@ -888,6 +899,7 @@ def grafic_principal(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def punt_anio(request):
     label = []
     puntaje = []
@@ -905,6 +917,7 @@ def punt_anio(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def tot_est(request):
     label = []
     conta = []
@@ -921,6 +934,7 @@ def tot_est(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def critic_chart(request):  # vista donde se maneja la grafica y donde se fabrica el json
     label = []
     data = []
@@ -950,6 +964,7 @@ def critic_chart(request):  # vista donde se maneja la grafica y donde se fabric
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def est_anio(request):
     label = []
     data = []
@@ -973,6 +988,7 @@ def est_anio(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def est_edad(request):
     label = []
     data = []
@@ -987,6 +1003,7 @@ def est_edad(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','usuario'])
 def desemp_ciu_edad(request):
     label = []
     avanzado = []

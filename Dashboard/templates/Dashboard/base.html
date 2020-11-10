@@ -51,6 +51,7 @@
           <hr class="sidebar-divider">
 
           <!-- Heading -->
+          {% if request.user.is_staff %}
           <div class="sidebar-heading">
             ADMIN
           </div>
@@ -60,6 +61,7 @@
               <i class="fas fa-upload"></i>
               <span>Subir Archivo</span></a>
           </li>
+          {% endif %}
           <!-- Nav Item - Charts -->
           <li class="nav-item">
             <a class="nav-link" href="{% url 'grafic' %}" >
