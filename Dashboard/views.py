@@ -98,6 +98,9 @@ def subir(request):
             insert = Entrada()
             insert.archivo = request.FILES.get('file')
             deli=request.POST.get('delimitador')
+            if(insert.archivo == None):
+                messages.error(request, "Error, por favor escoja un archivo a subir")
+                return render(request, "Dashboard/subir.html")
             insert.save()
             f = codecs.open('media/'+str(insert.archivo), encoding='utf-8',)
             f2 = open(str('media/icfes/data.txt'), 'a+')
@@ -577,10 +580,13 @@ def subir(request):
             from shutil import rmtree
             rmtree(BASE_DIR+'/media/icfes')
             # print(df)
+            messages.success(request, 'Carga de Archivo Exitoso!')
             return render(request, "Dashboard/subir.html")
          else:
              messages.error(request, "Error al procesar el formulario")
+             return render(request, "Dashboard/subir.html")
     else:
+        messages.error(request, " ")
         return render(request, "Dashboard/subir.html")
 
 
