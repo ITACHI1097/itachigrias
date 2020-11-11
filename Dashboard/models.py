@@ -10,9 +10,6 @@ from django.db import models
 class Entrada(models.Model):
    archivo = models.FileField(upload_to="icfes/", null=True, blank=True)
 
-   def __str__(self):
-       return self.archivo
-
 
 
 class AuthGroup(models.Model):
