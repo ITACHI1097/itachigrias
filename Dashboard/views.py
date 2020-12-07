@@ -567,7 +567,8 @@ def subir(request):
                 drop sequence sequen6 cascade;
                 drop sequence sequen7 cascade;
                 drop sequence sequen8 cascade;
-                DROP TABLE table_temp;"""
+                DROP TABLE table_temp;
+                DELETE FROM "Dashboard_entrada";"""
 
                 cur.execute(sql)
             except (Exception, psycopg2.OperationalError) as error:

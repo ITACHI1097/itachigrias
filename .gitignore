@@ -5,3 +5,7 @@ venv
 db.spycopg2
 .DS_Store
 local_settings.py
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
