@@ -8,35 +8,50 @@
     <body id="page-top"></body>
 {% endblock %}
 {% block titulo %}
-    <h1>Gestion de Grafica - Puntaje</h1>
+    <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-dark">Herramientas:</h6>
+    </div>
+    <div class="col-1">
+        <label for="exampleFormControlSelect1">Metricas:</label>
+    </div>
+    <div class="col-2">
+        <select id="metrica" name="metrica" class="form-control col-md-8 select2">
+
+          <option value="puntaje">Puntaje</option>
+          <option value="cantidad">Cantidad</option>
+          <option value="ambas">Puntaje y Cantidad</option>
+        </select>
+    </div>
+    <div class="col-2">
+
+            <label for="exampleFormControlSelect1">Tipo de Visualización:</label>
+        </div>
+        <div class="col-3">
+        <select id="graf" name="graf" class="form-control col-md-5 select2">
+          <option value="bar">Barras</option>
+          <option value="pie">Pastel</option>
+          <option value="line">Linea</option>
+          <option value="radar">Radar</option>
+          <option value="polarArea">Area Polar</option>
+          <option value="doughnut">Dona</option>
+          <option value="tabla">Tabla</option>
+        </select>
+    </div>
+    <div>
+        <button class="btn btn-outline-primary" onclick="ExportPdf()">Descargar Grafica</button>
+    </div>
+{#    <h1>Gestion de Grafica - Puntaje</h1>#}
 {% endblock %}
 {% block content %}
         <!-- Card Header - Dropdown -->
-        <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
-          <h6 class="m-0 font-weight-bold text-dark">Puntajes Nacionales y Departamentales</h6>
-        </div>
-                <div class="col-xl-4 col-md-6 mb-4" >
-                  <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">2012</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">Nacional: </div>
-                        </div>
-                        <div class="col-auto">
-                          <i class="fas fa-users fa-2x text-gray-300"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
         <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-dark">Filtros</h6>
         </div>
     <div class="page-template">
         <!-- Card Body -->
         <div class="card-body" >
-            <form method="get" action="{% url 'Gestion' %}" id="formulario">
+            <form method="get" action="{% url 'Dashboard' %}" id="formulario">
               <div class="row">
                 <div class="col">
                     <label for="exampleFormControlSelect1">Puntaje</label>
@@ -51,39 +66,26 @@
                     </select>
                 </div>
                 <div class="col">
+                    <label for="exampleFormControlSelect1">Categorias</label>
+                    <select id="categoria" name="categoria" class="form-control col-md-12 select2">
+
+                      <option>Condicion de las TIC</option>
+                      <option>Condicion de la vivienda</option>
+                      <option>Genero</option>
+                      <option>Rango de Edad</option>
+                      <option>Estrato</option>
+                      <option>Nivel Educativo Padres</option>
+                    </select>
+                </div>
+                <div class="col">
                     <label for="exampleFormControlSelect1">Año</label>
-                    <select id="ano" name="ano" class="form-control col-md-5 select2">
+                    <select id="ano" name="ano" class="form-control col-md-8 select2">
                       <option>TODOS</option>
                         {%for objeto in ano %}
                             <option value="{{ objeto.ano }}">{{ objeto.ano }}</option>
 
                         {% endfor %}
                     </select>
-<!-- {#                    <label for="exampleFormControlSelect1">Periodo</label>#}
-{#                    <select id="periodo" name="periodo" class="form-control col-md-5 select2">#}
-{#                        <script>#}
-{#                            var options = {#}
-{#                                    "TODOS": [""],#}
-{#                                    "2012" : ["2012_1","2012_2"],#}
-{#                                    '2013' : ["2013_1","2013_2"],#}
-{#                                    '2014' : ["2014_1","2014_2"],#}
-{#                                    '2015' : ["2015_1","2015_2"],#}
-{#                                    '2016' : ["2016_1","2016_2"],#}
-{#                            }#}
-{#                            $(function(){#}
-{#                                var fillSecondary = function(){#}
-{#                                    var selected = $('#ano').val();#}
-{#                                    $('#periodo').empty();#}
-{#                                    $('#periodo').append('<option>TODOS</option>');#}
-{#                                    options[selected].forEach(function(element,index){#}
-{#                                        $('#periodo').append('<option value="'+element+'">'+element+'</option>');#}
-{#                                    });#}
-{#                                }#}
-{#                                $('#ano').change(fillSecondary);#}
-{#                                fillSecondary();#}
-{#                            });#}
-{#                        </script>#}
-{#                    </select>#} -->
                 </div>
                 <div class="col">
                     <label for="exampleFormControlSelect1">Municipio</label>
@@ -127,26 +129,15 @@
                         </script>
                     </select>
                 </div>
-                <div class="col">
-                    <label for="exampleFormControlSelect1">Tipo de Grafica</label>
-                    <select id="graf" name="graf" class="form-control col-md-6 select2">
-                      <option value="bar">Barras</option>
-                      <option value="pie">Pastel</option>
-                      <option value="line">Linea</option>
-                      <option value="radar">Radar</option>
-                      <option value="polarArea">Area Polar</option>
-                      <option value="doughnut">Dona</option>
-{#                              <option value="bubble">Burbuja</option>#}
-                    </select>
-                </div>
+
                       <button type="submit" class="btn btn-outline-primary">Generar</button>
               </div>
             </form>
         </div>
         <div class="card-body">
           <div class="chart-area">
-            <canvas id="grafic-gest" data-url="{% url 'Gestion' %}" width="450" height="200" ></canvas>
-            <button class="btn btn-outline-primary" onclick="ExportPdf()">Descargar Grafica en PDF</button>
+            <canvas id="grafic-gest" data-url="{% url 'Dashboard' %}" width="450" height="200" ></canvas>
+
           </div>
         </div>
     </div>
