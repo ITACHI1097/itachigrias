@@ -93,8 +93,6 @@ def subir(request):
     if request.method == 'POST':
          form = FormEntrada(request.POST, request.FILES)
          if form.is_valid():
-
-
             insert = Entrada()
             insert.archivo = request.FILES.get('file')
             deli=request.POST.get('delimitador')
