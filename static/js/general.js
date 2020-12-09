@@ -5,7 +5,6 @@ $(document).ready(function (){
                     var graf = document.getElementById("graf").value;
                     var punt = document.getElementById("puntaje").options[document.getElementById("puntaje").selectedIndex].text;
                     var ano = document.getElementById("ano").options[document.getElementById("ano").selectedIndex].text;
-                    // var periodo = document.getElementById("periodo").options[document.getElementById("periodo").selectedIndex].text;
                     var muni = document.getElementById("municipio").options[document.getElementById("municipio").selectedIndex].text;
                     var inst = document.getElementById("inst").options[document.getElementById("inst").selectedIndex].text;
                     let cat = document.getElementById("categoria").options[document.getElementById("categoria").selectedIndex].text;
@@ -18,79 +17,6 @@ $(document).ready(function (){
 
                         success: function (data){
                             var ctx = $graficGest[0].getContext("2d");
-                            function getRandomColor() {
-                                var letters = "0123456789ABCDEF".split("");
-                                var color = "#";
-                                for (var i = 0; i < 6; i++ ) {
-                                  color += letters[Math.floor(Math.random() * 16)];
-                                }
-                                return color;
-                            }
-
-                            var puntaje = {
-                              label: 'Puntaje',
-                                  backgroundColor: [
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                    getRandomColor(),
-                                  ],
-                                  data:data.data
-                            };
-
-                            var categoria1 = {
-                              label: 'categoria',
-                              backgroundColor: 'red',
-                              data:data.categoria
-                            };
-                            // var dato1=(metrica=='Puntaje') ? data.masculino:data.Cmasculino;
-                            // var dato2=(metrica=="Puntaje") ? data.femenino:data.Cfemenino;
 
                             var masculino = {
                                 label: (metrica=="Puntaje")?'Puntaje Masculino':'Cantidad Masculino',
@@ -304,10 +230,6 @@ $(document).ready(function (){
                                 yAxisID: 'A'
                             }
 
-                            var genero = {
-                              label: 'Genero',
-                              backgroundColor: 'dark'
-                            };
                             if (window.grafica) {
                                 window.grafica.clear();
                                 window.grafica.destroy();
@@ -358,11 +280,8 @@ $(document).ready(function (){
                             }
                             if(metrica!="Puntaje y Cantidad"){
                                   window.grafica = new Chart(ctx,{
-
                                   type: graf,
                                   data: dato,
-
-
                                   options: {
                                     responsive: true,
                                     legend: {
@@ -370,13 +289,11 @@ $(document).ready(function (){
                                     },
                                     title: {
                                       display: true,
-                                      text: 'PUNTAJE: '+punt +'     Categoria: '+cat+'      AÑO: '+ano+'        MUNICIPIO: '+muni+'     INSTITUCION: '+inst
+                                      text: 'METRICA: '+metrica+'     PUNTAJE: '+punt +'     Categoria: '+cat+'      AÑO: '+ano+'        MUNICIPIO: '+muni+'     INSTITUCION: '+inst
                                     },
                                     scales: {
                                          yAxes: [{
                                              id: 'A',
-
-                                            // type: 'linear',
                                               position: 'left',
                                               scaleLabel: {
                                                   display: true,
@@ -600,11 +517,6 @@ $(document).ready(function (){
                                     yAxisID: 'B'
                                 }
 
-                                var genero = {
-                                  label: 'Genero',
-                                  backgroundColor: 'dark'
-                                };
-
                                 let dato2 = {
                                     labels: data.labels,
                                     datasets: [puntaje]
@@ -661,7 +573,7 @@ $(document).ready(function (){
                                     },
                                     title: {
                                       display: true,
-                                      text: 'PUNTAJE: '+punt +'     Categoria: '+cat+'      AÑO: '+ano+'        MUNICIPIO: '+muni+'     INSTITUCION: '+inst
+                                      text: 'METRICA: '+metrica+'     PUNTAJE: '+punt +'     Categoria: '+cat+'      AÑO: '+ano+'        MUNICIPIO: '+muni+'     INSTITUCION: '+inst
                                     },
                                     scales: {
                                          yAxes: [{
