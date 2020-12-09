@@ -93,186 +93,215 @@ $(document).ready(function (){
                             // var dato2=(metrica=="Puntaje") ? data.femenino:data.Cfemenino;
 
                             var masculino = {
-                                label: 'Masculino',
+                                label: (metrica=="Puntaje")?'Puntaje Masculino':'Cantidad Masculino',
                                 backgroundColor: 'red',
                                 // data:dato1
                                 data:(metrica=="Puntaje") ? data.masculino:data.Cmasculino,
-
+                                yAxisID: 'A'
                                 // data:data.masculino
                             }
 
                             var femenino = {
-                                label: 'Femenino',
+                                label: (metrica=="Puntaje")?'Puntaje Femenino':'Cantidad Femenino',
                                 backgroundColor: 'blue',
                                 // data:dato2,
                                 data:(metrica=="Puntaje")?data.femenino:data.Cfemenino,
+                                yAxisID: 'A'
                             }
 
                             var ticbuena = {
-                                label: 'Buena',
+                                label: (metrica=="Puntaje")?'Puntaje Buena':'Cantidad Buena',
                                 backgroundColor: 'green',
                                 data:(metrica=="Puntaje")?data.ticbuena:data.Cticbuena,
+                                yAxisID: 'A'
                             }
 
                             var ticregular = {
-                                label: 'REGULAR',
+                                label: (metrica=="Puntaje")?'Puntaje REGULAR':'Cantidad REGULAR',
                                 backgroundColor: 'yellow',
-                                data:(metrica=="Puntaje")?data.ticregular:data.Cticregular
+                                data:(metrica=="Puntaje")?data.ticregular:data.Cticregular,
+                                yAxisID: 'A'
                             }
 
                             var ticmala = {
-                                label: 'Mala',
+                                label: (metrica=="Puntaje")?'Puntaje Mala':'Cantidad Mala',
                                 backgroundColor: 'red',
-                                data:(metrica=="Puntaje")?data.ticmala:data.Cticmala
+                                data:(metrica=="Puntaje")?data.ticmala:data.Cticmala,
+                                yAxisID: 'A'
                             }
 
                             var vivbuena = {
-                                label: 'Buena',
+                                label: (metrica=="Puntaje")?'Puntaje BUENA':'Cantidad BUENA',
                                 backgroundColor: 'green',
-                                data:(metrica=="Puntaje")?data.vivbuena:data.Cvivbuena
+                                data:(metrica=="Puntaje")?data.vivbuena:data.Cvivbuena,
+                                yAxisID: 'A'
                             }
 
                             var vivregular = {
-                                label: 'REGULAR',
+                                label: (metrica=="Puntaje")?'Puntaje REGULAR':'Cantidad REGULAR',
                                 backgroundColor: 'yellow',
-                                data:(metrica=="Puntaje")?data.vivregular:data.Cvivregular
+                                data:(metrica=="Puntaje")?data.vivregular:data.Cvivregular,
+                                yAxisID: 'A'
                             }
 
                             var vivmala = {
-                                label: 'Mala',
+                                label: (metrica=="Puntaje")?'Puntaje Mala':'Cantidad MALA',
                                 backgroundColor: 'red',
-                                data:(metrica=="Puntaje")?data.vivmala:data.Cvivmala
+                                data:(metrica=="Puntaje")?data.vivmala:data.Cvivmala,
+                                yAxisID: 'A'
                             }
 
                             var e17 = {
-                                label: '17',
+                                label: (metrica=="Puntaje")?'Puntaje de 17':'Cantidad de 17',
                                 backgroundColor: 'blue',
-                                data:(metrica=="Puntaje")?data.e17:data.Ce17
+                                data:(metrica=="Puntaje")?data.e17:data.Ce17,
+                                yAxisID: 'A'
                             }
 
                             var e18y19 = {
-                                label: '18 Y 19',
+                                label: (metrica=="Puntaje")?'Puntaje de 18 Y 19':'Cantidad de 18 Y 19',
                                 backgroundColor: 'red',
-                                data:(metrica=="Puntaje")?data.e18y19:data.Ce18y19
+                                data:(metrica=="Puntaje")?data.e18y19:data.Ce18y19,
+                                yAxisID: 'A'
                             }
 
                             var e20a28 = {
-                                label: '20 A 28',
+                                label: (metrica=="Puntaje")?'Puntaje de 20 A 28':'Cantidad de 20 A 28',
                                 backgroundColor: 'green',
-                                data:(metrica=="Puntaje")?data.e20a28:data.Ce20a28
+                                data:(metrica=="Puntaje")?data.e20a28:data.Ce20a28,
+                                yAxisID: 'A'
                             }
 
                             var emayoresde28 = {
-                                label: 'MAYORES DE 28',
+                                label: (metrica=="Puntaje")?'Punt.MAYORES DE 28':'Cant.MAYORES DE 28',
                                 backgroundColor: 'yellow',
-                                data:(metrica=="Puntaje")?data.emayoresde28:data.Cemayoresde28
+                                data:(metrica=="Puntaje")?data.emayoresde28:data.Cemayoresde28,
+                                yAxisID: 'A'
                             }
 
                             var emenoresde17 = {
-                                label: 'MENORES DE 17',
+                                label: (metrica=="Puntaje")?'Punt.MENORES DE 17':'Cant.MENORES DE 17',
                                 backgroundColor: 'brown',
-                                data:(metrica=="Puntaje")?data.emenoresde17:data.Cemenoresde17
+                                data:(metrica=="Puntaje")?data.emenoresde17:data.Cemenoresde17,
+                                yAxisID: 'A'
                             }
 
                             var es1 = {
-                                label: 'ESTRATO 1',
+                                label: (metrica=="Puntaje")?'Punt.ESTRATO 1':'Cant.ESTRATO 1',
                                 backgroundColor: 'red',
-                                data:(metrica=="Puntaje")?data.es1:data.Ces1
+                                data:(metrica=="Puntaje")?data.es1:data.Ces1,
+                                yAxisID: 'A'
                             }
 
                             var es2 = {
-                                label: 'ESTRATO 2',
+                                label: (metrica=="Puntaje")?'Punt.ESTRATO 2':'Cant.ESTRATO 2',
                                 backgroundColor: 'blue',
-                                data:(metrica=="Puntaje")?data.es2:data.Ces2
+                                data:(metrica=="Puntaje")?data.es2:data.Ces2,
+                                yAxisID: 'A'
                             }
 
                             var es3 = {
-                                label: 'ESTRATO 3',
+                                label: (metrica=="Puntaje")?'Punt.ESTRATO 3':'Cant.ESTRATO 3',
                                 backgroundColor: 'yellow',
-                                data:(metrica=="Puntaje")?data.es3:data.Ces3
+                                data:(metrica=="Puntaje")?data.es3:data.Ces3,
+                                yAxisID: 'A'
                             }
 
                             var es4 = {
-                                label: 'ESTRATO 4',
+                                label: (metrica=="Puntaje")?'Punt.ESTRATO 4':'Cant.ESTRATO 4',
                                 backgroundColor: 'green',
-                                data:(metrica=="Puntaje")?data.es4:data.Ces4
+                                data:(metrica=="Puntaje")?data.es4:data.Ces4,
+                                yAxisID: 'A'
                             }
 
                             var es5 = {
-                                label: 'ESTRATO 5',
+                                label: (metrica=="Puntaje")?'Punt.ESTRATO 5':'Cant.ESTRATO 5',
                                 backgroundColor: 'brown',
-                                data:(metrica=="Puntaje")?data.es5:data.Ces5
+                                data:(metrica=="Puntaje")?data.es5:data.Ces5,
+                                yAxisID: 'A'
                             }
 
                             var es6 = {
-                                label: 'ESTRATO 6',
+                                label: (metrica=="Puntaje")?'Punt.ESTRATO 6':'Cant.ESTRATO 6',
                                 backgroundColor: 'black',
-                                data:(metrica=="Puntaje")?data.es6:data.Ces6
+                                data:(metrica=="Puntaje")?data.es6:data.Ces6,
+                                yAxisID: 'A'
                             }
 
                             var n = {
-                                label: 'NINGUNO',
+                                label: (metrica=="Puntaje")?'Punt.NINGUNO':'Cant.NINGUNO',
                                 backgroundColor: 'red',
-                                data:(metrica=="Puntaje")?data.n:data.Cn
+                                data:(metrica=="Puntaje")?data.n:data.Cn,
+                                yAxisID: 'A'
                             }
                             var PI = {
-                                label: 'PRIMARIA INCOMPLETA',
+                                label: (metrica=="Puntaje")?'Punt.PRIMARIA INCOMPLETA':'Cant.PRIMARIA INCOMPLETA',
                                 backgroundColor: 'blue',
-                                data:(metrica=="Puntaje")?data.PI:data.CPI
+                                data:(metrica=="Puntaje")?data.PI:data.CPI,
+                                yAxisID: 'A'
                             }
 
                             var PC = {
-                                label: 'PRIMARIA COMPLETA',
+                                label: (metrica=="Puntaje")?'Punt.PRIMARIA COMPLETA':'Cant.PRIMARIA COMPLETA',
                                 backgroundColor: 'green',
-                                data:(metrica=="Puntaje")?data.PC:data.CPC
+                                data:(metrica=="Puntaje")?data.PC:data.CPC,
+                                yAxisID: 'A'
                             }
 
                             var BI = {
-                                label: 'SECUNDARIA BACHILLERATO IMCOMPLETO',
+                                label: (metrica=="Puntaje")?'Punt.SECUNDARIA BACHILLERATO IMCOMPLETO':'Cant.SECUNDARIA BACHILLERATO IMCOMPLETO',
                                 backgroundColor: 'yellow',
-                                data:(metrica=="Puntaje")?data.BI:data.CBI
+                                data:(metrica=="Puntaje")?data.BI:data.CBI,
+                                yAxisID: 'A'
                             }
 
                             var BC = {
-                                label: 'SECUNDARIA BACHILLERATO COMPLETO',
+                                label: (metrica=="Puntaje")?'Punt.SECUNDARIA BACHILLERATO COMPLETO':'Cant.SECUNDARIA BACHILLERATO COMPLETO',
                                 backgroundColor: 'brown',
-                                data:(metrica=="Puntaje")?data.BC:data.CBC
+                                data:(metrica=="Puntaje")?data.BC:data.CBC,
+                                yAxisID: 'A'
                             }
 
                             var ETI = {
-                                label: 'EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
+                                label: (metrica=="Puntaje")?'Punt.EDUCACION TECNICA O TECNOLOGICA INCOMPLETA':'Cant.EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
                                 backgroundColor: 'pink',
-                                data:(metrica=="Puntaje")?data.ETI:data.CETI
+                                data:(metrica=="Puntaje")?data.ETI:data.CETI,
+                                yAxisID: 'A'
                             }
 
                             var ETC = {
-                                label: 'EDUCACION TECNICA O TECNOLOGICA COMPLETA',
+                                label: (metrica=="Puntaje")?'Punt.EDUCACION TECNICA O TECNOLOGICA COMPLETA':'Cant.EDUCACION TECNICA O TECNOLOGICA COMPLETA',
                                 backgroundColor: 'purple',
-                                data:(metrica=="Puntaje")?data.ETC:data.CETC
+                                data:(metrica=="Puntaje")?data.ETC:data.CETC,
+                                yAxisID: 'A'
                             }
 
                             var EPI = {
-                                label: 'EDUCACION PROFECIONAL INCOMPLETA',
+                                label: (metrica=="Puntaje")?'Punt.EDUCACION PROFECIONAL INCOMPLETA':'Cant.EDUCACION PROFECIONAL INCOMPLETA',
                                 backgroundColor: 'orange',
-                                data:(metrica=="Puntaje")?data.EPI:data.CEPI
+                                data:(metrica=="Puntaje")?data.EPI:data.CEPI,
+                                yAxisID: 'A'
                             }
 
                             var EPC = {
-                                label: 'EDUCACION PROFECIONAL COMPLETA',
+                                label: (metrica=="Puntaje")?'Punt.EDUCACION PROFECIONAL COMPLETA':'Cant.EDUCACION PROFECIONAL COMPLETA',
                                 backgroundColor: 'violet',
-                                data:(metrica=="Puntaje")?data.EPC:data.CEPC
+                                data:(metrica=="Puntaje")?data.EPC:data.CEPC,
+                                yAxisID: 'A'
                             }
 
                             var postgrado = {
-                                label: 'POSTGRADO',
+                                label: (metrica=="Puntaje")?'Punt.POSTGRADO':'Cant.POSTGRADO',
                                 backgroundColor: 'gray',
-                                data:(metrica=="Puntaje")?data.postgrado:data.Cpostgrado
+                                data:(metrica=="Puntaje")?data.postgrado:data.Cpostgrado,
+                                yAxisID: 'A'
                             }
 
                             var nosabe = {
-                                label: 'NO SABE',
+                                label: (metrica=="Puntaje")?'Punt.NO SABE':'Cant.NO SABE',
                                 backgroundColor: 'black',
-                                data:(metrica=="Puntaje")?data.nosabe:data.Cnosabe
+                                data:(metrica=="Puntaje")?data.nosabe:data.Cnosabe,
+                                yAxisID: 'A'
                             }
 
                             var genero = {
@@ -327,33 +356,342 @@ $(document).ready(function (){
                                     }
                                 }
                             }
+                            if(metrica!="Puntaje y Cantidad"){
+                                  window.grafica = new Chart(ctx,{
 
-                            window.grafica = new Chart(ctx,{
+                                  type: graf,
+                                  data: dato,
 
 
-                              type: graf,
-                              data: dato,
+                                  options: {
+                                    responsive: true,
+                                    legend: {
+                                      position: 'top',
+                                    },
+                                    title: {
+                                      display: true,
+                                      text: 'PUNTAJE: '+punt +'     Categoria: '+cat+'      AÑO: '+ano+'        MUNICIPIO: '+muni+'     INSTITUCION: '+inst
+                                    },
+                                    scales: {
+                                         yAxes: [{
+                                             id: 'A',
 
-
-                              options: {
-                                responsive: true,
-                                legend: {
-                                  position: 'top',
-                                },
-                                title: {
-                                  display: true,
-                                  text: 'PUNTAJE: '+punt +'     Categoria: '+cat+'      AÑO: '+ano+'        MUNICIPIO: '+muni+'     INSTITUCION: '+inst
-                                },
-                                scales: {
-                                     yAxes: [{
-                                          scaleLabel: {
-                                              display: true,
-                                              labelString: (metrica=="Puntaje")?'Puntaje':'Cantidad'
-                                          }
-                                     }]
+                                            // type: 'linear',
+                                              position: 'left',
+                                              scaleLabel: {
+                                                  display: true,
+                                                  labelString: (metrica=="Puntaje")?'Puntaje':'Cantidad'
+                                              }
+                                         }]
+                                    }
+                                  }
+                                });
+                            }
+                            else{
+                                var Pmasculino = {
+                                    label: 'Puntaje Masculino',
+                                    backgroundColor: 'red',
+                                    // data:dato1
+                                    data:data.masculino,
+                                    yAxisID: 'B'
+                                    // data:data.masculino
                                 }
-                              }
-                            });
+
+                                var Pfemenino = {
+                                    label: 'Puntaje Femenino',
+                                    backgroundColor: 'blue',
+                                    // data:dato2,
+                                    data:data.femenino,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pticbuena = {
+                                    label: 'Puntaje Buena',
+                                    backgroundColor: 'green',
+                                    data:data.ticbuena,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pticregular = {
+                                    label: 'Puntaje REGULAR',
+                                    backgroundColor: 'yellow',
+                                    data:data.ticregular,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pticmala = {
+                                    label: 'Puntaje Mala',
+                                    backgroundColor: 'red',
+                                    data:data.ticmala,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pvivbuena = {
+                                    label: 'Puntaje Buena',
+                                    backgroundColor: 'green',
+                                    data:data.vivbuena,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pvivregular = {
+                                    label: 'Puntaje REGULAR',
+                                    backgroundColor: 'yellow',
+                                    data:data.vivregular,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pvivmala = {
+                                    label: 'Puntaje Mala',
+                                    backgroundColor: 'red',
+                                    data:data.vivmala,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pe17 = {
+                                    label: 'Puntaje de 17',
+                                    backgroundColor: 'blue',
+                                    data:data.e17,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pe18y19 = {
+                                    label: 'Puntaje de 18 Y 19',
+                                    backgroundColor: 'red',
+                                    data:data.e18y19,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pe20a28 = {
+                                    label: 'Puntaje de 20 A 28',
+                                    backgroundColor: 'green',
+                                    data:data.e20a28,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pemayoresde28 = {
+                                    label: 'Puntaje MAYORES DE 28',
+                                    backgroundColor: 'yellow',
+                                    data:data.emayoresde28,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pemenoresde17 = {
+                                    label: 'Puntaje de MENORES DE 17',
+                                    backgroundColor: 'brown',
+                                    data:data.emenoresde17,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pes1 = {
+                                    label: 'Punt.ESTRATO 1',
+                                    backgroundColor: 'red',
+                                    data:data.es1,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pes2 = {
+                                    label: 'Punt.ESTRATO 2',
+                                    backgroundColor: 'blue',
+                                    data:data.es2,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pes3 = {
+                                    label: 'Punt.ESTRATO 3',
+                                    backgroundColor: 'yellow',
+                                    data:data.es3,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pes4 = {
+                                    label: 'Punt.ESTRATO 4',
+                                    backgroundColor: 'green',
+                                    data:data.es4,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pes5 = {
+                                    label: 'Punt.ESTRATO 5',
+                                    backgroundColor: 'brown',
+                                    data:data.es5,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pes6 = {
+                                    label: 'Punt.ESTRATO 6',
+                                    backgroundColor: 'black',
+                                    data:data.es6,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pn = {
+                                    label: 'Punt.NINGUNO',
+                                    backgroundColor: 'red',
+                                    data:data.n,
+                                    yAxisID: 'B'
+                                }
+                                var PPI = {
+                                    label: 'Punt.PRIMARIA INCOMPLETA',
+                                    backgroundColor: 'blue',
+                                    data:data.PI,
+                                    yAxisID: 'B'
+                                }
+
+                                var PPC = {
+                                    label: 'Punt.PRIMARIA COMPLETA',
+                                    backgroundColor: 'green',
+                                    data:(metrica=="Puntaje")?data.PC:data.CPC,
+                                    yAxisID: 'B'
+                                }
+
+                                var PBI = {
+                                    label: 'Punt.SECUNDARIA BACHILLERATO IMCOMPLETO',
+                                    backgroundColor: 'yellow',
+                                    data:data.BI,
+                                    yAxisID: 'B'
+                                }
+
+                                var PBC = {
+                                    label: 'Punt.SECUNDARIA BACHILLERATO COMPLETO',
+                                    backgroundColor: 'brown',
+                                    data:data.BC,
+                                    yAxisID: 'B'
+                                }
+
+                                var PETI = {
+                                    label: 'Punt.EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
+                                    backgroundColor: 'pink',
+                                    data:data.ETI,
+                                    yAxisID: 'B'
+                                }
+
+                                var PETC = {
+                                    label: 'Punt.EDUCACION TECNICA O TECNOLOGICA COMPLETA',
+                                    backgroundColor: 'purple',
+                                    data:data.ETC,
+                                    yAxisID: 'B'
+                                }
+
+                                var PEPI = {
+                                    label: 'Punt.EDUCACION PROFECIONAL INCOMPLETA',
+                                    backgroundColor: 'orange',
+                                    data:data.EPI,
+                                    yAxisID: 'B'
+                                }
+
+                                var PEPC = {
+                                    label: 'Punt.EDUCACION PROFECIONAL COMPLETA',
+                                    backgroundColor: 'violet',
+                                    data:data.EPC,
+                                    yAxisID: 'B'
+                                }
+
+                                var Ppostgrado = {
+                                    label: 'Punt.POSTGRADO',
+                                    backgroundColor: 'gray',
+                                    data:data.postgrado,
+                                    yAxisID: 'B'
+                                }
+
+                                var Pnosabe = {
+                                    label: 'Punt.NO SABE',
+                                    backgroundColor: 'black',
+                                    data:data.nosabe,
+                                    yAxisID: 'B'
+                                }
+
+                                var genero = {
+                                  label: 'Genero',
+                                  backgroundColor: 'dark'
+                                };
+
+                                let dato2 = {
+                                    labels: data.labels,
+                                    datasets: [puntaje]
+                                }
+                                if(cat =='Genero'){
+                                    dato2 = {
+                                      labels: data.labels,
+                                      datasets: [Pmasculino,Pfemenino,masculino,femenino]
+                                    }
+                                }else{
+                                    if(cat == 'Condicion de las TIC')
+                                        dato2 = {
+                                            labels: data.labels,
+                                            datasets: [Pticbuena,Pticregular,Pticmala,ticbuena,ticregular,ticmala]
+                                        }
+                                    else{
+                                        if(cat == 'Condicion de la vivienda')
+                                            dato2 = {
+                                                labels: data.labels,
+                                                datasets: [Pvivbuena,Pvivregular,Pvivmala,vivbuena,vivregular,vivmala]
+                                            }
+                                        else{
+                                            if(cat == 'Rango de Edad')
+                                                dato2 = {
+                                                    labels: data.labels,
+                                                    datasets: [Pe17,Pe18y19,Pe20a28,Pemayoresde28,Pemenoresde17,e17,e18y19,e20a28,emayoresde28,emenoresde17]
+                                                }
+                                            else{
+                                                if(cat == 'Estrato')
+                                                    dato2 = {
+                                                        labels: data.labels,
+                                                        datasets: [Pes1,Pes2,Pes3,Pes4,Pes5,Pes6,es1,es2,es3,es4,es5,es6]
+                                                    }
+                                                else{
+                                                    if(cat == 'Nivel Educativo Padres')
+                                                        dato2 = {
+                                                            labels: data.labels,
+                                                            datasets: [Pn,PPI,PPC,PBI,PBC,PETI,PETC,PEPI,PEPC,Ppostgrado,Pnosabe,n,PI,PC,BI,BC,ETI,ETC,EPI,EPC,postgrado,nosabe]
+                                                        }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                window.grafica = new Chart(ctx,{
+
+                                  type: graf,
+                                  data: dato2,
+
+                                  options: {
+                                    responsive: true,
+                                    legend: {
+                                      position: 'top',
+                                    },
+                                    title: {
+                                      display: true,
+                                      text: 'PUNTAJE: '+punt +'     Categoria: '+cat+'      AÑO: '+ano+'        MUNICIPIO: '+muni+'     INSTITUCION: '+inst
+                                    },
+                                    scales: {
+                                         yAxes: [{
+                                            id: 'A',
+
+                                            // type: 'linear',
+                                            position: 'left',
+                                             scaleLabel: {
+                                                  display: true,
+                                                  labelString: 'Cantidad'
+                                              }
+                                          }, {
+                                            id: 'B',
+                                            // type: 'linear',
+                                            position: 'right',
+                                            // ticks: {
+                                            //   max: 1,
+                                            //   min: 0
+                                            // }
+                                             scaleLabel: {
+                                                  display: true,
+                                                  labelString: 'Puntaje'
+                                              }
+                                         }]
+                                    }
+                                  }
+                                });
+                            }
+
+
                         }
                     })
 

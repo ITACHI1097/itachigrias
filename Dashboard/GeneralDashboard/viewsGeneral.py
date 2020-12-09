@@ -450,23 +450,37 @@ def Dashboard(request):
             if (inst == "General"):
                 if (categoria == "Genero"):
 
-                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
-                                                                                                     conta=Count(
-                                                                                                         'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message).filter(id_estudiante__estu_genero="MASCULINO")
-
+                    # result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
+                    #                                                                                  conta=Count(
+                    #                                                                                      'id_estudiante')).filter(
+                    #     id_lugar__cole_mcpio_ubicacion=message, id_estudiante__estu_genero="MASCULINO").order_by('id_institucion__cole_nombre_sede')
+                    #
+                    # for entry in result:
+                    #
+                    #     masculino.append(entry['prom'])
+                    #     Cmasculino.append(entry['conta'])
+                    # # result3 = FactSaber11.objects.get(id_institucion__cole_nombre_sede='id_institucion__cole_nombre_sede').filter(id_estudiante__estu_genero="FEMENINO").exists()
+                    # # try:
+                    #
+                    # result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje), conta=Count('id_estudiante')).filter(id_lugar__cole_mcpio_ubicacion=message, id_estudiante__estu_genero="FEMENINO").order_by('id_institucion__cole_nombre_sede')
+                    #
+                    # for entry in result2:
+                    #     label.append(
+                    #         entry['id_institucion__cole_nombre_sede'])
+                    #     femenino.append(entry['prom'])
+                    #     Cfemenino.append(entry['conta'])
+                    # # except IndexError:
+                    # # else:
+                    # #     femenino.append(0)
+                    # #     Cfemenino.append(0)
+                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom1=Avg(puntaje, filter=Q(id_estudiante__estu_genero="MASCULINO")),prom2=Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO")),conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(id_lugar__cole_mcpio_ubicacion=message)
                     for entry in result:
-                        label.append(
-                            entry['id_institucion__cole_nombre_sede'])
-                        masculino.append(entry['prom'])
-                        Cmasculino.append(entry['conta'])
-                    result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
-                                                                                                    conta=Count(
-                                                                                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message).filter(id_estudiante__estu_genero="FEMENINO")
-                    for entry in result2:
-                        femenino.append(entry['prom'])
-                        Cfemenino.append(entry['conta'])
+                        label.append(entry['id_institucion__cole_nombre_sede'])
+                        femenino.append(entry['prom1'])
+                        masculino.append(entry['prom2'])
+                        Cfemenino.append(entry['conta1'])
+                        Cmasculino.append(entry['conta2'])
+
                 else:
                     if (categoria == "Condicion de las TIC"):
                         result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
