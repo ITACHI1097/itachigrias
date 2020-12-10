@@ -93,12 +93,12 @@ def Dashboard(request):
     Cticregular = []
     ticmala = []
     Cticmala = []
-    vivbuena = []
-    Cvivbuena = []
-    vivregular = []
-    Cvivregular = []
-    vivmala = []
-    Cvivmala = []
+    Hmedio = []
+    CHmedio = []
+    Hcritico = []
+    CHcritico = []
+    Hsin = []
+    CHsin = []
     e17 = []
     Ce17 = []
     e18y19 = []
@@ -188,7 +188,7 @@ def Dashboard(request):
                         Cticmala.append(entry['conta3'])
 
                 else:
-                    if(categoria=="Condicion de la vivienda"):
+                    if(categoria=="Condicion en la que vive"):
                         # result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
                         #     prom=Avg(puntaje),
                         #     conta=Count(
@@ -220,21 +220,21 @@ def Dashboard(request):
 
                         result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion',
                                                             'id_tiempo__ano').annotate(
-                            prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vivienda="BUENA")),
-                            prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vivienda="REGULAR")),
-                            prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vivienda="MALA")),
-                            conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vivienda="BUENA")),
-                            conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vivienda="REGULAR")),
-                            conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vivienda="MALA"))).order_by(
+                            prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                            prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                            prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO")),
+                            conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                            conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                            conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).order_by(
                             'id_lugar__cole_mcpio_ubicacion')
                         for entry in result:
                             label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
-                            vivbuena.append(entry['prom1'])
-                            Cvivbuena.append(entry['conta1'])
-                            vivregular.append(entry['prom2'])
-                            Cvivregular.append(entry['conta2'])
-                            vivmala.append(entry['prom3'])
-                            Cvivmala.append(entry['conta3'])
+                            Hmedio.append(entry['prom1'])
+                            CHmedio.append(entry['conta1'])
+                            Hcritico.append(entry['prom2'])
+                            CHcritico.append(entry['conta2'])
+                            Hsin.append(entry['prom3'])
+                            CHsin.append(entry['conta3'])
 
                     else:
                         if(categoria=="Rango de Edad"):
@@ -2138,9 +2138,9 @@ def Dashboard(request):
         'ticbuena': ticbuena,
         'ticregular': ticregular,
         'ticmala': ticmala,
-        'vivbuena': vivbuena,
-        'vivregular': vivregular,
-        'vivmala': vivmala,
+        'Hmedio': Hmedio,
+        'Hcritico': Hcritico,
+        'Hsin': Hsin,
         'e17': e17,
         'e18y19': e18y19,
         'e20a28': e20a28,
@@ -2166,9 +2166,9 @@ def Dashboard(request):
         'Cticbuena': Cticbuena,
         'Cticregular': Cticregular,
         'Cticmala': Cticmala,
-        'Cvivbuena': Cvivbuena,
-        'Cvivregular': Cvivregular,
-        'Cvivmala': Cvivmala,
+        'CHmedio': CHmedio,
+        'CHcritico': CHcritico,
+        'CHsin': CHsin,
         'Ce17': Ce17,
         'Ce18y19': Ce18y19,
         'Ce20a28': Ce20a28,

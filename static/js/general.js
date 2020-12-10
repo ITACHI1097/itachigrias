@@ -73,9 +73,9 @@ $(document).ready(function (){
                             }
 
                             var vivbuena = {
-                                label: (metrica=="Puntaje")?'Puntaje BUENA':'Cantidad BUENA',
+                                label: (metrica=="Puntaje")?'Punt.Hacinamiento Medio':'Cant.Hacinamiento Medio',
                                 backgroundColor: 'green',
-                                data:(metrica=="Puntaje")?data.vivbuena:data.Cvivbuena,
+                                data:(metrica=="Puntaje")?data.Hmedio:data.CHmedio,
                                 borderColor: 'green',
                                 lineTension: 0,
                                 fill: false,
@@ -83,20 +83,20 @@ $(document).ready(function (){
                             }
 
                             var vivregular = {
-                                label: (metrica=="Puntaje")?'Puntaje REGULAR':'Cantidad REGULAR',
-                                backgroundColor: 'yellow',
-                                data:(metrica=="Puntaje")?data.vivregular:data.Cvivregular,
-                                borderColor: 'yellow',
+                                label: (metrica=="Puntaje")?'Punt.Hacinamiento Critico':'Cant.Hacinamiento Critico',
+                                backgroundColor: 'red',
+                                data:(metrica=="Puntaje")?data.Hcritico:data.CHcritico,
+                                borderColor: 'red',
                                 lineTension: 0,
                                 fill: false,
                                 yAxisID: 'A'
                             }
 
                             var vivmala = {
-                                label: (metrica=="Puntaje")?'Puntaje Mala':'Cantidad MALA',
-                                backgroundColor: 'red',
-                                data:(metrica=="Puntaje")?data.vivmala:data.Cvivmala,
-                                borderColor: 'red',
+                                label: (metrica=="Puntaje")?'Punt.Sin Hacinamiento':'Cant.Sin Hacinamiento',
+                                backgroundColor: 'black',
+                                data:(metrica=="Puntaje")?data.Hsin:data.CHsin,
+                                borderColor: 'black',
                                 lineTension: 0,
                                 fill: false,
                                 yAxisID: 'A'
@@ -343,7 +343,7 @@ $(document).ready(function (){
                                         datasets: [ticbuena,ticregular,ticmala]
                                     }
                                 else{
-                                    if(cat == 'Condicion de la vivienda')
+                                    if(cat == 'Condicion en la que vive')
                                         dato = {
                                             labels: data.labels,
                                             datasets: [vivbuena,vivregular,vivmala]
@@ -469,9 +469,9 @@ $(document).ready(function (){
                                 }
 
                                 var Pvivbuena = {
-                                    label: 'Puntaje Buena',
+                                    label: 'Punt.Hacinamiento Medio',
                                     backgroundColor: 'green',
-                                    data:data.vivbuena,
+                                    data:data.Hmedio,
                                     borderColor: 'green',
                                     lineTension: 0,
                                     fill: false,
@@ -479,20 +479,20 @@ $(document).ready(function (){
                                 }
 
                                 var Pvivregular = {
-                                    label: 'Puntaje REGULAR',
-                                    backgroundColor: 'yellow',
-                                    data:data.vivregular,
-                                    borderColor: 'yellow',
+                                    label: 'Punt.Hacinamiento Critico',
+                                    backgroundColor: 'red',
+                                    data:data.Hcritico,
+                                    borderColor: 'red',
                                     lineTension: 0,
                                     fill: false,
                                     yAxisID: 'B'
                                 }
 
                                 var Pvivmala = {
-                                    label: 'Puntaje Mala',
-                                    backgroundColor: 'red',
-                                    data:data.vivmala,
-                                    borderColor: 'red',
+                                    label: 'Punt.Sin Hacinamiento',
+                                    backgroundColor: 'black',
+                                    data:data.Hsin,
+                                    borderColor: 'black',
                                     lineTension: 0,
                                     fill: false,
                                     yAxisID: 'B'
@@ -733,7 +733,7 @@ $(document).ready(function (){
                                             datasets: [Pticbuena,Pticregular,Pticmala,ticbuena,ticregular,ticmala]
                                         }
                                     else{
-                                        if(cat == 'Condicion de la vivienda')
+                                        if(cat == 'Condicion en la que vive')
                                             dato2 = {
                                                 labels: data.labels,
                                                 datasets: [Pvivbuena,Pvivregular,Pvivmala,vivbuena,vivregular,vivmala]
