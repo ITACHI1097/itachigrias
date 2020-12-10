@@ -3,6 +3,13 @@
 {% block head %}
     <script src="{% static 'js/general.js' %}"></script>
     <script src="http://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
+    <style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
 {% endblock %}
 {% block body %}
     <body id="page-top"></body>
@@ -136,6 +143,12 @@
         </div>
         <div class="card-body">
           <div class="chart-area">
+            <button class="btn btn-outline-primary" onclick="resetZoom()">Reset Zoom</button>
+            <script>
+                function resetZoom() {
+                  window.grafica.resetZoom();
+                }
+            </script>
             <canvas id="grafic-gest" data-url="{% url 'Dashboard' %}" width="450" height="200" ></canvas>
 
           </div>

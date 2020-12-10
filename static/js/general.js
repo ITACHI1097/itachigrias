@@ -393,6 +393,23 @@ $(document).ready(function (){
                                                   labelString: (metrica=="Puntaje")?'Puntaje':'Cantidad'
                                               }
                                          }]
+                                    },
+                                    pan: {
+                                      enabled: true,
+                                      mode: "x",
+                                      speed: 10,
+                                      threshold: 10
+                                    },
+                                    zoom: {
+                                        enabled: true,
+                                        drag: false,
+                                        mode: "x",
+                                        speed: 0.01,
+                                        sensitivity: 0.1,
+                                        limits: {
+                                            max: 10,
+                                            min: 0.5
+                                        }
                                     }
                                   }
                                 });
@@ -781,6 +798,23 @@ $(document).ready(function (){
                                                   labelString: 'Puntaje'
                                               }
                                          }]
+                                    },
+                                    pan: {
+                                      enabled: true,
+                                      mode: "x",
+                                      speed: 10,
+                                      threshold: 10
+                                    },
+                                    zoom: {
+                                        enabled: true,
+                                        drag: false,
+                                        mode: "x",
+                                        speed: 0.01,
+                                        // sensitivity: 0.1,
+                                        limits: {
+                                            max: 10,
+                                            min: 0.5
+                                        }
                                     }
                                   }
                                 });

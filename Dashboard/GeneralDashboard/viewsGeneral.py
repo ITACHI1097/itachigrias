@@ -144,94 +144,97 @@ def Dashboard(request):
     BI = []
     CBI = []
     contad = []
-    anos = []
     # se obtiene todas las variables desde el html desde un form con el metodo get
     message = request.GET['municipio']
     puntaje = request.GET['puntaje']
     inst = request.GET['inst']
     ano = request.GET['ano']
     categoria = request.GET['categoria']
-    conta=0
-    conta2=0
 
     if (ano == "TODOS"):
         if (message == "TODOS"):
             if(categoria == "Genero"):
 
-                result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
-                                                                                               conta=Count(
-                                                                                                   'id_estudiante')).filter(id_estudiante__estu_genero="MASCULINO")
-
+                result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion', 'id_tiempo__ano').annotate(
+                    prom1=Avg(puntaje, filter=Q(id_estudiante__estu_genero="MASCULINO")),
+                    prom2=Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO")),
+                    conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),
+                    conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).order_by(
+                    'id_lugar__cole_mcpio_ubicacion')
                 for entry in result:
-                    label.append(entry['id_lugar__cole_mcpio_ubicacion'])  # guarda nombre del departamento ya agrupado
-                    dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por municipio)
-                    masculino.append(entry['prom'])
-                    Cmasculino.append(entry['conta'])
-
-                result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
-                                                                                                conta2=Count(
-                                                                                                    'id_estudiante')).filter(id_estudiante__estu_genero="FEMENINO")
-                for entry in result2:
-                    femenino.append(entry['prom'])
-                    Cfemenino.append(entry['conta2'])
+                    label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
+                    femenino.append(entry['prom1'])
+                    masculino.append(entry['prom2'])
+                    Cfemenino.append(entry['conta1'])
+                    Cmasculino.append(entry['conta2'])
             else:
                 if(categoria=="Condicion de las TIC"):
-                    result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
-                                                                                                   conta=Count(
-                                                                                                       'id_estudiante')).filter(id_estudiante__eco_condicion_tic="BUENA")
 
+                    result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion', 'id_tiempo__ano').annotate(
+                        prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                        prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                        prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="MALA")),
+                        conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                        conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                        conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="MALA"))).order_by(
+                        'id_lugar__cole_mcpio_ubicacion')
                     for entry in result:
-                        label.append(
-                            entry['id_lugar__cole_mcpio_ubicacion'])  # guarda nombre del departamento ya agrupado
-                        dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por municipio)
-                        ticbuena.append(entry['prom'])
-                        Cticbuena.append(entry['conta'])
-                    result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
-                                                                                                   conta=Count(
-                                                                                                       'id_estudiante')).filter(id_estudiante__eco_condicion_tic="REGULAR")
-
-                    for entry in result2:
-                        ticregular.append(entry['prom'])
-                        Cticregular.append(entry['conta'])
-
-                    result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
-                                                                                                    conta=Count(
-                                                                                                        'id_estudiante')).filter(id_estudiante__eco_condicion_tic="MALA")
-
-                    for entry in result3:
-                        ticmala.append(entry['prom'])
-                        Cticmala.append(entry['conta'])
+                        label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
+                        ticbuena.append(entry['prom1'])
+                        Cticbuena.append(entry['conta1'])
+                        ticregular.append(entry['prom2'])
+                        Cticregular.append(entry['conta2'])
+                        ticmala.append(entry['prom3'])
+                        Cticmala.append(entry['conta3'])
 
                 else:
                     if(categoria=="Condicion de la vivienda"):
-                        result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="BUENA")
+                        # result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
+                        #     prom=Avg(puntaje),
+                        #     conta=Count(
+                        #         'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="BUENA")
+                        #
+                        # for entry in result:
+                        #     label.append(
+                        #         entry['id_lugar__cole_mcpio_ubicacion'])  # guarda nombre del departamento ya agrupado
+                        #     dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por municipio)
+                        #     vivbuena.append(entry['prom'])
+                        #     Cvivbuena.append(entry['conta'])
+                        # result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
+                        #     prom=Avg(puntaje),
+                        #     conta=Count(
+                        #         'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="REGULAR")
+                        #
+                        # for entry in result2:
+                        #     vivregular.append(entry['prom'])
+                        #     Cvivregular.append(entry['conta'])
+                        #
+                        # result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
+                        #     prom=Avg(puntaje),
+                        #     conta=Count(
+                        #         'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="MALA")
+                        #
+                        # for entry in result3:
+                        #     vivmala.append(entry['prom'])
+                        #     Cvivmala.append(entry['conta'])
 
+                        result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion',
+                                                            'id_tiempo__ano').annotate(
+                            prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vivienda="BUENA")),
+                            prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vivienda="REGULAR")),
+                            prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vivienda="MALA")),
+                            conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vivienda="BUENA")),
+                            conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vivienda="REGULAR")),
+                            conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vivienda="MALA"))).order_by(
+                            'id_lugar__cole_mcpio_ubicacion')
                         for entry in result:
-                            label.append(
-                                entry['id_lugar__cole_mcpio_ubicacion'])  # guarda nombre del departamento ya agrupado
-                            dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por municipio)
-                            vivbuena.append(entry['prom'])
-                            Cvivbuena.append(entry['conta'])
-                        result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="REGULAR")
-
-                        for entry in result2:
-                            vivregular.append(entry['prom'])
-                            Cvivregular.append(entry['conta'])
-
-                        result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="MALA")
-
-                        for entry in result3:
-                            vivmala.append(entry['prom'])
-                            Cvivmala.append(entry['conta'])
+                            label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
+                            vivbuena.append(entry['prom1'])
+                            Cvivbuena.append(entry['conta1'])
+                            vivregular.append(entry['prom2'])
+                            Cvivregular.append(entry['conta2'])
+                            vivmala.append(entry['prom3'])
+                            Cvivmala.append(entry['conta3'])
 
                     else:
                         if(categoria=="Rango de Edad"):
@@ -450,40 +453,13 @@ def Dashboard(request):
         else:
             if (inst == "General"):
                 if (categoria == "Genero"):
-
-                    # result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
-                    #                                                                                  conta=Count(
-                    #                                                                                      'id_estudiante')).filter(
-                    #     id_lugar__cole_mcpio_ubicacion=message, id_estudiante__estu_genero="MASCULINO").order_by('id_institucion__cole_nombre_sede')
-                    #
-                    # for entry in result:
-                    #
-                    #     masculino.append(entry['prom'])
-                    #     Cmasculino.append(entry['conta'])
-                    # # result3 = FactSaber11.objects.get(id_institucion__cole_nombre_sede='id_institucion__cole_nombre_sede').filter(id_estudiante__estu_genero="FEMENINO").exists()
-                    # # try:
-                    #
-                    # result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje), conta=Count('id_estudiante')).filter(id_lugar__cole_mcpio_ubicacion=message, id_estudiante__estu_genero="FEMENINO").order_by('id_institucion__cole_nombre_sede')
-                    #
-                    # for entry in result2:
-                    #     label.append(
-                    #         entry['id_institucion__cole_nombre_sede'])
-                    #     femenino.append(entry['prom'])
-                    #     Cfemenino.append(entry['conta'])
-                    # # except IndexError:
-                    # # else:
-                    # #     femenino.append(0)
-                    # #     Cfemenino.append(0)
                     result = FactSaber11.objects.values('id_institucion__cole_nombre_sede','id_tiempo__ano').annotate(prom1=Avg(puntaje, filter=Q(id_estudiante__estu_genero="MASCULINO")),prom2=Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO")),conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(id_lugar__cole_mcpio_ubicacion=message).order_by('id_institucion__cole_nombre_sede')
                     for entry in result:
                         label.append(entry['id_institucion__cole_nombre_sede']+" : "+entry['id_tiempo__ano'])
-                        anos.append(entry['id_tiempo__ano'])
-
                         femenino.append(entry['prom1'])
                         masculino.append(entry['prom2'])
                         Cfemenino.append(entry['conta1'])
                         Cmasculino.append(entry['conta2'])
-                    # anos1 = [label,anos]
 
                 else:
                     if (categoria == "Condicion de las TIC"):
@@ -2215,5 +2191,4 @@ def Dashboard(request):
         'CPI': CPI,
         'CBC': CBC,
         'CBI': CBI,
-        'anos': anos,
     })
