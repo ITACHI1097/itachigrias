@@ -21,8 +21,12 @@ $(document).ready(function (){
                             var masculino = {
                                 label: (metrica=="Puntaje")?'Puntaje Masculino':'Cantidad Masculino',
                                 backgroundColor: 'red',
+
                                 // data:dato1
                                 data:(metrica=="Puntaje") ? data.masculino:data.Cmasculino,
+                                borderColor: 'red',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                                 // data:data.masculino
                             }
@@ -32,6 +36,9 @@ $(document).ready(function (){
                                 backgroundColor: 'blue',
                                 // data:dato2,
                                 data:(metrica=="Puntaje")?data.femenino:data.Cfemenino,
+                                borderColor: 'blue',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -39,6 +46,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Puntaje Buena':'Cantidad Buena',
                                 backgroundColor: 'green',
                                 data:(metrica=="Puntaje")?data.ticbuena:data.Cticbuena,
+                                borderColor: 'green',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -46,6 +56,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Puntaje REGULAR':'Cantidad REGULAR',
                                 backgroundColor: 'yellow',
                                 data:(metrica=="Puntaje")?data.ticregular:data.Cticregular,
+                                borderColor: 'yellow',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -53,6 +66,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Puntaje Mala':'Cantidad Mala',
                                 backgroundColor: 'red',
                                 data:(metrica=="Puntaje")?data.ticmala:data.Cticmala,
+                                borderColor: 'red',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -60,6 +76,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Puntaje BUENA':'Cantidad BUENA',
                                 backgroundColor: 'green',
                                 data:(metrica=="Puntaje")?data.vivbuena:data.Cvivbuena,
+                                borderColor: 'green',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -67,6 +86,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Puntaje REGULAR':'Cantidad REGULAR',
                                 backgroundColor: 'yellow',
                                 data:(metrica=="Puntaje")?data.vivregular:data.Cvivregular,
+                                borderColor: 'yellow',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -74,6 +96,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Puntaje Mala':'Cantidad MALA',
                                 backgroundColor: 'red',
                                 data:(metrica=="Puntaje")?data.vivmala:data.Cvivmala,
+                                borderColor: 'red',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -81,6 +106,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Puntaje de 17':'Cantidad de 17',
                                 backgroundColor: 'blue',
                                 data:(metrica=="Puntaje")?data.e17:data.Ce17,
+                                borderColor: 'blue',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -88,6 +116,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Puntaje de 18 Y 19':'Cantidad de 18 Y 19',
                                 backgroundColor: 'red',
                                 data:(metrica=="Puntaje")?data.e18y19:data.Ce18y19,
+                                borderColor: 'red',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -95,6 +126,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Puntaje de 20 A 28':'Cantidad de 20 A 28',
                                 backgroundColor: 'green',
                                 data:(metrica=="Puntaje")?data.e20a28:data.Ce20a28,
+                                borderColor: 'green',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -102,6 +136,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.MAYORES DE 28':'Cant.MAYORES DE 28',
                                 backgroundColor: 'yellow',
                                 data:(metrica=="Puntaje")?data.emayoresde28:data.Cemayoresde28,
+                                borderColor: 'yellow',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -109,6 +146,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.MENORES DE 17':'Cant.MENORES DE 17',
                                 backgroundColor: 'brown',
                                 data:(metrica=="Puntaje")?data.emenoresde17:data.Cemenoresde17,
+                                borderColor: 'brown',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -116,6 +156,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.ESTRATO 1':'Cant.ESTRATO 1',
                                 backgroundColor: 'red',
                                 data:(metrica=="Puntaje")?data.es1:data.Ces1,
+                                borderColor: 'red',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -123,6 +166,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.ESTRATO 2':'Cant.ESTRATO 2',
                                 backgroundColor: 'blue',
                                 data:(metrica=="Puntaje")?data.es2:data.Ces2,
+                                borderColor: 'blue',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -130,6 +176,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.ESTRATO 3':'Cant.ESTRATO 3',
                                 backgroundColor: 'yellow',
                                 data:(metrica=="Puntaje")?data.es3:data.Ces3,
+                                borderColor: 'yellow',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -137,6 +186,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.ESTRATO 4':'Cant.ESTRATO 4',
                                 backgroundColor: 'green',
                                 data:(metrica=="Puntaje")?data.es4:data.Ces4,
+                                borderColor: 'green',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -144,6 +196,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.ESTRATO 5':'Cant.ESTRATO 5',
                                 backgroundColor: 'brown',
                                 data:(metrica=="Puntaje")?data.es5:data.Ces5,
+                                borderColor: 'brown',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -151,6 +206,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.ESTRATO 6':'Cant.ESTRATO 6',
                                 backgroundColor: 'black',
                                 data:(metrica=="Puntaje")?data.es6:data.Ces6,
+                                borderColor: 'black',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -158,12 +216,18 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.NINGUNO':'Cant.NINGUNO',
                                 backgroundColor: 'red',
                                 data:(metrica=="Puntaje")?data.n:data.Cn,
+                                borderColor: 'red',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
                             var PI = {
                                 label: (metrica=="Puntaje")?'Punt.PRIMARIA INCOMPLETA':'Cant.PRIMARIA INCOMPLETA',
                                 backgroundColor: 'blue',
                                 data:(metrica=="Puntaje")?data.PI:data.CPI,
+                                borderColor: 'blue',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -171,6 +235,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.PRIMARIA COMPLETA':'Cant.PRIMARIA COMPLETA',
                                 backgroundColor: 'green',
                                 data:(metrica=="Puntaje")?data.PC:data.CPC,
+                                borderColor: 'green',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -178,6 +245,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.SECUNDARIA BACHILLERATO IMCOMPLETO':'Cant.SECUNDARIA BACHILLERATO IMCOMPLETO',
                                 backgroundColor: 'yellow',
                                 data:(metrica=="Puntaje")?data.BI:data.CBI,
+                                borderColor: 'yellow',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -185,6 +255,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.SECUNDARIA BACHILLERATO COMPLETO':'Cant.SECUNDARIA BACHILLERATO COMPLETO',
                                 backgroundColor: 'brown',
                                 data:(metrica=="Puntaje")?data.BC:data.CBC,
+                                borderColor: 'brown',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -192,6 +265,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.EDUCACION TECNICA O TECNOLOGICA INCOMPLETA':'Cant.EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
                                 backgroundColor: 'pink',
                                 data:(metrica=="Puntaje")?data.ETI:data.CETI,
+                                borderColor: 'pink',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -199,6 +275,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.EDUCACION TECNICA O TECNOLOGICA COMPLETA':'Cant.EDUCACION TECNICA O TECNOLOGICA COMPLETA',
                                 backgroundColor: 'purple',
                                 data:(metrica=="Puntaje")?data.ETC:data.CETC,
+                                borderColor: 'purple',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -206,6 +285,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.EDUCACION PROFECIONAL INCOMPLETA':'Cant.EDUCACION PROFECIONAL INCOMPLETA',
                                 backgroundColor: 'orange',
                                 data:(metrica=="Puntaje")?data.EPI:data.CEPI,
+                                borderColor: 'orange',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -213,6 +295,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.EDUCACION PROFECIONAL COMPLETA':'Cant.EDUCACION PROFECIONAL COMPLETA',
                                 backgroundColor: 'violet',
                                 data:(metrica=="Puntaje")?data.EPC:data.CEPC,
+                                borderColor: 'violet',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -220,6 +305,9 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.POSTGRADO':'Cant.POSTGRADO',
                                 backgroundColor: 'gray',
                                 data:(metrica=="Puntaje")?data.postgrado:data.Cpostgrado,
+                                borderColor: 'gray',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
 
@@ -227,8 +315,12 @@ $(document).ready(function (){
                                 label: (metrica=="Puntaje")?'Punt.NO SABE':'Cant.NO SABE',
                                 backgroundColor: 'black',
                                 data:(metrica=="Puntaje")?data.nosabe:data.Cnosabe,
+                                borderColor: 'black',
+                                lineTension: 0,
+                                fill: false,
                                 yAxisID: 'A'
                             }
+
 
                             if (window.grafica) {
                                 window.grafica.clear();
@@ -241,6 +333,7 @@ $(document).ready(function (){
                             if(cat =='Genero'){
                                 dato = {
                                   labels: data.labels,
+
                                   datasets: [masculino,femenino]
                                 }
                             }else{
@@ -310,6 +403,9 @@ $(document).ready(function (){
                                     backgroundColor: 'red',
                                     // data:dato1
                                     data:data.masculino,
+                                    borderColor: 'red',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                     // data:data.masculino
                                 }
@@ -319,6 +415,9 @@ $(document).ready(function (){
                                     backgroundColor: 'blue',
                                     // data:dato2,
                                     data:data.femenino,
+                                    borderColor: 'blue',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -326,6 +425,9 @@ $(document).ready(function (){
                                     label: 'Puntaje Buena',
                                     backgroundColor: 'green',
                                     data:data.ticbuena,
+                                    borderColor: 'green',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -333,6 +435,9 @@ $(document).ready(function (){
                                     label: 'Puntaje REGULAR',
                                     backgroundColor: 'yellow',
                                     data:data.ticregular,
+                                    borderColor: 'yellow',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -340,6 +445,9 @@ $(document).ready(function (){
                                     label: 'Puntaje Mala',
                                     backgroundColor: 'red',
                                     data:data.ticmala,
+                                    borderColor: 'red',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -347,6 +455,9 @@ $(document).ready(function (){
                                     label: 'Puntaje Buena',
                                     backgroundColor: 'green',
                                     data:data.vivbuena,
+                                    borderColor: 'green',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -354,6 +465,9 @@ $(document).ready(function (){
                                     label: 'Puntaje REGULAR',
                                     backgroundColor: 'yellow',
                                     data:data.vivregular,
+                                    borderColor: 'yellow',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -361,6 +475,9 @@ $(document).ready(function (){
                                     label: 'Puntaje Mala',
                                     backgroundColor: 'red',
                                     data:data.vivmala,
+                                    borderColor: 'red',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -368,6 +485,9 @@ $(document).ready(function (){
                                     label: 'Puntaje de 17',
                                     backgroundColor: 'blue',
                                     data:data.e17,
+                                    borderColor: 'blue',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -375,6 +495,9 @@ $(document).ready(function (){
                                     label: 'Puntaje de 18 Y 19',
                                     backgroundColor: 'red',
                                     data:data.e18y19,
+                                    borderColor: 'red',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -382,6 +505,9 @@ $(document).ready(function (){
                                     label: 'Puntaje de 20 A 28',
                                     backgroundColor: 'green',
                                     data:data.e20a28,
+                                    borderColor: 'green',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -389,6 +515,9 @@ $(document).ready(function (){
                                     label: 'Puntaje MAYORES DE 28',
                                     backgroundColor: 'yellow',
                                     data:data.emayoresde28,
+                                    borderColor: 'yellow',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -396,6 +525,9 @@ $(document).ready(function (){
                                     label: 'Puntaje de MENORES DE 17',
                                     backgroundColor: 'brown',
                                     data:data.emenoresde17,
+                                    borderColor: 'brown',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -403,6 +535,9 @@ $(document).ready(function (){
                                     label: 'Punt.ESTRATO 1',
                                     backgroundColor: 'red',
                                     data:data.es1,
+                                    borderColor: 'red',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -410,6 +545,9 @@ $(document).ready(function (){
                                     label: 'Punt.ESTRATO 2',
                                     backgroundColor: 'blue',
                                     data:data.es2,
+                                    borderColor: 'blue',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -417,6 +555,9 @@ $(document).ready(function (){
                                     label: 'Punt.ESTRATO 3',
                                     backgroundColor: 'yellow',
                                     data:data.es3,
+                                    borderColor: 'yellow',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -424,6 +565,9 @@ $(document).ready(function (){
                                     label: 'Punt.ESTRATO 4',
                                     backgroundColor: 'green',
                                     data:data.es4,
+                                    borderColor: 'green',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -431,6 +575,9 @@ $(document).ready(function (){
                                     label: 'Punt.ESTRATO 5',
                                     backgroundColor: 'brown',
                                     data:data.es5,
+                                    borderColor: 'brown',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -438,6 +585,9 @@ $(document).ready(function (){
                                     label: 'Punt.ESTRATO 6',
                                     backgroundColor: 'black',
                                     data:data.es6,
+                                    borderColor: 'black',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -445,19 +595,28 @@ $(document).ready(function (){
                                     label: 'Punt.NINGUNO',
                                     backgroundColor: 'red',
                                     data:data.n,
+                                    borderColor: 'red',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
                                 var PPI = {
                                     label: 'Punt.PRIMARIA INCOMPLETA',
                                     backgroundColor: 'blue',
                                     data:data.PI,
+                                    borderColor: 'blue',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
                                 var PPC = {
                                     label: 'Punt.PRIMARIA COMPLETA',
                                     backgroundColor: 'green',
-                                    data:(metrica=="Puntaje")?data.PC:data.CPC,
+                                    data:data.PC,
+                                    borderColor: 'green',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -465,6 +624,9 @@ $(document).ready(function (){
                                     label: 'Punt.SECUNDARIA BACHILLERATO IMCOMPLETO',
                                     backgroundColor: 'yellow',
                                     data:data.BI,
+                                    borderColor: 'yellow',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -472,6 +634,9 @@ $(document).ready(function (){
                                     label: 'Punt.SECUNDARIA BACHILLERATO COMPLETO',
                                     backgroundColor: 'brown',
                                     data:data.BC,
+                                    borderColor: 'brown',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -479,6 +644,9 @@ $(document).ready(function (){
                                     label: 'Punt.EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
                                     backgroundColor: 'pink',
                                     data:data.ETI,
+                                    borderColor: 'pink',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -486,6 +654,9 @@ $(document).ready(function (){
                                     label: 'Punt.EDUCACION TECNICA O TECNOLOGICA COMPLETA',
                                     backgroundColor: 'purple',
                                     data:data.ETC,
+                                    borderColor: 'purple',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -493,6 +664,9 @@ $(document).ready(function (){
                                     label: 'Punt.EDUCACION PROFECIONAL INCOMPLETA',
                                     backgroundColor: 'orange',
                                     data:data.EPI,
+                                    borderColor: 'orange',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -500,6 +674,9 @@ $(document).ready(function (){
                                     label: 'Punt.EDUCACION PROFECIONAL COMPLETA',
                                     backgroundColor: 'violet',
                                     data:data.EPC,
+                                    borderColor: 'violet',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -507,6 +684,9 @@ $(document).ready(function (){
                                     label: 'Punt.POSTGRADO',
                                     backgroundColor: 'gray',
                                     data:data.postgrado,
+                                    borderColor: 'gray',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 
@@ -514,6 +694,9 @@ $(document).ready(function (){
                                     label: 'Punt.NO SABE',
                                     backgroundColor: 'black',
                                     data:data.nosabe,
+                                    borderColor: 'gray',
+                                    lineTension: 0,
+                                    fill: false,
                                     yAxisID: 'B'
                                 }
 

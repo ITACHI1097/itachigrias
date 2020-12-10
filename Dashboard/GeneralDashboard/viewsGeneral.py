@@ -144,6 +144,7 @@ def Dashboard(request):
     BI = []
     CBI = []
     contad = []
+    anos = []
     # se obtiene todas las variables desde el html desde un form con el metodo get
     message = request.GET['municipio']
     puntaje = request.GET['puntaje']
@@ -473,13 +474,16 @@ def Dashboard(request):
                     # # else:
                     # #     femenino.append(0)
                     # #     Cfemenino.append(0)
-                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom1=Avg(puntaje, filter=Q(id_estudiante__estu_genero="MASCULINO")),prom2=Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO")),conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(id_lugar__cole_mcpio_ubicacion=message)
+                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede','id_tiempo__ano').annotate(prom1=Avg(puntaje, filter=Q(id_estudiante__estu_genero="MASCULINO")),prom2=Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO")),conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(id_lugar__cole_mcpio_ubicacion=message).order_by('id_institucion__cole_nombre_sede')
                     for entry in result:
-                        label.append(entry['id_institucion__cole_nombre_sede'])
+                        label.append(entry['id_institucion__cole_nombre_sede']+" : "+entry['id_tiempo__ano'])
+                        anos.append(entry['id_tiempo__ano'])
+
                         femenino.append(entry['prom1'])
                         masculino.append(entry['prom2'])
                         Cfemenino.append(entry['conta1'])
                         Cmasculino.append(entry['conta2'])
+                    # anos1 = [label,anos]
 
                 else:
                     if (categoria == "Condicion de las TIC"):
@@ -2211,4 +2215,5 @@ def Dashboard(request):
         'CPI': CPI,
         'CBC': CBC,
         'CBI': CBI,
+        'anos': anos,
     })
