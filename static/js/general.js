@@ -396,14 +396,14 @@ $(document).ready(function (){
                                     },
                                     pan: {
                                       enabled: true,
-                                      mode: "x",
+                                      mode: "xy",
                                       speed: 10,
                                       threshold: 10
                                     },
                                     zoom: {
                                         enabled: true,
                                         drag: false,
-                                        mode: "x",
+                                        mode: "xy",
                                         speed: 0.01,
                                         sensitivity: 0.1,
                                         limits: {

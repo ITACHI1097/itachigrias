@@ -189,34 +189,6 @@ def Dashboard(request):
 
                 else:
                     if(categoria=="Condicion en la que vive"):
-                        # result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                        #     prom=Avg(puntaje),
-                        #     conta=Count(
-                        #         'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="BUENA")
-                        #
-                        # for entry in result:
-                        #     label.append(
-                        #         entry['id_lugar__cole_mcpio_ubicacion'])  # guarda nombre del departamento ya agrupado
-                        #     dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por municipio)
-                        #     vivbuena.append(entry['prom'])
-                        #     Cvivbuena.append(entry['conta'])
-                        # result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                        #     prom=Avg(puntaje),
-                        #     conta=Count(
-                        #         'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="REGULAR")
-                        #
-                        # for entry in result2:
-                        #     vivregular.append(entry['prom'])
-                        #     Cvivregular.append(entry['conta'])
-                        #
-                        # result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                        #     prom=Avg(puntaje),
-                        #     conta=Count(
-                        #         'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="MALA")
-                        #
-                        # for entry in result3:
-                        #     vivmala.append(entry['prom'])
-                        #     Cvivmala.append(entry['conta'])
 
                         result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion',
                                                             'id_tiempo__ano').annotate(
@@ -238,217 +210,131 @@ def Dashboard(request):
 
                     else:
                         if(categoria=="Rango de Edad"):
-                            result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(id_estudiante__estu_rango_edad="17")
 
+                            result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion',
+                                                                'id_tiempo__ano').annotate(
+                                prom1=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="17")),
+                                prom2=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                prom3=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                prom4=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                prom5=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17")),
+                                conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="17")),
+                                conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                conta3=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                conta4=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                conta5=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).order_by(
+                                'id_tiempo__ano','id_lugar__cole_mcpio_ubicacion')
                             for entry in result:
-                                label.append(
-                                    entry[
-                                        'id_lugar__cole_mcpio_ubicacion'])  # guarda nombre del departamento ya agrupado
-                                e17.append(entry['prom'])
-                                Ce17.append(entry['conta'])
-                            result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(id_estudiante__estu_rango_edad="18 Y 19")
-
-                            for entry in result2:
-                                e18y19.append(entry['prom'])
-                                Ce18y19.append(entry['conta'])
-
-                            result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(id_estudiante__estu_rango_edad="20 A 28")
-
-                            for entry in result3:
-                                e20a28.append(entry['prom'])
-                                Ce20a28.append(entry['conta'])
-
-                            result4 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(id_estudiante__estu_rango_edad="MAYORES DE 28")
-
-                            for entry in result4:
-                                emayoresde28.append(entry['prom'])
-                                Cemayoresde28.append(entry['conta'])
-
-                            result5 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(id_estudiante__estu_rango_edad="MENORES DE 17")
-
-                            for entry in result5:
-                                emenoresde17.append(entry['prom'])
-                                Cemenoresde17.append(entry['conta'])
+                                label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
+                                e17.append(entry['prom1'])
+                                Ce17.append(entry['conta1'])
+                                e18y19.append(entry['prom2'])
+                                Ce18y19.append(entry['conta2'])
+                                e20a28.append(entry['prom3'])
+                                Ce20a28.append(entry['conta3'])
+                                emayoresde28.append(entry['prom4'])
+                                Cemayoresde28.append(entry['conta4'])
+                                emenoresde17.append(entry['prom5'])
+                                Cemenoresde17.append(entry['conta5'])
 
                         else:
                             if(categoria=="Estrato"):
-                                result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="1")
 
+                                result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion',
+                                                                    'id_tiempo__ano').annotate(
+                                    prom1=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                    prom2=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                    prom3=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                    prom4=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                    prom5=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                    prom6=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="6")),
+                                    conta1=Count('id_estudiante', filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                    conta2=Count('id_estudiante', filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                    conta3=Count('id_estudiante', filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                    conta4=Count('id_estudiante', filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                    conta5=Count('id_estudiante', filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                    conta6=Count('id_estudiante', filter=Q(id_estudiante__fami_estrato_vivienda="6"))).order_by(
+                                    'id_lugar__cole_mcpio_ubicacion')
                                 for entry in result:
                                     label.append(
-                                        entry[
-                                            'id_lugar__cole_mcpio_ubicacion'])
-                                    es1.append(entry['prom'])
-                                    Ces1.append(entry['conta'])
-                                result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="2")
-
-                                for entry in result2:
-                                    es2.append(entry['prom'])
-                                    Ces2.append(entry['conta'])
-
-                                result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="3")
-
-                                for entry in result3:
-                                    es3.append(entry['prom'])
-                                    Ces3.append(entry['conta'])
-
-                                result4 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="4")
-
-                                for entry in result4:
-                                    es4.append(entry['prom'])
-                                    Ces4.append(entry['conta'])
-
-                                result5 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="5")
-
-                                for entry in result5:
-                                    es5.append(entry['prom'])
-                                    Ces5.append(entry['conta'])
-
-                                result6 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="6")
-
-                                for entry in result6:
-                                    es6.append(entry['prom'])
-                                    Ces6.append(entry['conta'])
+                                        entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
+                                    es1.append(entry['prom1'])
+                                    Ces1.append(entry['conta1'])
+                                    es2.append(entry['prom2'])
+                                    Ces2.append(entry['conta2'])
+                                    es3.append(entry['prom3'])
+                                    Ces3.append(entry['conta3'])
+                                    es4.append(entry['prom4'])
+                                    Ces4.append(entry['conta4'])
+                                    es5.append(entry['prom5'])
+                                    Ces5.append(entry['conta5'])
+                                    es6.append(entry['prom6'])
+                                    Ces6.append(entry['conta6'])
                             else:
                                 if(categoria == "Nivel Educativo Padres"):
-                                    result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_max_nivel_educa_padres="NINGUNO")
 
+                                    result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion',
+                                                                        'id_tiempo__ano').annotate(
+                                        prom1=Avg(puntaje, filter=Q(id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                        prom2=Avg(puntaje, filter=Q(id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                        prom3=Avg(puntaje, filter=Q(id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                        prom4=Avg(puntaje, filter=Q(id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                        prom5=Avg(puntaje, filter=Q(id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                        prom6=Avg(puntaje, filter=Q(id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                        prom7=Avg(puntaje, filter=Q(id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                        prom8=Avg(puntaje, filter=Q(id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                        prom9=Avg(puntaje, filter=Q(id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                        prom10=Avg(puntaje, filter=Q(id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                        prom11=Avg(puntaje, filter=Q(id_estudiante__fami_max_nivel_educa_padres="NO SABE")),
+                                        conta1=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                        conta2=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                        conta3=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                        conta4=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                        conta5=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                        conta6=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                        conta7=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                        conta8=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                        conta9=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                        conta10=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                        conta11=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_max_nivel_educa_padres="NO SABE"))
+                                        ).order_by(
+                                        'id_lugar__cole_mcpio_ubicacion')
                                     for entry in result:
                                         label.append(
-                                            entry[
-                                                'id_lugar__cole_mcpio_ubicacion'])  # guarda nombre del departamento ya agrupado
-                                        n.append(entry['prom'])
-                                        Cn.append(entry['conta'])
-                                    result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")
-
-                                    for entry in result2:
-                                        PI.append(entry['prom'])
-                                        CPI.append(entry['conta'])
-
-                                    result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")
-
-                                    for entry in result3:
-                                        PC.append(entry['prom'])
-                                        CPC.append(entry['conta'])
-
-                                    result4 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")
-
-                                    for entry in result4:
-                                        BI.append(entry['prom'])
-                                        CBI.append(entry['conta'])
-
-                                    result5 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")
-
-                                    for entry in result5:
-                                        BC.append(entry['prom'])
-                                        CBC.append(entry['conta'])
-
-                                    result6 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")
-
-                                    for entry in result6:
-                                        ETI.append(entry['prom'])
-                                        CETI.append(entry['conta'])
-
-                                    result7 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")
-
-                                    for entry in result7:
-                                        ETC.append(entry['prom'])
-                                        CETC.append(entry['conta'])
-
-                                    result8 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")
-
-                                    for entry in result8:
-                                        EPI.append(entry['prom'])
-                                        CEPI.append(entry['conta'])
-
-                                    result9 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL COMPLETA")
-
-                                    for entry in result9:
-                                        EPC.append(entry['prom'])
-                                        CEPC.append(entry['conta'])
-
-                                    result10 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")
-
-                                    for entry in result10:
-                                        postgrado.append(entry['prom'])
-                                        Cpostgrado.append(entry['conta'])
-
-                                    result11 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_estudiante__fami_max_nivel_educa_padres="NO SABE")
-
-                                    for entry in result11:
-                                        nosabe.append(entry['prom'])
-                                        Cnosabe.append(entry['conta'])
+                                            entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
+                                        n.append(entry['prom1'])
+                                        Cn.append(entry['conta1'])
+                                        PI.append(entry['prom2'])
+                                        CPI.append(entry['conta2'])
+                                        PC.append(entry['prom3'])
+                                        CPC.append(entry['conta3'])
+                                        BI.append(entry['prom4'])
+                                        CBI.append(entry['conta4'])
+                                        BC.append(entry['prom5'])
+                                        CBC.append(entry['conta5'])
+                                        ETI.append(entry['prom6'])
+                                        CETI.append(entry['conta6'])
+                                        ETC.append(entry['prom7'])
+                                        CETC.append(entry['conta7'])
+                                        EPI.append(entry['prom8'])
+                                        CEPI.append(entry['conta8'])
+                                        EPC.append(entry['prom9'])
+                                        CEPC.append(entry['conta9'])
+                                        postgrado.append(entry['prom10'])
+                                        Cpostgrado.append(entry['conta10'])
+                                        nosabe.append(entry['prom11'])
+                                        Cnosabe.append(entry['conta11'])
 
         else:
             if (inst == "General"):
@@ -463,1664 +349,1120 @@ def Dashboard(request):
 
                 else:
                     if (categoria == "Condicion de las TIC"):
-                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__eco_condicion_tic="BUENA")
-
+                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                            'id_tiempo__ano').annotate(
+                            prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                            prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                            prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="MALA")),
+                            conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                            conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                            conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="MALA"))).filter(
+                            id_lugar__cole_mcpio_ubicacion=message).order_by(
+                            'id_institucion__cole_nombre_sede')
                         for entry in result:
-                            label.append(
-                                entry['id_institucion__cole_nombre_sede'])
-                            ticbuena.append(entry['prom'])
-                            Cticbuena.append(entry['conta'])
-                        result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__eco_condicion_tic="REGULAR")
-
-                        for entry in result2:
-                            ticregular.append(entry['prom'])
-                            Cticregular.append(entry['conta'])
-
-                        result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__eco_condicion_tic="MALA")
-
-                        for entry in result3:
-                            ticmala.append(entry['prom'])
-                            Cticmala.append(entry['conta'])
+                            label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
+                            ticbuena.append(entry['prom1'])
+                            Cticbuena.append(entry['conta1'])
+                            ticregular.append(entry['prom2'])
+                            Cticregular.append(entry['conta2'])
+                            ticmala.append(entry['prom3'])
+                            Cticmala.append(entry['conta3'])
 
                     else:
-                        if (categoria == "Condicion de la vivienda"):
-                            result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__eco_condicion_vivienda="BUENA")
-
+                        if (categoria == "Condicion en la que vive"):
+                            result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                'id_tiempo__ano').annotate(
+                                prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                                prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                                prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO")),
+                                conta1=Count('id_estudiante',
+                                             filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                                conta2=Count('id_estudiante',
+                                             filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                                conta3=Count('id_estudiante',
+                                             filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).filter(
+                                id_lugar__cole_mcpio_ubicacion=message).order_by(
+                                'id_institucion__cole_nombre_sede')
                             for entry in result:
-                                label.append(
-                                    entry[
-                                        'id_institucion__cole_nombre_sede'])
-                                vivbuena.append(entry['prom'])
-                                Cvivbuena.append(entry['conta'])
-                            result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__eco_condicion_vivienda="REGULAR")
-
-                            for entry in result2:
-                                vivregular.append(entry['prom'])
-                                Cvivregular.append(entry['conta'])
-
-                            result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__eco_condicion_vivienda="MALA")
-
-                            for entry in result3:
-                                vivmala.append(entry['prom'])
-                                Cvivmala.append(entry['conta'])
+                                label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
+                                Hmedio.append(entry['prom1'])
+                                CHmedio.append(entry['conta1'])
+                                Hcritico.append(entry['prom2'])
+                                CHcritico.append(entry['conta2'])
+                                Hsin.append(entry['prom3'])
+                                CHsin.append(entry['conta3'])
 
                         else:
                             if (categoria == "Rango de Edad"):
-                                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__estu_rango_edad="17")
-
+                                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                    'id_tiempo__ano').annotate(
+                                    prom1=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="17")),
+                                    prom2=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                    prom3=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                    prom4=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                    prom5=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17")),
+                                    conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="17")),
+                                    conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                    conta3=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                    conta4=Count('id_estudiante',
+                                                 filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                    conta5=Count('id_estudiante',
+                                                 filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).filter(
+                                    id_lugar__cole_mcpio_ubicacion=message).order_by(
+                                    'id_tiempo__ano', 'id_institucion__cole_nombre_sede')
                                 for entry in result:
                                     label.append(
-                                        entry[
-                                            'id_institucion__cole_nombre_sede'])
-                                    e17.append(entry['prom'])
-                                    Ce17.append(entry['conta'])
-                                result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__estu_rango_edad="18 Y 19")
-
-                                for entry in result2:
-                                    e18y19.append(entry['prom'])
-                                    Ce18y19.append(entry['conta'])
-
-                                result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__estu_rango_edad="20 A 28")
-
-                                for entry in result3:
-                                    e20a28.append(entry['prom'])
-                                    Ce20a28.append(entry['conta'])
-
-                                result4 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__estu_rango_edad="MAYORES DE 28")
-
-                                for entry in result4:
-                                    emayoresde28.append(entry['prom'])
-                                    Cemayoresde28.append(entry['conta'])
-
-                                result5 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__estu_rango_edad="MENORES DE 17")
-
-                                for entry in result5:
-                                    emenoresde17.append(entry['prom'])
-                                    Cemenoresde17.append(entry['conta'])
+                                        entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
+                                    e17.append(entry['prom1'])
+                                    Ce17.append(entry['conta1'])
+                                    e18y19.append(entry['prom2'])
+                                    Ce18y19.append(entry['conta2'])
+                                    e20a28.append(entry['prom3'])
+                                    Ce20a28.append(entry['conta3'])
+                                    emayoresde28.append(entry['prom4'])
+                                    Cemayoresde28.append(entry['conta4'])
+                                    emenoresde17.append(entry['prom5'])
+                                    Cemenoresde17.append(entry['conta5'])
 
                             else:
                                 if (categoria == "Estrato"):
-                                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__fami_estrato_vivienda="1")
-
+                                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                        'id_tiempo__ano').annotate(
+                                        prom1=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                        prom2=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                        prom3=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                        prom4=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                        prom5=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                        prom6=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="6")),
+                                        conta1=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                        conta2=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                        conta3=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                        conta4=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                        conta5=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                        conta6=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="6"))).filter(
+                                        id_lugar__cole_mcpio_ubicacion=message).order_by(
+                                        'id_institucion__cole_nombre_sede')
                                     for entry in result:
                                         label.append(
-                                            entry[
-                                                'id_institucion__cole_nombre_sede'])
-                                        es1.append(entry['prom'])
-                                        Ces1.append(entry['conta'])
-                                    result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__fami_estrato_vivienda="2")
-
-                                    for entry in result2:
-                                        es2.append(entry['prom'])
-                                        Ces2.append(entry['conta'])
-
-                                    result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__fami_estrato_vivienda="3")
-
-                                    for entry in result3:
-                                        es3.append(entry['prom'])
-                                        Ces3.append(entry['conta'])
-
-                                    result4 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__fami_estrato_vivienda="4")
-
-                                    for entry in result4:
-                                        es4.append(entry['prom'])
-                                        Ces4.append(entry['conta'])
-
-                                    result5 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__fami_estrato_vivienda="5")
-
-                                    for entry in result5:
-                                        es5.append(entry['prom'])
-                                        Ces5.append(entry['conta'])
-
-                                    result6 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__fami_estrato_vivienda="6")
-
-                                    for entry in result6:
-                                        es6.append(entry['prom'])
-                                        Ces6.append(entry['conta'])
+                                            entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
+                                        es1.append(entry['prom1'])
+                                        Ces1.append(entry['conta1'])
+                                        es2.append(entry['prom2'])
+                                        Ces2.append(entry['conta2'])
+                                        es3.append(entry['prom3'])
+                                        Ces3.append(entry['conta3'])
+                                        es4.append(entry['prom4'])
+                                        Ces4.append(entry['conta4'])
+                                        es5.append(entry['prom5'])
+                                        Ces5.append(entry['conta5'])
+                                        es6.append(entry['prom6'])
+                                        Ces6.append(entry['conta6'])
                                 else:
                                     if (categoria == "Nivel Educativo Padres"):
-                                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_estudiante__fami_max_nivel_educa_padres="NINGUNO")
-
+                                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                            'id_tiempo__ano').annotate(
+                                            prom1=Avg(puntaje,
+                                                      filter=Q(id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                            prom2=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                            prom3=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                            prom4=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                            prom5=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                            prom6=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                            prom7=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                            prom8=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            prom9=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            prom10=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                            prom11=Avg(puntaje,
+                                                       filter=Q(id_estudiante__fami_max_nivel_educa_padres="NO SABE")),
+                                            conta1=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                            conta2=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                            conta3=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                            conta4=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                            conta5=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                            conta6=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                            conta7=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                            conta8=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            conta9=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            conta10=Count('id_estudiante',
+                                                          filter=Q(
+                                                              id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                            conta11=Count('id_estudiante',
+                                                          filter=Q(
+                                                              id_estudiante__fami_max_nivel_educa_padres="NO SABE"))
+                                            ).filter(
+                                            id_lugar__cole_mcpio_ubicacion=message).order_by(
+                                                'id_institucion__cole_nombre_sede')
                                         for entry in result:
                                             label.append(
-                                                entry[
-                                                    'id_institucion__cole_nombre_sede'])
-                                            n.append(entry['prom'])
-                                            Cn.append(entry['conta'])
-                                        result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message,
-                                            id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")
-
-                                        for entry in result2:
-                                            PI.append(entry['prom'])
-                                            CPI.append(entry['conta'])
-
-                                        result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message,
-                                            id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")
-
-                                        for entry in result3:
-                                            PC.append(entry['prom'])
-                                            CPC.append(entry['conta'])
-
-                                        result4 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message,
-                                            id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")
-
-                                        for entry in result4:
-                                            BI.append(entry['prom'])
-                                            CBI.append(entry['conta'])
-
-                                        result5 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message,
-                                            id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")
-
-                                        for entry in result5:
-                                            BC.append(entry['prom'])
-                                            CBC.append(entry['conta'])
-
-                                        result6 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message,
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")
-
-                                        for entry in result6:
-                                            ETI.append(entry['prom'])
-                                            CETI.append(entry['conta'])
-
-                                        result7 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message,
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")
-
-                                        for entry in result7:
-                                            ETC.append(entry['prom'])
-                                            CETC.append(entry['conta'])
-
-                                        result8 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message,
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")
-
-                                        for entry in result8:
-                                            EPI.append(entry['prom'])
-                                            CEPI.append(entry['conta'])
-
-                                        result9 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message,
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL COMPLETA")
-
-                                        for entry in result9:
-                                            EPC.append(entry['prom'])
-                                            CEPC.append(entry['conta'])
-
-                                        result10 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message,
-                                            id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")
-
-                                        for entry in result10:
-                                            postgrado.append(entry['prom'])
-                                            Cpostgrado.append(entry['conta'])
-
-                                        result11 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message,
-                                            id_estudiante__fami_max_nivel_educa_padres="NO SABE")
-
-                                        for entry in result11:
-                                            nosabe.append(entry['prom'])
-                                            Cnosabe.append(entry['conta'])
+                                                entry['id_institucion__cole_nombre_sede'] + " : " + entry[
+                                                    'id_tiempo__ano'])
+                                            n.append(entry['prom1'])
+                                            Cn.append(entry['conta1'])
+                                            PI.append(entry['prom2'])
+                                            CPI.append(entry['conta2'])
+                                            PC.append(entry['prom3'])
+                                            CPC.append(entry['conta3'])
+                                            BI.append(entry['prom4'])
+                                            CBI.append(entry['conta4'])
+                                            BC.append(entry['prom5'])
+                                            CBC.append(entry['conta5'])
+                                            ETI.append(entry['prom6'])
+                                            CETI.append(entry['conta6'])
+                                            ETC.append(entry['prom7'])
+                                            CETC.append(entry['conta7'])
+                                            EPI.append(entry['prom8'])
+                                            CEPI.append(entry['conta8'])
+                                            EPC.append(entry['prom9'])
+                                            CEPC.append(entry['conta9'])
+                                            postgrado.append(entry['prom10'])
+                                            Cpostgrado.append(entry['conta10'])
+                                            nosabe.append(entry['prom11'])
+                                            Cnosabe.append(entry['conta11'])
             else:
                 if (categoria == "Genero"):
 
-                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
-                                                                                                     conta=Count(
-                                                                                                         'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__estu_genero="MASCULINO")
-
+                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede', 'id_tiempo__ano').annotate(
+                        prom1=Avg(puntaje, filter=Q(id_estudiante__estu_genero="MASCULINO")),
+                        prom2=Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO")),
+                        conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),
+                        conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(
+                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by('id_institucion__cole_nombre_sede')
                     for entry in result:
-                        label.append(
-                            entry['id_institucion__cole_nombre_sede'])
-                        masculino.append(entry['prom'])
-                        Cmasculino.append(entry['conta'])
-                    result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
-                                                                                                    conta=Count(
-                                                                                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__estu_genero="FEMENINO")
-                    for entry in result2:
-                        femenino.append(entry['prom'])
-                        Cfemenino.append(entry['conta'])
+                        label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
+                        femenino.append(entry['prom1'])
+                        masculino.append(entry['prom2'])
+                        Cfemenino.append(entry['conta1'])
+                        Cmasculino.append(entry['conta2'])
                 else:
                     if (categoria == "Condicion de las TIC"):
-                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__eco_condicion_tic="BUENA")
-
+                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                            'id_tiempo__ano').annotate(
+                            prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                            prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                            prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="MALA")),
+                            conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                            conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                            conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="MALA"))).filter(
+                            id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
+                            'id_institucion__cole_nombre_sede')
                         for entry in result:
-                            label.append(
-                                entry['id_institucion__cole_nombre_sede'])
-                            ticbuena.append(entry['prom'])
-                            Cticbuena.append(entry['conta'])
-                        result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__eco_condicion_tic="REGULAR")
-
-                        for entry in result2:
-                            ticregular.append(entry['prom'])
-                            Cticregular.append(entry['conta'])
-
-                        result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__eco_condicion_tic="MALA")
-
-                        for entry in result3:
-                            ticmala.append(entry['prom'])
-                            Cticmala.append(entry['conta'])
+                            label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
+                            ticbuena.append(entry['prom1'])
+                            Cticbuena.append(entry['conta1'])
+                            ticregular.append(entry['prom2'])
+                            Cticregular.append(entry['conta2'])
+                            ticmala.append(entry['prom3'])
+                            Cticmala.append(entry['conta3'])
 
                     else:
-                        if (categoria == "Condicion de la vivienda"):
-                            result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__eco_condicion_vivienda="BUENA")
-
+                        if (categoria == "Condicion en la que vive"):
+                            result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                'id_tiempo__ano').annotate(
+                                prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                                prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                                prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO")),
+                                conta1=Count('id_estudiante',
+                                             filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                                conta2=Count('id_estudiante',
+                                             filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                                conta3=Count('id_estudiante',
+                                             filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).filter(
+                                id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
+                                'id_institucion__cole_nombre_sede')
                             for entry in result:
                                 label.append(
-                                    entry[
-                                        'id_institucion__cole_nombre_sede'])
-                                vivbuena.append(entry['prom'])
-                                Cvivbuena.append(entry['conta'])
-                            result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__eco_condicion_vivienda="REGULAR")
-
-                            for entry in result2:
-                                vivregular.append(entry['prom'])
-                                Cvivregular.append(entry['conta'])
-
-                            result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__eco_condicion_vivienda="MALA")
-
-                            for entry in result3:
-                                vivmala.append(entry['prom'])
-                                Cvivmala.append(entry['conta'])
+                                    entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
+                                Hmedio.append(entry['prom1'])
+                                CHmedio.append(entry['conta1'])
+                                Hcritico.append(entry['prom2'])
+                                CHcritico.append(entry['conta2'])
+                                Hsin.append(entry['prom3'])
+                                CHsin.append(entry['conta3'])
 
                         else:
                             if (categoria == "Rango de Edad"):
-                                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__estu_rango_edad="17")
-
+                                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                    'id_tiempo__ano').annotate(
+                                    prom1=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="17")),
+                                    prom2=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                    prom3=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                    prom4=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                    prom5=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17")),
+                                    conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="17")),
+                                    conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                    conta3=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                    conta4=Count('id_estudiante',
+                                                 filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                    conta5=Count('id_estudiante',
+                                                 filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).filter(
+                                    id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
+                                    'id_tiempo__ano', 'id_institucion__cole_nombre_sede')
                                 for entry in result:
                                     label.append(
-                                        entry[
-                                            'id_institucion__cole_nombre_sede'])
-                                    e17.append(entry['prom'])
-                                    Ce17.append(entry['conta'])
-                                result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__estu_rango_edad="18 Y 19")
-
-                                for entry in result2:
-                                    e18y19.append(entry['prom'])
-                                    Ce18y19.append(entry['conta'])
-
-                                result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__estu_rango_edad="20 A 28")
-
-                                for entry in result3:
-                                    e20a28.append(entry['prom'])
-                                    Ce20a28.append(entry['conta'])
-
-                                result4 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__estu_rango_edad="MAYORES DE 28")
-
-                                for entry in result4:
-                                    emayoresde28.append(entry['prom'])
-                                    Cemayoresde28.append(entry['conta'])
-
-                                result5 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__estu_rango_edad="MENORES DE 17")
-
-                                for entry in result5:
-                                    emenoresde17.append(entry['prom'])
-                                    Cemenoresde17.append(entry['conta'])
+                                        entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
+                                    e17.append(entry['prom1'])
+                                    Ce17.append(entry['conta1'])
+                                    e18y19.append(entry['prom2'])
+                                    Ce18y19.append(entry['conta2'])
+                                    e20a28.append(entry['prom3'])
+                                    Ce20a28.append(entry['conta3'])
+                                    emayoresde28.append(entry['prom4'])
+                                    Cemayoresde28.append(entry['conta4'])
+                                    emenoresde17.append(entry['prom5'])
+                                    Cemenoresde17.append(entry['conta5'])
 
                             else:
                                 if (categoria == "Estrato"):
-                                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__fami_estrato_vivienda="1")
-
+                                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                        'id_tiempo__ano').annotate(
+                                        prom1=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                        prom2=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                        prom3=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                        prom4=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                        prom5=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                        prom6=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="6")),
+                                        conta1=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                        conta2=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                        conta3=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                        conta4=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                        conta5=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                        conta6=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="6"))).filter(
+                                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
+                                        'id_institucion__cole_nombre_sede')
                                     for entry in result:
                                         label.append(
-                                            entry[
-                                                'id_institucion__cole_nombre_sede'])
-                                        es1.append(entry['prom'])
-                                        Ces1.append(entry['conta'])
-                                    result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__fami_estrato_vivienda="2")
-
-                                    for entry in result2:
-                                        es2.append(entry['prom'])
-                                        Ces2.append(entry['conta'])
-
-                                    result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__fami_estrato_vivienda="3")
-
-                                    for entry in result3:
-                                        es3.append(entry['prom'])
-                                        Ces3.append(entry['conta'])
-
-                                    result4 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__fami_estrato_vivienda="4")
-
-                                    for entry in result4:
-                                        es4.append(entry['prom'])
-                                        Ces4.append(entry['conta'])
-
-                                    result5 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__fami_estrato_vivienda="5")
-
-                                    for entry in result5:
-                                        es5.append(entry['prom'])
-                                        Ces5.append(entry['conta'])
-
-                                    result6 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__fami_estrato_vivienda="6")
-
-                                    for entry in result6:
-                                        es6.append(entry['prom'])
-                                        Ces6.append(entry['conta'])
+                                            entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
+                                        es1.append(entry['prom1'])
+                                        Ces1.append(entry['conta1'])
+                                        es2.append(entry['prom2'])
+                                        Ces2.append(entry['conta2'])
+                                        es3.append(entry['prom3'])
+                                        Ces3.append(entry['conta3'])
+                                        es4.append(entry['prom4'])
+                                        Ces4.append(entry['conta4'])
+                                        es5.append(entry['prom5'])
+                                        Ces5.append(entry['conta5'])
+                                        es6.append(entry['prom6'])
+                                        Ces6.append(entry['conta6'])
                                 else:
                                     if (categoria == "Nivel Educativo Padres"):
-                                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_estudiante__fami_max_nivel_educa_padres="NINGUNO")
-
+                                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                            'id_tiempo__ano').annotate(
+                                            prom1=Avg(puntaje,
+                                                      filter=Q(id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                            prom2=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                            prom3=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                            prom4=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                            prom5=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                            prom6=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                            prom7=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                            prom8=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            prom9=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            prom10=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                            prom11=Avg(puntaje,
+                                                       filter=Q(id_estudiante__fami_max_nivel_educa_padres="NO SABE")),
+                                            conta1=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                            conta2=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                            conta3=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                            conta4=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                            conta5=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                            conta6=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                            conta7=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                            conta8=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            conta9=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            conta10=Count('id_estudiante',
+                                                          filter=Q(
+                                                              id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                            conta11=Count('id_estudiante',
+                                                          filter=Q(
+                                                              id_estudiante__fami_max_nivel_educa_padres="NO SABE"))
+                                        ).filter(
+                                            id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
+                                            'id_institucion__cole_nombre_sede')
                                         for entry in result:
                                             label.append(
-                                                entry[
-                                                    'id_institucion__cole_nombre_sede'])
-                                            n.append(entry['prom'])
-                                            Cn.append(entry['conta'])
-                                        result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst,
-                                            id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")
-
-                                        for entry in result2:
-                                            PI.append(entry['prom'])
-                                            CPI.append(entry['conta'])
-
-                                        result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst,
-                                            id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")
-
-                                        for entry in result3:
-                                            PC.append(entry['prom'])
-                                            CPC.append(entry['conta'])
-
-                                        result4 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst,
-                                            id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")
-
-                                        for entry in result4:
-                                            BI.append(entry['prom'])
-                                            CBI.append(entry['conta'])
-
-                                        result5 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst,
-                                            id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")
-
-                                        for entry in result5:
-                                            BC.append(entry['prom'])
-                                            CBC.append(entry['conta'])
-
-                                        result6 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst,
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")
-
-                                        for entry in result6:
-                                            ETI.append(entry['prom'])
-                                            CETI.append(entry['conta'])
-
-                                        result7 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst,
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")
-
-                                        for entry in result7:
-                                            ETC.append(entry['prom'])
-                                            CETC.append(entry['conta'])
-
-                                        result8 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst,
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")
-
-                                        for entry in result8:
-                                            EPI.append(entry['prom'])
-                                            CEPI.append(entry['conta'])
-
-                                        result9 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst,
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL COMPLETA")
-
-                                        for entry in result9:
-                                            EPC.append(entry['prom'])
-                                            CEPC.append(entry['conta'])
-
-                                        result10 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst,
-                                            id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")
-
-                                        for entry in result10:
-                                            postgrado.append(entry['prom'])
-                                            Cpostgrado.append(entry['conta'])
-
-                                        result11 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst,
-                                            id_estudiante__fami_max_nivel_educa_padres="NO SABE")
-
-                                        for entry in result11:
-                                            nosabe.append(entry['prom'])
-                                            Cnosabe.append(entry['conta'])
+                                                entry['id_institucion__cole_nombre_sede'] + " : " + entry[
+                                                    'id_tiempo__ano'])
+                                            n.append(entry['prom1'])
+                                            Cn.append(entry['conta1'])
+                                            PI.append(entry['prom2'])
+                                            CPI.append(entry['conta2'])
+                                            PC.append(entry['prom3'])
+                                            CPC.append(entry['conta3'])
+                                            BI.append(entry['prom4'])
+                                            CBI.append(entry['conta4'])
+                                            BC.append(entry['prom5'])
+                                            CBC.append(entry['conta5'])
+                                            ETI.append(entry['prom6'])
+                                            CETI.append(entry['conta6'])
+                                            ETC.append(entry['prom7'])
+                                            CETC.append(entry['conta7'])
+                                            EPI.append(entry['prom8'])
+                                            CEPI.append(entry['conta8'])
+                                            EPC.append(entry['prom9'])
+                                            CEPC.append(entry['conta9'])
+                                            postgrado.append(entry['prom10'])
+                                            Cpostgrado.append(entry['conta10'])
+                                            nosabe.append(entry['prom11'])
+                                            Cnosabe.append(entry['conta11'])
 
 
     else:
             if (message == "TODOS"):
                 if (categoria == "Genero"):
 
-                    result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
-                                                                                                   conta=Count(
-                                                                                                       'id_estudiante')).filter(id_estudiante__estu_genero="MASCULINO", id_tiempo__ano=ano)
-
+                    result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion', 'id_tiempo__ano').annotate(
+                        prom1=Avg(puntaje, filter=Q(id_estudiante__estu_genero="MASCULINO")),
+                        prom2=Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO")),
+                        conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),
+                        conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(
+                        id_tiempo__ano=ano).order_by(
+                        'id_lugar__cole_mcpio_ubicacion')
                     for entry in result:
-                        label.append(
-                            entry['id_lugar__cole_mcpio_ubicacion'])
-                        masculino.append(entry['prom'])
-                        Cmasculino.append(entry['conta'])
-                    result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
-                                                                                                    conta=Count(
-                                                                                                        'id_estudiante')).filter(id_estudiante__estu_genero="FEMENINO", id_tiempo__ano=ano)
-                    for entry in result2:
-                        femenino.append(entry['prom'])
-                        Cfemenino.append(entry['conta'])
+                        label.append(entry['id_lugar__cole_mcpio_ubicacion'])
+                        femenino.append(entry['prom1'])
+                        masculino.append(entry['prom2'])
+                        Cfemenino.append(entry['conta1'])
+                        Cmasculino.append(entry['conta2'])
                 else:
                     if (categoria == "Condicion de las TIC"):
-                        result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(id_estudiante__eco_condicion_tic="BUENA", id_tiempo__ano=ano)
-
+                        result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion',
+                                                            'id_tiempo__ano').annotate(
+                            prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                            prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                            prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="MALA")),
+                            conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                            conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                            conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="MALA"))).filter(
+                            id_tiempo__ano=ano).order_by(
+                            'id_lugar__cole_mcpio_ubicacion')
                         for entry in result:
-                            label.append(
-                                entry['id_lugar__cole_mcpio_ubicacion'])
-                            ticbuena.append(entry['prom'])
-                            Cticbuena.append(entry['conta'])
-                        result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(id_estudiante__eco_condicion_tic="REGULAR", id_tiempo__ano=ano)
-
-                        for entry in result2:
-                            ticregular.append(entry['prom'])
-                            Cticregular.append(entry['conta'])
-
-                        result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(id_estudiante__eco_condicion_tic="MALA", id_tiempo__ano=ano)
-
-                        for entry in result3:
-                            ticmala.append(entry['prom'])
-                            Cticmala.append(entry['conta'])
+                            label.append(entry['id_lugar__cole_mcpio_ubicacion'])
+                            ticbuena.append(entry['prom1'])
+                            Cticbuena.append(entry['conta1'])
+                            ticregular.append(entry['prom2'])
+                            Cticregular.append(entry['conta2'])
+                            ticmala.append(entry['prom3'])
+                            Cticmala.append(entry['conta3'])
 
                     else:
-                        if (categoria == "Condicion de la vivienda"):
-                            result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="BUENA", id_tiempo__ano=ano)
-
+                        if (categoria == "Condicion en la que vive"):
+                            result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion',
+                                                                'id_tiempo__ano').annotate(
+                                prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                                prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                                prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO")),
+                                conta1=Count('id_estudiante',
+                                             filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                                conta2=Count('id_estudiante',
+                                             filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                                conta3=Count('id_estudiante',
+                                             filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).filter(
+                                id_tiempo__ano=ano).order_by(
+                                'id_lugar__cole_mcpio_ubicacion')
                             for entry in result:
-                                label.append(
-                                    entry[
-                                        'id_lugar__cole_mcpio_ubicacion'])
-                                vivbuena.append(entry['prom'])
-                                Cvivbuena.append(entry['conta'])
-                            result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="REGULAR", id_tiempo__ano=ano)
-
-                            for entry in result2:
-                                vivregular.append(entry['prom'])
-                                Cvivregular.append(entry['conta'])
-
-                            result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(id_estudiante__eco_condicion_vivienda="MALA", id_tiempo__ano=ano)
-
-                            for entry in result3:
-                                vivmala.append(entry['prom'])
-                                Cvivmala.append(entry['conta'])
+                                label.append(entry['id_lugar__cole_mcpio_ubicacion'])
+                                Hmedio.append(entry['prom1'])
+                                CHmedio.append(entry['conta1'])
+                                Hcritico.append(entry['prom2'])
+                                CHcritico.append(entry['conta2'])
+                                Hsin.append(entry['prom3'])
+                                CHsin.append(entry['conta3'])
 
                         else:
                             if (categoria == "Rango de Edad"):
-                                result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(id_estudiante__estu_rango_edad="17", id_tiempo__ano=ano)
-
+                                result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion',
+                                                                    'id_tiempo__ano').annotate(
+                                    prom1=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="17")),
+                                    prom2=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                    prom3=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                    prom4=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                    prom5=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17")),
+                                    conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="17")),
+                                    conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                    conta3=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                    conta4=Count('id_estudiante',
+                                                 filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                    conta5=Count('id_estudiante',
+                                                 filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).filter(
+                                    id_tiempo__ano=ano).order_by(
+                                    'id_tiempo__ano', 'id_lugar__cole_mcpio_ubicacion')
                                 for entry in result:
                                     label.append(
-                                        entry[
-                                            'id_lugar__cole_mcpio_ubicacion'])
-                                    e17.append(entry['prom'])
-                                    Ce17.append(entry['conta'])
-                                result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(id_estudiante__estu_rango_edad="18 Y 19", id_tiempo__ano=ano)
-
-                                for entry in result2:
-                                    e18y19.append(entry['prom'])
-                                    Ce18y19.append(entry['conta'])
-
-                                result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(id_estudiante__estu_rango_edad="20 A 28", id_tiempo__ano=ano)
-
-                                for entry in result3:
-                                    e20a28.append(entry['prom'])
-                                    Ce20a28.append(entry['conta'])
-
-                                result4 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(id_estudiante__estu_rango_edad="MAYORES DE 28", id_tiempo__ano=ano)
-
-                                for entry in result4:
-                                    emayoresde28.append(entry['prom'])
-                                    Cemayoresde28.append(entry['conta'])
-
-                                result5 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(id_estudiante__estu_rango_edad="MENORES DE 17", id_tiempo__ano=ano)
-
-                                for entry in result5:
-                                    emenoresde17.append(entry['prom'])
-                                    Cemenoresde17.append(entry['conta'])
+                                        entry['id_lugar__cole_mcpio_ubicacion'])
+                                    e17.append(entry['prom1'])
+                                    Ce17.append(entry['conta1'])
+                                    e18y19.append(entry['prom2'])
+                                    Ce18y19.append(entry['conta2'])
+                                    e20a28.append(entry['prom3'])
+                                    Ce20a28.append(entry['conta3'])
+                                    emayoresde28.append(entry['prom4'])
+                                    Cemayoresde28.append(entry['conta4'])
+                                    emenoresde17.append(entry['prom5'])
+                                    Cemenoresde17.append(entry['conta5'])
 
                             else:
                                 if (categoria == "Estrato"):
-                                    result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="1", id_tiempo__ano=ano)
-
+                                    result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion',
+                                                                        'id_tiempo__ano').annotate(
+                                        prom1=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                        prom2=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                        prom3=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                        prom4=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                        prom5=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                        prom6=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="6")),
+                                        conta1=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                        conta2=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                        conta3=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                        conta4=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                        conta5=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                        conta6=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__fami_estrato_vivienda="6"))).filter(
+                                        id_tiempo__ano=ano).order_by(
+                                        'id_lugar__cole_mcpio_ubicacion')
                                     for entry in result:
                                         label.append(
-                                            entry[
-                                                'id_lugar__cole_mcpio_ubicacion'])
-                                        es1.append(entry['prom'])
-                                        Ces1.append(entry['conta'])
-                                    result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="2", id_tiempo__ano=ano)
-
-                                    for entry in result2:
-                                        es2.append(entry['prom'])
-                                        Ces2.append(entry['conta'])
-
-                                    result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="3", id_tiempo__ano=ano)
-
-                                    for entry in result3:
-                                        es3.append(entry['prom'])
-                                        Ces3.append(entry['conta'])
-
-                                    result4 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="4", id_tiempo__ano=ano)
-
-                                    for entry in result4:
-                                        es4.append(entry['prom'])
-                                        Ces4.append(entry['conta'])
-
-                                    result5 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="5", id_tiempo__ano=ano)
-
-                                    for entry in result5:
-                                        es5.append(entry['prom'])
-                                        Ces5.append(entry['conta'])
-
-                                    result6 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(id_estudiante__fami_estrato_vivienda="6", id_tiempo__ano=ano)
-
-                                    for entry in result6:
-                                        es6.append(entry['prom'])
-                                        Ces6.append(entry['conta'])
+                                            entry['id_lugar__cole_mcpio_ubicacion'])
+                                        es1.append(entry['prom1'])
+                                        Ces1.append(entry['conta1'])
+                                        es2.append(entry['prom2'])
+                                        Ces2.append(entry['conta2'])
+                                        es3.append(entry['prom3'])
+                                        Ces3.append(entry['conta3'])
+                                        es4.append(entry['prom4'])
+                                        Ces4.append(entry['conta4'])
+                                        es5.append(entry['prom5'])
+                                        Ces5.append(entry['conta5'])
+                                        es6.append(entry['prom6'])
+                                        Ces6.append(entry['conta6'])
                                 else:
                                     if (categoria == "Nivel Educativo Padres"):
-                                        result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(id_estudiante__fami_max_nivel_educa_padres="NINGUNO", id_tiempo__ano=ano)
-
+                                        result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion',
+                                                                            'id_tiempo__ano').annotate(
+                                            prom1=Avg(puntaje,
+                                                      filter=Q(id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                            prom2=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                            prom3=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                            prom4=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                            prom5=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                            prom6=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                            prom7=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                            prom8=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            prom9=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            prom10=Avg(puntaje, filter=Q(
+                                                id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                            prom11=Avg(puntaje,
+                                                       filter=Q(id_estudiante__fami_max_nivel_educa_padres="NO SABE")),
+                                            conta1=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                            conta2=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                            conta3=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                            conta4=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                            conta5=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                            conta6=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                            conta7=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                            conta8=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            conta9=Count('id_estudiante',
+                                                         filter=Q(
+                                                             id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                            conta10=Count('id_estudiante',
+                                                          filter=Q(
+                                                              id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                            conta11=Count('id_estudiante',
+                                                          filter=Q(
+                                                              id_estudiante__fami_max_nivel_educa_padres="NO SABE"))
+                                            ).filter(
+                                            id_tiempo__ano=ano).order_by(
+                                            'id_lugar__cole_mcpio_ubicacion')
                                         for entry in result:
                                             label.append(
-                                                entry[
-                                                    'id_lugar__cole_mcpio_ubicacion'])
-                                            n.append(entry['prom'])
-                                            Cn.append(entry['conta'])
-                                        result2 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA", id_tiempo__ano=ano)
-
-                                        for entry in result2:
-                                            PI.append(entry['prom'])
-                                            CPI.append(entry['conta'])
-
-                                        result3 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA", id_tiempo__ano=ano)
-
-                                        for entry in result3:
-                                            PC.append(entry['prom'])
-                                            CPC.append(entry['conta'])
-
-                                        result4 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO", id_tiempo__ano=ano)
-
-                                        for entry in result4:
-                                            BI.append(entry['prom'])
-                                            CBI.append(entry['conta'])
-
-                                        result5 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO", id_tiempo__ano=ano)
-
-                                        for entry in result5:
-                                            BC.append(entry['prom'])
-                                            CBC.append(entry['conta'])
-
-                                        result6 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA", id_tiempo__ano=ano)
-
-                                        for entry in result6:
-                                            ETI.append(entry['prom'])
-                                            CETI.append(entry['conta'])
-
-                                        result7 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA", id_tiempo__ano=ano)
-
-                                        for entry in result7:
-                                            ETC.append(entry['prom'])
-                                            CETC.append(entry['conta'])
-
-                                        result8 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA", id_tiempo__ano=ano)
-
-                                        for entry in result8:
-                                            EPI.append(entry['prom'])
-                                            CEPI.append(entry['conta'])
-
-                                        result9 = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL COMPLETA", id_tiempo__ano=ano)
-
-                                        for entry in result9:
-                                            EPC.append(entry['prom'])
-                                            CEPC.append(entry['conta'])
-
-                                        result10 = FactSaber11.objects.values(
-                                            'id_lugar__cole_mcpio_ubicacion').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_estudiante__fami_max_nivel_educa_padres="POSTGRADO", id_tiempo__ano=ano)
-
-                                        for entry in result10:
-                                            postgrado.append(entry['prom'])
-                                            Cpostgrado.append(entry['conta'])
-
-                                        result11 = FactSaber11.objects.values(
-                                            'id_lugar__cole_mcpio_ubicacion').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_estudiante__fami_max_nivel_educa_padres="NO SABE", id_tiempo__ano=ano)
-
-                                        for entry in result11:
-                                            nosabe.append(entry['prom'])
-                                            Cnosabe.append(entry['conta'])
+                                                entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry[
+                                                    'id_tiempo__ano'])
+                                            n.append(entry['prom1'])
+                                            Cn.append(entry['conta1'])
+                                            PI.append(entry['prom2'])
+                                            CPI.append(entry['conta2'])
+                                            PC.append(entry['prom3'])
+                                            CPC.append(entry['conta3'])
+                                            BI.append(entry['prom4'])
+                                            CBI.append(entry['conta4'])
+                                            BC.append(entry['prom5'])
+                                            CBC.append(entry['conta5'])
+                                            ETI.append(entry['prom6'])
+                                            CETI.append(entry['conta6'])
+                                            ETC.append(entry['prom7'])
+                                            CETC.append(entry['conta7'])
+                                            EPI.append(entry['prom8'])
+                                            CEPI.append(entry['conta8'])
+                                            EPC.append(entry['prom9'])
+                                            CEPC.append(entry['conta9'])
+                                            postgrado.append(entry['prom10'])
+                                            Cpostgrado.append(entry['conta10'])
+                                            nosabe.append(entry['prom11'])
+                                            Cnosabe.append(entry['conta11'])
 
 
             else:
                 if (inst == "General"):
                     if (categoria == "Genero"):
 
-                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(
-                            id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__estu_genero="MASCULINO")
-
+                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                            'id_tiempo__ano').annotate(
+                            prom1=Avg(puntaje, filter=Q(id_estudiante__estu_genero="MASCULINO")),
+                            prom2=Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO")),
+                            conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),
+                            conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(
+                            id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano).order_by(
+                            'id_institucion__cole_nombre_sede')
                         for entry in result:
-                            label.append(
-                                entry['id_institucion__cole_nombre_sede'])
-                            masculino.append(entry['prom'])
-                            Cmasculino.append(entry['conta'])
-                        result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(
-                            id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__estu_genero="FEMENINO")
-                        for entry in result2:
-                            femenino.append(entry['prom'])
-                            Cfemenino.append(entry['conta'])
+                            label.append(entry['id_institucion__cole_nombre_sede'])
+                            femenino.append(entry['prom1'])
+                            masculino.append(entry['prom2'])
+                            Cfemenino.append(entry['conta1'])
+                            Cmasculino.append(entry['conta2'])
                     else:
                         if (categoria == "Condicion de las TIC"):
-                            result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__eco_condicion_tic="BUENA")
-
+                            result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                'id_tiempo__ano').annotate(
+                                prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                                prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                                prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="MALA")),
+                                conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                                conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                                conta3=Count('id_estudiante',
+                                             filter=Q(id_estudiante__eco_condicion_tic="MALA"))).filter(
+                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano).order_by(
+                                'id_institucion__cole_nombre_sede')
                             for entry in result:
                                 label.append(
-                                    entry[
-                                        'id_institucion__cole_nombre_sede'])
-                                ticbuena.append(entry['prom'])
-                                Cticbuena.append(entry['conta'])
-                            result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__eco_condicion_tic="REGULAR")
-
-                            for entry in result2:
-                                ticregular.append(entry['prom'])
-                                Cticregular.append(entry['conta'])
-
-                            result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__eco_condicion_tic="MALA")
-
-                            for entry in result3:
-                                ticmala.append(entry['prom'])
-                                Cticmala.append(entry['conta'])
+                                    entry['id_institucion__cole_nombre_sede'])
+                                ticbuena.append(entry['prom1'])
+                                Cticbuena.append(entry['conta1'])
+                                ticregular.append(entry['prom2'])
+                                Cticregular.append(entry['conta2'])
+                                ticmala.append(entry['prom3'])
+                                Cticmala.append(entry['conta3'])
 
                         else:
                             if (categoria == "Condicion de la vivienda"):
-                                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                                    id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__eco_condicion_vivienda="BUENA")
-
+                                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                    'id_tiempo__ano').annotate(
+                                    prom1=Avg(puntaje,
+                                              filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                                    prom2=Avg(puntaje,
+                                              filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                                    prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO")),
+                                    conta1=Count('id_estudiante',
+                                                 filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                                    conta2=Count('id_estudiante',
+                                                 filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                                    conta3=Count('id_estudiante',
+                                                 filter=Q(
+                                                     id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).filter(
+                                    id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano).order_by(
+                                    'id_institucion__cole_nombre_sede')
                                 for entry in result:
                                     label.append(
-                                        entry[
-                                            'id_institucion__cole_nombre_sede'])
-                                    vivbuena.append(entry['prom'])
-                                    Cvivbuena.append(entry['conta'])
-                                result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                                    id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__eco_condicion_vivienda="REGULAR")
-
-                                for entry in result2:
-                                    vivregular.append(entry['prom'])
-                                    Cvivregular.append(entry['conta'])
-
-                                result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                                    id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__eco_condicion_vivienda="MALA")
-
-                                for entry in result3:
-                                    vivmala.append(entry['prom'])
-                                    Cvivmala.append(entry['conta'])
+                                        entry['id_institucion__cole_nombre_sede'])
+                                    Hmedio.append(entry['prom1'])
+                                    CHmedio.append(entry['conta1'])
+                                    Hcritico.append(entry['prom2'])
+                                    CHcritico.append(entry['conta2'])
+                                    Hsin.append(entry['prom3'])
+                                    CHsin.append(entry['conta3'])
 
                             else:
                                 if (categoria == "Rango de Edad"):
-                                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__estu_rango_edad="17")
-
+                                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                        'id_tiempo__ano').annotate(
+                                        prom1=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="17")),
+                                        prom2=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                        prom3=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                        prom4=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                        prom5=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17")),
+                                        conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="17")),
+                                        conta2=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                        conta3=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                        conta4=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                        conta5=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).filter(
+                                        id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano).order_by(
+                                        'id_tiempo__ano', 'id_institucion__cole_nombre_sede')
                                     for entry in result:
                                         label.append(
-                                            entry[
-                                                'id_institucion__cole_nombre_sede'])
-                                        e17.append(entry['prom'])
-                                        Ce17.append(entry['conta'])
-                                    result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__estu_rango_edad="18 Y 19")
-
-                                    for entry in result2:
-                                        e18y19.append(entry['prom'])
-                                        Ce18y19.append(entry['conta'])
-
-                                    result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__estu_rango_edad="20 A 28")
-
-                                    for entry in result3:
-                                        e20a28.append(entry['prom'])
-                                        Ce20a28.append(entry['conta'])
-
-                                    result4 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__estu_rango_edad="MAYORES DE 28")
-
-                                    for entry in result4:
-                                        emayoresde28.append(entry['prom'])
-                                        Cemayoresde28.append(entry['conta'])
-
-                                    result5 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__estu_rango_edad="MENORES DE 17")
-
-                                    for entry in result5:
-                                        emenoresde17.append(entry['prom'])
-                                        Cemenoresde17.append(entry['conta'])
+                                            entry['id_institucion__cole_nombre_sede'])
+                                        e17.append(entry['prom1'])
+                                        Ce17.append(entry['conta1'])
+                                        e18y19.append(entry['prom2'])
+                                        Ce18y19.append(entry['conta2'])
+                                        e20a28.append(entry['prom3'])
+                                        Ce20a28.append(entry['conta3'])
+                                        emayoresde28.append(entry['prom4'])
+                                        Cemayoresde28.append(entry['conta4'])
+                                        emenoresde17.append(entry['prom5'])
+                                        Cemenoresde17.append(entry['conta5'])
 
                                 else:
                                     if (categoria == "Estrato"):
-                                        result = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="1")
-
+                                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                            'id_tiempo__ano').annotate(
+                                            prom1=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                            prom2=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                            prom3=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                            prom4=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                            prom5=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                            prom6=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="6")),
+                                            conta1=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                            conta2=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                            conta3=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                            conta4=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                            conta5=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                            conta6=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="6"))).filter(
+                                            id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano).order_by(
+                                            'id_institucion__cole_nombre_sede')
                                         for entry in result:
                                             label.append(
-                                                entry[
-                                                    'id_institucion__cole_nombre_sede'])
-                                            es1.append(entry['prom'])
-                                            Ces1.append(entry['conta'])
-                                        result2 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="2")
-
-                                        for entry in result2:
-                                            es2.append(entry['prom'])
-                                            Ces2.append(entry['conta'])
-
-                                        result3 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="3")
-
-                                        for entry in result3:
-                                            es3.append(entry['prom'])
-                                            Ces3.append(entry['conta'])
-
-                                        result4 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="4")
-
-                                        for entry in result4:
-                                            es4.append(entry['prom'])
-                                            Ces4.append(entry['conta'])
-
-                                        result5 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="5")
-
-                                        for entry in result5:
-                                            es5.append(entry['prom'])
-                                            Ces5.append(entry['conta'])
-
-                                        result6 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="6")
-
-                                        for entry in result6:
-                                            es6.append(entry['prom'])
-                                            Ces6.append(entry['conta'])
+                                                entry['id_institucion__cole_nombre_sede'])
+                                            es1.append(entry['prom1'])
+                                            Ces1.append(entry['conta1'])
+                                            es2.append(entry['prom2'])
+                                            Ces2.append(entry['conta2'])
+                                            es3.append(entry['prom3'])
+                                            Ces3.append(entry['conta3'])
+                                            es4.append(entry['prom4'])
+                                            Ces4.append(entry['conta4'])
+                                            es5.append(entry['prom5'])
+                                            Ces5.append(entry['conta5'])
+                                            es6.append(entry['prom6'])
+                                            Ces6.append(entry['conta6'])
                                     else:
                                         if (categoria == "Nivel Educativo Padres"):
-                                            result = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano, id_estudiante__fami_max_nivel_educa_padres="NINGUNO")
-
+                                            result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                                'id_tiempo__ano').annotate(
+                                                prom1=Avg(puntaje,
+                                                          filter=Q(
+                                                              id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                                prom2=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                                prom3=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                                prom4=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                                prom5=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                                prom6=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                                prom7=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                                prom8=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                                prom9=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                                prom10=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                                prom11=Avg(puntaje,
+                                                           filter=Q(
+                                                               id_estudiante__fami_max_nivel_educa_padres="NO SABE")),
+                                                conta1=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                                conta2=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                                conta3=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                                conta4=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                                conta5=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                                conta6=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                                conta7=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                                conta8=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                                conta9=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                                conta10=Count('id_estudiante',
+                                                              filter=Q(
+                                                                  id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                                conta11=Count('id_estudiante',
+                                                              filter=Q(
+                                                                  id_estudiante__fami_max_nivel_educa_padres="NO SABE"))
+                                            ).filter(
+                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano).order_by(
+                                                'id_institucion__cole_nombre_sede')
                                             for entry in result:
                                                 label.append(
-                                                    entry[
-                                                        'id_institucion__cole_nombre_sede'])
-                                                n.append(entry['prom'])
-                                                Cn.append(entry['conta'])
-                                            result2 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")
-
-                                            for entry in result2:
-                                                PI.append(entry['prom'])
-                                                CPI.append(entry['conta'])
-
-                                            result3 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")
-
-                                            for entry in result3:
-                                                PC.append(entry['prom'])
-                                                CPC.append(entry['conta'])
-
-                                            result4 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")
-
-                                            for entry in result4:
-                                                BI.append(entry['prom'])
-                                                CBI.append(entry['conta'])
-
-                                            result5 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")
-
-                                            for entry in result5:
-                                                BC.append(entry['prom'])
-                                                CBC.append(entry['conta'])
-
-                                            result6 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")
-
-                                            for entry in result6:
-                                                ETI.append(entry['prom'])
-                                                CETI.append(entry['conta'])
-
-                                            result7 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")
-
-                                            for entry in result7:
-                                                ETC.append(entry['prom'])
-                                                CETC.append(entry['conta'])
-
-                                            result8 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")
-
-                                            for entry in result8:
-                                                EPI.append(entry['prom'])
-                                                CEPI.append(entry['conta'])
-
-                                            result9 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL COMPLETA")
-
-                                            for entry in result9:
-                                                EPC.append(entry['prom'])
-                                                CEPC.append(entry['conta'])
-
-                                            result10 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")
-
-                                            for entry in result10:
-                                                postgrado.append(entry['prom'])
-                                                Cpostgrado.append(entry['conta'])
-
-                                            result11 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="NO SABE")
-
-                                            for entry in result11:
-                                                nosabe.append(entry['prom'])
-                                                Cnosabe.append(entry['conta'])
+                                                    entry['id_institucion__cole_nombre_sede'])
+                                                n.append(entry['prom1'])
+                                                Cn.append(entry['conta1'])
+                                                PI.append(entry['prom2'])
+                                                CPI.append(entry['conta2'])
+                                                PC.append(entry['prom3'])
+                                                CPC.append(entry['conta3'])
+                                                BI.append(entry['prom4'])
+                                                CBI.append(entry['conta4'])
+                                                BC.append(entry['prom5'])
+                                                CBC.append(entry['conta5'])
+                                                ETI.append(entry['prom6'])
+                                                CETI.append(entry['conta6'])
+                                                ETC.append(entry['prom7'])
+                                                CETC.append(entry['conta7'])
+                                                EPI.append(entry['prom8'])
+                                                CEPI.append(entry['conta8'])
+                                                EPC.append(entry['prom9'])
+                                                CEPC.append(entry['conta9'])
+                                                postgrado.append(entry['prom10'])
+                                                Cpostgrado.append(entry['conta10'])
+                                                nosabe.append(entry['prom11'])
+                                                Cnosabe.append(entry['conta11'])
                 else:
                     if (categoria == "Genero"):
 
-                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(
-                            id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__estu_genero="MASCULINO")
-
+                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                            'id_tiempo__ano').annotate(
+                            prom1=Avg(puntaje, filter=Q(id_estudiante__estu_genero="MASCULINO")),
+                            prom2=Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO")),
+                            conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),
+                            conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(
+                            id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano).order_by(
+                            'id_institucion__cole_nombre_sede')
                         for entry in result:
-                            label.append(
-                                entry['id_institucion__cole_nombre_sede'])
-                            masculino.append(entry['prom'])
-                            Cmasculino.append(entry['conta'])
-                        result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                            prom=Avg(puntaje),
-                            conta=Count(
-                                'id_estudiante')).filter(
-                            id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__estu_genero="FEMENINO")
-                        for entry in result2:
-                            femenino.append(entry['prom'])
-                            Cfemenino.append(entry['conta'])
+                            label.append(entry['id_institucion__cole_nombre_sede'])
+                            femenino.append(entry['prom1'])
+                            masculino.append(entry['prom2'])
+                            Cfemenino.append(entry['conta1'])
+                            Cmasculino.append(entry['conta2'])
                     else:
                         if (categoria == "Condicion de las TIC"):
-                            result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                                id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__eco_condicion_tic="BUENA")
-
+                            result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                'id_tiempo__ano').annotate(
+                                prom1=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                                prom2=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                                prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_tic="MALA")),
+                                conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
+                                conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
+                                conta3=Count('id_estudiante',
+                                             filter=Q(id_estudiante__eco_condicion_tic="MALA"))).filter(
+                                id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano).order_by(
+                                'id_institucion__cole_nombre_sede')
                             for entry in result:
                                 label.append(
-                                    entry[
-                                        'id_institucion__cole_nombre_sede'])
-                                ticbuena.append(entry['prom'])
-                                Cticbuena.append(entry['conta'])
-                            result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                                id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__eco_condicion_tic="REGULAR")
-
-                            for entry in result2:
-                                ticregular.append(entry['prom'])
-                                Cticregular.append(entry['conta'])
-
-                            result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                prom=Avg(puntaje),
-                                conta=Count(
-                                    'id_estudiante')).filter(
-                                id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__eco_condicion_tic="MALA")
-
-                            for entry in result3:
-                                ticmala.append(entry['prom'])
-                                Cticmala.append(entry['conta'])
+                                    entry['id_institucion__cole_nombre_sede'])
+                                ticbuena.append(entry['prom1'])
+                                Cticbuena.append(entry['conta1'])
+                                ticregular.append(entry['prom2'])
+                                Cticregular.append(entry['conta2'])
+                                ticmala.append(entry['prom3'])
+                                Cticmala.append(entry['conta3'])
 
                         else:
-                            if (categoria == "Condicion de la vivienda"):
-                                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
+                            if (categoria == "Condicion en la que vive"):
+                                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                    'id_tiempo__ano').annotate(
+                                    prom1=Avg(puntaje,
+                                              filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                                    prom2=Avg(puntaje,
+                                              filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                                    prom3=Avg(puntaje, filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO")),
+                                    conta1=Count('id_estudiante',
+                                                 filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
+                                    conta2=Count('id_estudiante',
+                                                 filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
+                                    conta3=Count('id_estudiante',
+                                                 filter=Q(
+                                                     id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).filter(
                                     id_lugar__cole_mcpio_ubicacion=message,
-                                    id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__eco_condicion_vivienda="BUENA")
-
+                                    id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano).order_by(
+                                    'id_institucion__cole_nombre_sede')
                                 for entry in result:
                                     label.append(
-                                        entry[
-                                            'id_institucion__cole_nombre_sede'])
-                                    vivbuena.append(entry['prom'])
-                                    Cvivbuena.append(entry['conta'])
-                                result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                                    id_lugar__cole_mcpio_ubicacion=message,
-                                    id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__eco_condicion_vivienda="REGULAR")
-
-                                for entry in result2:
-                                    vivregular.append(entry['prom'])
-                                    Cvivregular.append(entry['conta'])
-
-                                result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                    prom=Avg(puntaje),
-                                    conta=Count(
-                                        'id_estudiante')).filter(
-                                    id_lugar__cole_mcpio_ubicacion=message,
-                                    id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__eco_condicion_vivienda="MALA")
-
-                                for entry in result3:
-                                    vivmala.append(entry['prom'])
-                                    Cvivmala.append(entry['conta'])
+                                        entry['id_institucion__cole_nombre_sede'])
+                                    Hmedio.append(entry['prom1'])
+                                    CHmedio.append(entry['conta1'])
+                                    Hcritico.append(entry['prom2'])
+                                    CHcritico.append(entry['conta2'])
+                                    Hsin.append(entry['prom3'])
+                                    CHsin.append(entry['conta3'])
 
                             else:
                                 if (categoria == "Rango de Edad"):
-                                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
+                                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                        'id_tiempo__ano').annotate(
+                                        prom1=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="17")),
+                                        prom2=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                        prom3=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                        prom4=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                        prom5=Avg(puntaje, filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17")),
+                                        conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="17")),
+                                        conta2=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__estu_rango_edad="18 Y 19")),
+                                        conta3=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
+                                        conta4=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
+                                        conta5=Count('id_estudiante',
+                                                     filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).filter(
                                         id_lugar__cole_mcpio_ubicacion=message,
-                                        id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__estu_rango_edad="17")
-
+                                        id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano).order_by(
+                                        'id_tiempo__ano', 'id_institucion__cole_nombre_sede')
                                     for entry in result:
                                         label.append(
-                                            entry[
-                                                'id_institucion__cole_nombre_sede'])
-                                        e17.append(entry['prom'])
-                                        Ce17.append(entry['conta'])
-                                    result2 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_lugar__cole_mcpio_ubicacion=message,
-                                        id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__estu_rango_edad="18 Y 19")
-
-                                    for entry in result2:
-                                        e18y19.append(entry['prom'])
-                                        Ce18y19.append(entry['conta'])
-
-                                    result3 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_lugar__cole_mcpio_ubicacion=message,
-                                        id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__estu_rango_edad="20 A 28")
-
-                                    for entry in result3:
-                                        e20a28.append(entry['prom'])
-                                        Ce20a28.append(entry['conta'])
-
-                                    result4 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_lugar__cole_mcpio_ubicacion=message,
-                                        id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__estu_rango_edad="MAYORES DE 28")
-
-                                    for entry in result4:
-                                        emayoresde28.append(entry['prom'])
-                                        Cemayoresde28.append(entry['conta'])
-
-                                    result5 = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(
-                                        prom=Avg(puntaje),
-                                        conta=Count(
-                                            'id_estudiante')).filter(
-                                        id_lugar__cole_mcpio_ubicacion=message,
-                                        id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__estu_rango_edad="MENORES DE 17")
-
-                                    for entry in result5:
-                                        emenoresde17.append(entry['prom'])
-                                        Cemenoresde17.append(entry['conta'])
+                                            entry['id_institucion__cole_nombre_sede'])
+                                        e17.append(entry['prom1'])
+                                        Ce17.append(entry['conta1'])
+                                        e18y19.append(entry['prom2'])
+                                        Ce18y19.append(entry['conta2'])
+                                        e20a28.append(entry['prom3'])
+                                        Ce20a28.append(entry['conta3'])
+                                        emayoresde28.append(entry['prom4'])
+                                        Cemayoresde28.append(entry['conta4'])
+                                        emenoresde17.append(entry['prom5'])
+                                        Cemenoresde17.append(entry['conta5'])
 
                                 else:
                                     if (categoria == "Estrato"):
-                                        result = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
+                                        result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                            'id_tiempo__ano').annotate(
+                                            prom1=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                            prom2=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                            prom3=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                            prom4=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                            prom5=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                            prom6=Avg(puntaje, filter=Q(id_estudiante__fami_estrato_vivienda="6")),
+                                            conta1=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="1")),
+                                            conta2=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="2")),
+                                            conta3=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="3")),
+                                            conta4=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="4")),
+                                            conta5=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="5")),
+                                            conta6=Count('id_estudiante',
+                                                         filter=Q(id_estudiante__fami_estrato_vivienda="6"))).filter(
                                             id_lugar__cole_mcpio_ubicacion=message,
-                                            id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="1")
-
+                                            id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano).order_by(
+                                            'id_institucion__cole_nombre_sede')
                                         for entry in result:
                                             label.append(
-                                                entry[
-                                                    'id_institucion__cole_nombre_sede'])
-                                            es1.append(entry['prom'])
-                                            Ces1.append(entry['conta'])
-                                        result2 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_lugar__cole_mcpio_ubicacion=message,
-                                            id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="2")
-
-                                        for entry in result2:
-                                            es2.append(entry['prom'])
-                                            Ces2.append(entry['conta'])
-
-                                        result3 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_lugar__cole_mcpio_ubicacion=message,
-                                            id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="3")
-
-                                        for entry in result3:
-                                            es3.append(entry['prom'])
-                                            Ces3.append(entry['conta'])
-
-                                        result4 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_lugar__cole_mcpio_ubicacion=message,
-                                            id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="4")
-
-                                        for entry in result4:
-                                            es4.append(entry['prom'])
-                                            Ces4.append(entry['conta'])
-
-                                        result5 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_lugar__cole_mcpio_ubicacion=message,
-                                            id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="5")
-
-                                        for entry in result5:
-                                            es5.append(entry['prom'])
-                                            Ces5.append(entry['conta'])
-
-                                        result6 = FactSaber11.objects.values(
-                                            'id_institucion__cole_nombre_sede').annotate(
-                                            prom=Avg(puntaje),
-                                            conta=Count(
-                                                'id_estudiante')).filter(
-                                            id_lugar__cole_mcpio_ubicacion=message,
-                                            id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano, id_estudiante__fami_estrato_vivienda="6")
-
-                                        for entry in result6:
-                                            es6.append(entry['prom'])
-                                            Ces6.append(entry['conta'])
+                                                entry['id_institucion__cole_nombre_sede'] + " : " + entry[
+                                                    'id_tiempo__ano'])
+                                            es1.append(entry['prom1'])
+                                            Ces1.append(entry['conta1'])
+                                            es2.append(entry['prom2'])
+                                            Ces2.append(entry['conta2'])
+                                            es3.append(entry['prom3'])
+                                            Ces3.append(entry['conta3'])
+                                            es4.append(entry['prom4'])
+                                            Ces4.append(entry['conta4'])
+                                            es5.append(entry['prom5'])
+                                            Ces5.append(entry['conta5'])
+                                            es6.append(entry['prom6'])
+                                            Ces6.append(entry['conta6'])
                                     else:
                                         if (categoria == "Nivel Educativo Padres"):
-                                            result = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
+                                            result = FactSaber11.objects.values('id_institucion__cole_nombre_sede',
+                                                                                'id_tiempo__ano').annotate(
+                                                prom1=Avg(puntaje,
+                                                          filter=Q(
+                                                              id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                                prom2=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                                prom3=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                                prom4=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                                prom5=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                                prom6=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                                prom7=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                                prom8=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                                prom9=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                                prom10=Avg(puntaje, filter=Q(
+                                                    id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                                prom11=Avg(puntaje,
+                                                           filter=Q(
+                                                               id_estudiante__fami_max_nivel_educa_padres="NO SABE")),
+                                                conta1=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="NINGUNO")),
+                                                conta2=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")),
+                                                conta3=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")),
+                                                conta4=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")),
+                                                conta5=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")),
+                                                conta6=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")),
+                                                conta7=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")),
+                                                conta8=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                                conta9=Count('id_estudiante',
+                                                             filter=Q(
+                                                                 id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")),
+                                                conta10=Count('id_estudiante',
+                                                              filter=Q(
+                                                                  id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")),
+                                                conta11=Count('id_estudiante',
+                                                              filter=Q(
+                                                                  id_estudiante__fami_max_nivel_educa_padres="NO SABE"))
+                                            ).filter(
                                                 id_lugar__cole_mcpio_ubicacion=message,
-                                                id_institucion__cole_nombre_sede=inst, id_estudiante__fami_max_nivel_educa_padres="NINGUNO", id_tiempo__ano=ano)
-
+                                                id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano).order_by(
+                                                'id_institucion__cole_nombre_sede')
                                             for entry in result:
-                                                label.append(entry['id_institucion__cole_nombre_sede'])
-                                                n.append(entry['prom'])
-                                                Cn.append(entry['conta'])
-                                            result2 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message,
-                                                id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="PRIMARIA INCOMPLETA")
-
-                                            for entry in result2:
-                                                PI.append(entry['prom'])
-                                                CPI.append(entry['conta'])
-
-                                            result3 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message,
-                                                id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="PRIMARIA COMPLETA")
-
-                                            for entry in result3:
-                                                PC.append(entry['prom'])
-                                                CPC.append(entry['conta'])
-
-                                            result4 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message,
-                                                id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO IMCOMPLETO")
-
-                                            for entry in result4:
-                                                BI.append(entry['prom'])
-                                                CBI.append(entry['conta'])
-
-                                            result5 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message,
-                                                id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="SECUNDARIA BACHILLERATO COMPLETO")
-
-                                            for entry in result5:
-                                                BC.append(entry['prom'])
-                                                CBC.append(entry['conta'])
-
-                                            result6 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message,
-                                                id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA INCOMPLETA")
-
-                                            for entry in result6:
-                                                ETI.append(entry['prom'])
-                                                CETI.append(entry['conta'])
-
-                                            result7 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message,
-                                                id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION TECNICA O TECNOLOGICA COMPLETA")
-
-                                            for entry in result7:
-                                                ETC.append(entry['prom'])
-                                                CETC.append(entry['conta'])
-
-                                            result8 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message,
-                                                id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL INCOMPLETA")
-
-                                            for entry in result8:
-                                                EPI.append(entry['prom'])
-                                                CEPI.append(entry['conta'])
-
-                                            result9 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message,
-                                                id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="EDUCACION PROFECIONAL COMPLETA")
-
-                                            for entry in result9:
-                                                EPC.append(entry['prom'])
-                                                CEPC.append(entry['conta'])
-
-                                            result10 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message,
-                                                id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="POSTGRADO")
-
-                                            for entry in result10:
-                                                postgrado.append(entry['prom'])
-                                                Cpostgrado.append(entry['conta'])
-
-                                            result11 = FactSaber11.objects.values(
-                                                'id_institucion__cole_nombre_sede').annotate(
-                                                prom=Avg(puntaje),
-                                                conta=Count(
-                                                    'id_estudiante')).filter(
-                                                id_lugar__cole_mcpio_ubicacion=message,
-                                                id_institucion__cole_nombre_sede=inst, id_tiempo__ano=ano,
-                                                id_estudiante__fami_max_nivel_educa_padres="NO SABE")
-
-                                            for entry in result11:
-                                                nosabe.append(entry['prom'])
-                                                Cnosabe.append(entry['conta'])
+                                                label.append(
+                                                    entry['id_institucion__cole_nombre_sede'] + " : " + entry[
+                                                        'id_tiempo__ano'])
+                                                n.append(entry['prom1'])
+                                                Cn.append(entry['conta1'])
+                                                PI.append(entry['prom2'])
+                                                CPI.append(entry['conta2'])
+                                                PC.append(entry['prom3'])
+                                                CPC.append(entry['conta3'])
+                                                BI.append(entry['prom4'])
+                                                CBI.append(entry['conta4'])
+                                                BC.append(entry['prom5'])
+                                                CBC.append(entry['conta5'])
+                                                ETI.append(entry['prom6'])
+                                                CETI.append(entry['conta6'])
+                                                ETC.append(entry['prom7'])
+                                                CETC.append(entry['conta7'])
+                                                EPI.append(entry['prom8'])
+                                                CEPI.append(entry['conta8'])
+                                                EPC.append(entry['prom9'])
+                                                CEPC.append(entry['conta9'])
+                                                postgrado.append(entry['prom10'])
+                                                Cpostgrado.append(entry['conta10'])
+                                                nosabe.append(entry['prom11'])
+                                                Cnosabe.append(entry['conta11'])
 
 
     # masculino = np.around(masculino)
