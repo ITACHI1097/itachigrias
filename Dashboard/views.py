@@ -59,7 +59,8 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
-@unauthenticated_user
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def registerPage(request):
     form = CreateUserForm()
 
@@ -69,8 +70,10 @@ def registerPage(request):
             user = form.save()
             username = form.cleaned_data.get('username')
 
-            group = Group.objects.get(name='usuario')
+            group = Group.objects.get(name='admin')
+            user.is_staff = True
             user.groups.add(group)
+
 
             messages.success(request, 'Registro Exitoso para el Usuario: ' + username)
             return redirect('login')

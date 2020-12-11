@@ -99,10 +99,12 @@
                           <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                           Settings
                         </a>
-                        <a class="dropdown-item" href="#">
+                           {% if request.user.groups.all.0.name == "admin" %}
+                        <a class="dropdown-item" href="{% url 'register' %}">
                           <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                          Activity Log
+                          Crear Cuenta
                         </a>
+                          {% endif %}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'logout' %}" data-toggle="modal" data-target="#logoutModal">
                           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

@@ -51,7 +51,7 @@
           <hr class="sidebar-divider">
 
           <!-- Heading -->
-          {% if request.user.is_staff %}
+          {% if request.user.groups.all.0.name == "admin" %}
           <div class="sidebar-heading">
             ADMIN
           </div>

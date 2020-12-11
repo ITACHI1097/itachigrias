@@ -45,7 +45,7 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Te Damos la Bienvenida a ITACHI</h1>
                   </div>
-                  <form class="user" method="POST" action="">
+                  <form id="formu" class="user" method="POST" action="">
                       {% csrf_token %}
                     <div class="form-group">
                       <input type="text" name="username" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Usuario...">
@@ -55,9 +55,17 @@
                     </div>
 
                     <input type="submit" class="btn btn-primary btn-user btn-block"></input>
+                    <input type="submit" class="btn btn-primary btn-user btn-block" value="Entrar como Invitado" id="inv" onclick="invitado()"></input>
 
 
                   </form>
+                <script>
+                        function invitado() {
+                            $("#exampleInputEmail").val("invitado");
+                            $("#exampleInputPassword").val("1234invitado1234");
+                            {#exampleInputPasswordL.innerHTML="daniel7895421";#}
+                        }
+                    </script>
                   <hr>
                   {% for message in messages %}
                       <p id="messages">{{ message }}</p>
@@ -65,9 +73,9 @@
                   <div class="text-center">
                     <a class="small" href="{% url 'reset_password' %}">Me Olvide la Contraseña</a>
                   </div>
-                  <div class="text-center">
-                    <a class="small" href="{% url 'register' %}">Crea una Cuenta!</a>
-                  </div>
+{#                  <div class="text-center">#}
+{#                    <a class="small" href="{% url 'register' %}">Crea una Cuenta!</a>#}
+{#                  </div>#}
                 </div>
               </div>
             </div>
