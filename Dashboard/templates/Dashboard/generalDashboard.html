@@ -35,13 +35,14 @@
         </div>
         <div class="col-3">
         <select id="graf" name="graf" class="form-control col-md-5 select2">
+          <option value="tabla">Tabla</option>
           <option value="bar">Barras</option>
           <option value="pie">Pastel</option>
           <option value="line">Linea</option>
           <option value="radar">Radar</option>
           <option value="polarArea">Area Polar</option>
           <option value="doughnut">Dona</option>
-          <option value="tabla">Tabla</option>
+
         </select>
     </div>
     <div>
@@ -143,14 +144,16 @@
         </div>
         <div class="card-body">
           <div class="chart-area">
-            <button class="btn btn-outline-primary" onclick="resetZoom()">Reset Zoom</button>
+            <button class="btn btn-outline-primary" id="btn_resetZoom" onclick="resetZoom()">Reset Zoom</button>
             <script>
                 function resetZoom() {
                   window.grafica.resetZoom();
                 }
             </script>
             <canvas id="grafic-gest" data-url="{% url 'Dashboard' %}" width="450" height="200" ></canvas>
-
+            <table id="miTabla">
+            </table>
+              <div id='container'></div>
           </div>
         </div>
     </div>

@@ -405,6 +405,42 @@ $(document).ready(function (){
                                 }
                               }
                             });
+                            if(graf=="Tabla"){
+                                var graph=document.getElementById("grafic-gest");
+                                graph.style.display='none';
+                                const tableContainer = document.getElementById('container');
+                                const xAxis = grafica.data.labels;
+                                const yAxis = grafica.data.datasets;
+
+                                const tableHeader = `<tr>${
+                                    xAxis.reduce((memo, entry) => {
+                                        memo += `<th>${entry}</th>`;
+                                        return memo;
+                                    }, '<th></th>')
+                                }</tr>`;
+
+                                const tableBody = yAxis.reduce((memo, entry) => {
+                                    const rows = entry.data.reduce((memo, entry) => {
+                                        memo += `<td>${entry}</td>`
+                                        return memo;
+                                    }, '');
+
+                                    memo += `<tr><td>${entry.label}</td>${rows}</tr>`;
+
+                                    return memo;
+                                }, '');
+
+                                const table = ` <div class="card shadow mb-4">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">${tableHeader}${tableBody}</table>
+                                                            </div>
+                                                        </div>
+                                                    </div>`;
+
+                                tableContainer.innerHTML = table;
+
+                            }
 
                         }
                     })
