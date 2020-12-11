@@ -437,7 +437,7 @@ $(document).ready(function (){
                                         xAxis.reduce((memo, entry) => {
                                             memo += `<th>${entry}</th>`;
                                             return memo;
-                                        }, '<th></th>')
+                                        }, '<th>METRICAS</th>')
                                     }</tr>`;
 
                                     const tableBody = yAxis.reduce((memo, entry) => {
@@ -903,7 +903,7 @@ $(document).ready(function (){
                                             xAxis.reduce((memo, entry) => {
                                                 memo += `<th>${entry}</th>`;
                                                 return memo;
-                                            }, '<th></th>')
+                                            }, '<th>METRICAS</th>')
                                         }</tr>`;
 
                                         const tableBody = yAxis.reduce((memo, entry) => {
