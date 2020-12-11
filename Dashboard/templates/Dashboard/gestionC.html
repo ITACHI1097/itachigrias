@@ -24,13 +24,12 @@
                     <label for="exampleFormControlSelect1">Categorias</label>
                     <select id="categoria" name="categoria" class="form-control col-md-12 select2">
 
-                      <option value="id_estudiante__eco_condicion_tic">Condicion de las TIC</option>
-                      <option value="id_estudiante__eco_condicion_vive">Condicion en la que vive</option>
-                      <option value="id_estudiante__estu_genero">Genero</option>
-                      <option value="id_estudiante__estu_rango_edad">Rango de Edad</option>
-                      <option value="id_estudiante__fami_estrato_vivienda">Estrato</option>
-                      <option value="id_estudiante__fami_ingreso_fmiliar_mensual">Ingresos Familiares</option>
-                      <option value="id_estudiante__fami_max_nivel_educa_padres">Nivel Educativo Padres</option>
+                      <option>Condicion de las TIC</option>
+                      <option>Condicion en la que vive</option>
+                      <option>Genero</option>
+                      <option>Rango de Edad</option>
+                      <option>Estrato</option>
+                      <option>Nivel Educativo Padres</option>
                     </select>
                 </div>
                 <div class="col">
@@ -128,6 +127,12 @@
         </div>
         <div class="card-body">
           <div class="chart-area">
+            <button class="btn btn-outline-primary" onclick="resetZoom()">Reset Zoom</button>
+            <script>
+                function resetZoom() {
+                  window.grafica.resetZoom();
+                }
+            </script>
             <canvas id="grafic-gest" data-url="{% url 'Gestion' %}" width="450" height="200" ></canvas>
             <button class="btn btn-outline-primary" onclick="ExportPdf()">Descargar Grafica en PDF</button>
           </div>

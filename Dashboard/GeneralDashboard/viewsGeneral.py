@@ -1358,8 +1358,7 @@ def Dashboard(request):
                                             'id_institucion__cole_nombre_sede')
                                         for entry in result:
                                             label.append(
-                                                entry['id_institucion__cole_nombre_sede'] + " : " + entry[
-                                                    'id_tiempo__ano'])
+                                                entry['id_institucion__cole_nombre_sede'])
                                             es1.append(entry['prom1'])
                                             Ces1.append(entry['conta1'])
                                             es2.append(entry['prom2'])
@@ -1439,8 +1438,7 @@ def Dashboard(request):
                                                 'id_institucion__cole_nombre_sede')
                                             for entry in result:
                                                 label.append(
-                                                    entry['id_institucion__cole_nombre_sede'] + " : " + entry[
-                                                        'id_tiempo__ano'])
+                                                    entry['id_institucion__cole_nombre_sede'])
                                                 n.append(entry['prom1'])
                                                 Cn.append(entry['conta1'])
                                                 PI.append(entry['prom2'])

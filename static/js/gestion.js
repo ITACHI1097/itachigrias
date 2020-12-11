@@ -5,7 +5,6 @@ $(document).ready(function (){
                     var graf = document.getElementById("graf").value;
                     var punt = document.getElementById("puntaje").options[document.getElementById("puntaje").selectedIndex].text;
                     var ano = document.getElementById("ano").options[document.getElementById("ano").selectedIndex].text;
-                    // var periodo = document.getElementById("periodo").options[document.getElementById("periodo").selectedIndex].text;
                     var muni = document.getElementById("municipio").options[document.getElementById("municipio").selectedIndex].text;
                     var inst = document.getElementById("inst").options[document.getElementById("inst").selectedIndex].text;
                     $.ajax({
@@ -78,8 +77,65 @@ $(document).ready(function (){
                                     getRandomColor(),
                                     getRandomColor(),
                                     getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
                                   ],
-                                  data:data.data
+                                  data:data.data,
+                                  borderColor: 'red',
+                                  lineTension: 0,
+                                  fill: false,
                             };
 
                             var estudiantes = {
@@ -118,6 +174,23 @@ $(document).ready(function (){
                                               labelString: 'Puntaje'
                                           }
                                      }]
+                                },
+                                pan: {
+                                  enabled: true,
+                                  mode: "x",
+                                  speed: 10,
+                                  threshold: 10
+                                },
+                                zoom: {
+                                    enabled: true,
+                                    drag: false,
+                                    mode: "x",
+                                    speed: 0.01,
+                                    sensitivity: 0.1,
+                                    limits: {
+                                        max: 10,
+                                        min: 0.5
+                                    }
                                 }
                               }
                             });
