@@ -46,7 +46,7 @@
         </select>
     </div>
     <div>
-        <button class="btn btn-outline-primary" onclick="ExportPdf()">Descargar Grafica</button>
+        <button id="btn_download" class="btn btn-outline-primary" onclick="ExportPdf()">Descargar Grafica</button>
     </div>
 {#    <h1>Gestion de Grafica - Puntaje</h1>#}
 {% endblock %}
@@ -151,8 +151,6 @@
                 }
             </script>
             <canvas id="grafic-gest" data-url="{% url 'Dashboard' %}" width="450" height="200" ></canvas>
-            <table id="miTabla">
-            </table>
               <div id='container'></div>
           </div>
         </div>

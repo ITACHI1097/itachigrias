@@ -112,6 +112,7 @@
                 <div class="col">
                     <label for="exampleFormControlSelect1">Tipo de Grafica</label>
                     <select id="graf" name="graf" class="form-control col-md-6 select2">
+                      <option value="tabla">Tabla</option>
                       <option value="bar">Barras</option>
                       <option value="pie">Pastel</option>
                       <option value="line">Linea</option>
@@ -127,14 +128,15 @@
         </div>
         <div class="card-body">
           <div class="chart-area">
-            <button class="btn btn-outline-primary" onclick="resetZoom()">Reset Zoom</button>
+            <button id="btn_resetZoom" class="btn btn-outline-primary" onclick="resetZoom()">Reset Zoom</button>
             <script>
                 function resetZoom() {
                   window.grafica.resetZoom();
                 }
             </script>
             <canvas id="grafic-gest" data-url="{% url 'Gestion' %}" width="450" height="200" ></canvas>
-            <button class="btn btn-outline-primary" onclick="ExportPdf()">Descargar Grafica en PDF</button>
+            <button id="btn_download" class="btn btn-outline-primary" onclick="ExportPdf()">Descargar Grafica en PDF</button>
+            <div id='container'></div>
           </div>
         </div>
     </div>

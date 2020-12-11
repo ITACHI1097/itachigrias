@@ -25,7 +25,7 @@ $(document).ready(function (){
                             }
 
                             var puntaje = {
-                              label: 'Puntaje',
+                              label: 'Puntaje Promedio',
                                   backgroundColor: [
                                     getRandomColor(),
                                     getRandomColor(),
@@ -152,6 +152,10 @@ $(document).ready(function (){
                                 window.grafica.clear();
                                 window.grafica.destroy();
                             }
+                            if(graf=="tabla"){
+                                graf="bar";
+                                ban=1;
+                            }
                             window.grafica = new Chart(ctx, {
                               type: graf,
                               data: {
@@ -194,6 +198,63 @@ $(document).ready(function (){
                                 }
                               }
                             });
+                            var graph=document.getElementById("grafic-gest");
+                            var btn=document.getElementById("btn_resetZoom");
+                            var tb=document.getElementById("container");
+                            var tbd=document.getElementById("btn_download");
+                            if(ban==1){
+
+                                graph.style.display='none';
+                                btn.style.display='none';
+                                tb.style.display='block';
+                                tbd.style.display='none';
+                                const tableContainer = document.getElementById('container');
+                                const xAxis = grafica.data.labels;
+                                const yAxis = grafica.data.datasets;
+
+                                const tableHeader = `<tr>${
+                                    xAxis.reduce((memo, entry) => {
+                                        memo += `<th>${entry}</th>`;
+                                        return memo;
+                                    }, '<th></th>')
+                                }</tr>`;
+
+                                const tableBody = yAxis.reduce((memo, entry) => {
+                                    const rows = entry.data.reduce((memo, entry) => {
+                                        memo += `<td>${entry}</td>`
+                                        return memo;
+                                    }, '');
+
+                                    memo += `<tr><td>${entry.label}</td>${rows}</tr>`;
+
+                                    return memo;
+                                }, '');
+
+                                const table = ` <div class="container-fluid">
+                                                    <div class="card shadow mb-4">
+                                                            <div class="card-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="1"><thead>${tableHeader}</thead><tbody>${tableBody}</tbody></table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <script>
+                                                        $('#dataTable').DataTable({
+                                                            "pagingType": "full_numbers"
+                                                        });
+                                                    </script>
+                                                </div>`;
+
+
+                                tableContainer.innerHTML = table;
+                                ban=0;
+
+                            }else{
+                                graph.style.display='block';
+                                btn.style.display='block';
+                                tb.style.display='none';
+                                tbd.style.display='block';
+                            }
                         }
                     })
 

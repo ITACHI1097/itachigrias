@@ -23,7 +23,7 @@ $(document).ready(function (){
 
 
                               var masculino = {
-                                  label: (metrica == "Puntaje") ? 'Puntaje Masculino' : 'Cantidad Masculino',
+                                  label: (metrica == "Puntaje") ? 'Puntaje Promedio Masculino' : 'Cantidad Masculino',
                                   backgroundColor: 'red',
 
                                   // data:dato1
@@ -36,7 +36,7 @@ $(document).ready(function (){
                               }
 
                               var femenino = {
-                                  label: (metrica == "Puntaje") ? 'Puntaje Femenino' : 'Cantidad Femenino',
+                                  label: (metrica == "Puntaje") ? 'Puntaje Promedio Femenino' : 'Cantidad Femenino',
                                   backgroundColor: 'blue',
                                   // data:dato2,
                                   data: (metrica == "Puntaje") ? data.femenino : data.Cfemenino,
@@ -47,7 +47,7 @@ $(document).ready(function (){
                               }
 
                               var ticbuena = {
-                                  label: (metrica == "Puntaje") ? 'Puntaje Buena' : 'Cantidad Buena',
+                                  label: (metrica == "Puntaje") ? 'Puntaje Promedio Buena' : 'Cantidad Buena',
                                   backgroundColor: 'green',
                                   data: (metrica == "Puntaje") ? data.ticbuena : data.Cticbuena,
                                   borderColor: 'green',
@@ -57,7 +57,7 @@ $(document).ready(function (){
                               }
 
                               var ticregular = {
-                                  label: (metrica == "Puntaje") ? 'Puntaje REGULAR' : 'Cantidad REGULAR',
+                                  label: (metrica == "Puntaje") ? 'Puntaje Promedio REGULAR' : 'Cantidad REGULAR',
                                   backgroundColor: 'yellow',
                                   data: (metrica == "Puntaje") ? data.ticregular : data.Cticregular,
                                   borderColor: 'yellow',
@@ -67,7 +67,7 @@ $(document).ready(function (){
                               }
 
                               var ticmala = {
-                                  label: (metrica == "Puntaje") ? 'Puntaje Mala' : 'Cantidad Mala',
+                                  label: (metrica == "Puntaje") ? 'Puntaje Promedio Mala' : 'Cantidad Mala',
                                   backgroundColor: 'red',
                                   data: (metrica == "Puntaje") ? data.ticmala : data.Cticmala,
                                   borderColor: 'red',
@@ -77,7 +77,7 @@ $(document).ready(function (){
                               }
 
                               var vivbuena = {
-                                  label: (metrica == "Puntaje") ? 'Punt.Hacinamiento Medio' : 'Cant.Hacinamiento Medio',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio Hacinamiento Medio' : 'Cant.Hacinamiento Medio',
                                   backgroundColor: 'green',
                                   data: (metrica == "Puntaje") ? data.Hmedio : data.CHmedio,
                                   borderColor: 'green',
@@ -87,7 +87,7 @@ $(document).ready(function (){
                               }
 
                               var vivregular = {
-                                  label: (metrica == "Puntaje") ? 'Punt.Hacinamiento Critico' : 'Cant.Hacinamiento Critico',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio Hacinamiento Critico' : 'Cant.Hacinamiento Critico',
                                   backgroundColor: 'red',
                                   data: (metrica == "Puntaje") ? data.Hcritico : data.CHcritico,
                                   borderColor: 'red',
@@ -97,7 +97,7 @@ $(document).ready(function (){
                               }
 
                               var vivmala = {
-                                  label: (metrica == "Puntaje") ? 'Punt.Sin Hacinamiento' : 'Cant.Sin Hacinamiento',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio Sin Hacinamiento' : 'Cant.Sin Hacinamiento',
                                   backgroundColor: 'black',
                                   data: (metrica == "Puntaje") ? data.Hsin : data.CHsin,
                                   borderColor: 'black',
@@ -107,7 +107,7 @@ $(document).ready(function (){
                               }
 
                               var e17 = {
-                                  label: (metrica == "Puntaje") ? 'Puntaje de 17' : 'Cantidad de 17',
+                                  label: (metrica == "Puntaje") ? 'Puntaje Promedio de 17' : 'Cantidad de 17',
                                   backgroundColor: 'blue',
                                   data: (metrica == "Puntaje") ? data.e17 : data.Ce17,
                                   borderColor: 'blue',
@@ -117,7 +117,7 @@ $(document).ready(function (){
                               }
 
                               var e18y19 = {
-                                  label: (metrica == "Puntaje") ? 'Puntaje de 18 Y 19' : 'Cantidad de 18 Y 19',
+                                  label: (metrica == "Puntaje") ? 'Puntaje Promedio de 18 Y 19' : 'Cantidad de 18 Y 19',
                                   backgroundColor: 'red',
                                   data: (metrica == "Puntaje") ? data.e18y19 : data.Ce18y19,
                                   borderColor: 'red',
@@ -127,7 +127,7 @@ $(document).ready(function (){
                               }
 
                               var e20a28 = {
-                                  label: (metrica == "Puntaje") ? 'Puntaje de 20 A 28' : 'Cantidad de 20 A 28',
+                                  label: (metrica == "Puntaje") ? 'Puntaje Promedio de 20 A 28' : 'Cantidad de 20 A 28',
                                   backgroundColor: 'green',
                                   data: (metrica == "Puntaje") ? data.e20a28 : data.Ce20a28,
                                   borderColor: 'green',
@@ -137,7 +137,7 @@ $(document).ready(function (){
                               }
 
                               var emayoresde28 = {
-                                  label: (metrica == "Puntaje") ? 'Punt.MAYORES DE 28' : 'Cant.MAYORES DE 28',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio MAYORES DE 28' : 'Cant.MAYORES DE 28',
                                   backgroundColor: 'yellow',
                                   data: (metrica == "Puntaje") ? data.emayoresde28 : data.Cemayoresde28,
                                   borderColor: 'yellow',
@@ -147,7 +147,7 @@ $(document).ready(function (){
                               }
 
                               var emenoresde17 = {
-                                  label: (metrica == "Puntaje") ? 'Punt.MENORES DE 17' : 'Cant.MENORES DE 17',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio MENORES DE 17' : 'Cant.MENORES DE 17',
                                   backgroundColor: 'brown',
                                   data: (metrica == "Puntaje") ? data.emenoresde17 : data.Cemenoresde17,
                                   borderColor: 'brown',
@@ -157,7 +157,7 @@ $(document).ready(function (){
                               }
 
                               var es1 = {
-                                  label: (metrica == "Puntaje") ? 'Punt.ESTRATO 1' : 'Cant.ESTRATO 1',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 1' : 'Cant.ESTRATO 1',
                                   backgroundColor: 'red',
                                   data: (metrica == "Puntaje") ? data.es1 : data.Ces1,
                                   borderColor: 'red',
@@ -167,7 +167,7 @@ $(document).ready(function (){
                               }
 
                               var es2 = {
-                                  label: (metrica == "Puntaje") ? 'Punt.ESTRATO 2' : 'Cant.ESTRATO 2',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 2' : 'Cant.ESTRATO 2',
                                   backgroundColor: 'blue',
                                   data: (metrica == "Puntaje") ? data.es2 : data.Ces2,
                                   borderColor: 'blue',
@@ -177,7 +177,7 @@ $(document).ready(function (){
                               }
 
                               var es3 = {
-                                  label: (metrica == "Puntaje") ? 'Punt.ESTRATO 3' : 'Cant.ESTRATO 3',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 3' : 'Cant.ESTRATO 3',
                                   backgroundColor: 'yellow',
                                   data: (metrica == "Puntaje") ? data.es3 : data.Ces3,
                                   borderColor: 'yellow',
@@ -187,7 +187,7 @@ $(document).ready(function (){
                               }
 
                               var es4 = {
-                                  label: (metrica == "Puntaje") ? 'Punt.ESTRATO 4' : 'Cant.ESTRATO 4',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 4' : 'Cant.ESTRATO 4',
                                   backgroundColor: 'green',
                                   data: (metrica == "Puntaje") ? data.es4 : data.Ces4,
                                   borderColor: 'green',
@@ -197,7 +197,7 @@ $(document).ready(function (){
                               }
 
                               var es5 = {
-                                  label: (metrica == "Puntaje") ? 'Punt.ESTRATO 5' : 'Cant.ESTRATO 5',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 5' : 'Cant.ESTRATO 5',
                                   backgroundColor: 'brown',
                                   data: (metrica == "Puntaje") ? data.es5 : data.Ces5,
                                   borderColor: 'brown',
@@ -207,7 +207,7 @@ $(document).ready(function (){
                               }
 
                               var es6 = {
-                                  label: (metrica == "Puntaje") ? 'Punt.ESTRATO 6' : 'Cant.ESTRATO 6',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 6' : 'Cant.ESTRATO 6',
                                   backgroundColor: 'black',
                                   data: (metrica == "Puntaje") ? data.es6 : data.Ces6,
                                   borderColor: 'black',
@@ -217,7 +217,7 @@ $(document).ready(function (){
                               }
 
                               var n = {
-                                  label: (metrica == "Puntaje") ? 'Punt.NINGUNO' : 'Cant.NINGUNO',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio NINGUNO' : 'Cant.NINGUNO',
                                   backgroundColor: 'red',
                                   data: (metrica == "Puntaje") ? data.n : data.Cn,
                                   borderColor: 'red',
@@ -226,7 +226,7 @@ $(document).ready(function (){
                                   yAxisID: 'A'
                               }
                               var PI = {
-                                  label: (metrica == "Puntaje") ? 'Punt.PRIMARIA INCOMPLETA' : 'Cant.PRIMARIA INCOMPLETA',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio PRIMARIA INCOMPLETA' : 'Cant.PRIMARIA INCOMPLETA',
                                   backgroundColor: 'blue',
                                   data: (metrica == "Puntaje") ? data.PI : data.CPI,
                                   borderColor: 'blue',
@@ -236,7 +236,7 @@ $(document).ready(function (){
                               }
 
                               var PC = {
-                                  label: (metrica == "Puntaje") ? 'Punt.PRIMARIA COMPLETA' : 'Cant.PRIMARIA COMPLETA',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio PRIMARIA COMPLETA' : 'Cant.PRIMARIA COMPLETA',
                                   backgroundColor: 'green',
                                   data: (metrica == "Puntaje") ? data.PC : data.CPC,
                                   borderColor: 'green',
@@ -246,7 +246,7 @@ $(document).ready(function (){
                               }
 
                               var BI = {
-                                  label: (metrica == "Puntaje") ? 'Punt.SECUNDARIA BACHILLERATO IMCOMPLETO' : 'Cant.SECUNDARIA BACHILLERATO IMCOMPLETO',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio SECUNDARIA BACHILLERATO IMCOMPLETO' : 'Cant.SECUNDARIA BACHILLERATO IMCOMPLETO',
                                   backgroundColor: 'yellow',
                                   data: (metrica == "Puntaje") ? data.BI : data.CBI,
                                   borderColor: 'yellow',
@@ -256,7 +256,7 @@ $(document).ready(function (){
                               }
 
                               var BC = {
-                                  label: (metrica == "Puntaje") ? 'Punt.SECUNDARIA BACHILLERATO COMPLETO' : 'Cant.SECUNDARIA BACHILLERATO COMPLETO',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio SECUNDARIA BACHILLERATO COMPLETO' : 'Cant.SECUNDARIA BACHILLERATO COMPLETO',
                                   backgroundColor: 'brown',
                                   data: (metrica == "Puntaje") ? data.BC : data.CBC,
                                   borderColor: 'brown',
@@ -266,7 +266,7 @@ $(document).ready(function (){
                               }
 
                               var ETI = {
-                                  label: (metrica == "Puntaje") ? 'Punt.EDUCACION TECNICA O TECNOLOGICA INCOMPLETA' : 'Cant.EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio EDUCACION TECNICA O TECNOLOGICA INCOMPLETA' : 'Cant.EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
                                   backgroundColor: 'pink',
                                   data: (metrica == "Puntaje") ? data.ETI : data.CETI,
                                   borderColor: 'pink',
@@ -276,7 +276,7 @@ $(document).ready(function (){
                               }
 
                               var ETC = {
-                                  label: (metrica == "Puntaje") ? 'Punt.EDUCACION TECNICA O TECNOLOGICA COMPLETA' : 'Cant.EDUCACION TECNICA O TECNOLOGICA COMPLETA',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio EDUCACION TECNICA O TECNOLOGICA COMPLETA' : 'Cant.EDUCACION TECNICA O TECNOLOGICA COMPLETA',
                                   backgroundColor: 'purple',
                                   data: (metrica == "Puntaje") ? data.ETC : data.CETC,
                                   borderColor: 'purple',
@@ -286,7 +286,7 @@ $(document).ready(function (){
                               }
 
                               var EPI = {
-                                  label: (metrica == "Puntaje") ? 'Punt.EDUCACION PROFECIONAL INCOMPLETA' : 'Cant.EDUCACION PROFECIONAL INCOMPLETA',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio EDUCACION PROFECIONAL INCOMPLETA' : 'Cant.EDUCACION PROFECIONAL INCOMPLETA',
                                   backgroundColor: 'orange',
                                   data: (metrica == "Puntaje") ? data.EPI : data.CEPI,
                                   borderColor: 'orange',
@@ -296,7 +296,7 @@ $(document).ready(function (){
                               }
 
                               var EPC = {
-                                  label: (metrica == "Puntaje") ? 'Punt.EDUCACION PROFECIONAL COMPLETA' : 'Cant.EDUCACION PROFECIONAL COMPLETA',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio EDUCACION PROFECIONAL COMPLETA' : 'Cant.EDUCACION PROFECIONAL COMPLETA',
                                   backgroundColor: 'violet',
                                   data: (metrica == "Puntaje") ? data.EPC : data.CEPC,
                                   borderColor: 'violet',
@@ -306,7 +306,7 @@ $(document).ready(function (){
                               }
 
                               var postgrado = {
-                                  label: (metrica == "Puntaje") ? 'Punt.POSTGRADO' : 'Cant.POSTGRADO',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio POSTGRADO' : 'Cant.POSTGRADO',
                                   backgroundColor: 'gray',
                                   data: (metrica == "Puntaje") ? data.postgrado : data.Cpostgrado,
                                   borderColor: 'gray',
@@ -316,7 +316,7 @@ $(document).ready(function (){
                               }
 
                               var nosabe = {
-                                  label: (metrica == "Puntaje") ? 'Punt.NO SABE' : 'Cant.NO SABE',
+                                  label: (metrica == "Puntaje") ? 'Punt.Promedio NO SABE' : 'Cant.NO SABE',
                                   backgroundColor: 'black',
                                   data: (metrica == "Puntaje") ? data.nosabe : data.Cnosabe,
                                   borderColor: 'black',
@@ -398,7 +398,7 @@ $(document).ready(function (){
                                                   position: 'left',
                                                   scaleLabel: {
                                                       display: true,
-                                                      labelString: (metrica == "Puntaje") ? 'Puntaje' : 'Cantidad'
+                                                      labelString: (metrica == "Puntaje") ? 'Puntaje Promedio' : 'Cantidad'
                                                   }
                                               }]
                                           },
@@ -479,7 +479,7 @@ $(document).ready(function (){
 
                               } else {
                                   var Pmasculino = {
-                                      label: 'Puntaje Masculino',
+                                      label: 'Puntaje Promedio Masculino',
                                       backgroundColor: 'red',
                                       // data:dato1
                                       data: data.masculino,
@@ -491,7 +491,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pfemenino = {
-                                      label: 'Puntaje Femenino',
+                                      label: 'Puntaje Promedio Femenino',
                                       backgroundColor: 'blue',
                                       // data:dato2,
                                       data: data.femenino,
@@ -502,7 +502,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pticbuena = {
-                                      label: 'Puntaje Buena',
+                                      label: 'Puntaje Promedio Buena',
                                       backgroundColor: 'green',
                                       data: data.ticbuena,
                                       borderColor: 'green',
@@ -512,7 +512,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pticregular = {
-                                      label: 'Puntaje REGULAR',
+                                      label: 'Puntaje Promedio REGULAR',
                                       backgroundColor: 'yellow',
                                       data: data.ticregular,
                                       borderColor: 'yellow',
@@ -522,7 +522,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pticmala = {
-                                      label: 'Puntaje Mala',
+                                      label: 'Puntaje Promedio Mala',
                                       backgroundColor: 'red',
                                       data: data.ticmala,
                                       borderColor: 'red',
@@ -532,7 +532,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pvivbuena = {
-                                      label: 'Punt.Hacinamiento Medio',
+                                      label: 'Punt.Promedio Hacinamiento Medio',
                                       backgroundColor: 'green',
                                       data: data.Hmedio,
                                       borderColor: 'green',
@@ -542,7 +542,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pvivregular = {
-                                      label: 'Punt.Hacinamiento Critico',
+                                      label: 'Punt.Promedio Hacinamiento Critico',
                                       backgroundColor: 'red',
                                       data: data.Hcritico,
                                       borderColor: 'red',
@@ -552,7 +552,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pvivmala = {
-                                      label: 'Punt.Sin Hacinamiento',
+                                      label: 'Punt.Promedio Sin Hacinamiento',
                                       backgroundColor: 'black',
                                       data: data.Hsin,
                                       borderColor: 'black',
@@ -562,7 +562,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pe17 = {
-                                      label: 'Puntaje de 17',
+                                      label: 'Puntaje Promedio de 17',
                                       backgroundColor: 'blue',
                                       data: data.e17,
                                       borderColor: 'blue',
@@ -572,7 +572,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pe18y19 = {
-                                      label: 'Puntaje de 18 Y 19',
+                                      label: 'Puntaje Promedio de 18 Y 19',
                                       backgroundColor: 'red',
                                       data: data.e18y19,
                                       borderColor: 'red',
@@ -582,7 +582,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pe20a28 = {
-                                      label: 'Puntaje de 20 A 28',
+                                      label: 'Puntaje Promedio de 20 A 28',
                                       backgroundColor: 'green',
                                       data: data.e20a28,
                                       borderColor: 'green',
@@ -592,7 +592,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pemayoresde28 = {
-                                      label: 'Puntaje MAYORES DE 28',
+                                      label: 'Puntaje Promedio MAYORES DE 28',
                                       backgroundColor: 'yellow',
                                       data: data.emayoresde28,
                                       borderColor: 'yellow',
@@ -602,7 +602,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pemenoresde17 = {
-                                      label: 'Puntaje de MENORES DE 17',
+                                      label: 'Puntaje Promedio de MENORES DE 17',
                                       backgroundColor: 'brown',
                                       data: data.emenoresde17,
                                       borderColor: 'brown',
@@ -612,7 +612,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pes1 = {
-                                      label: 'Punt.ESTRATO 1',
+                                      label: 'Punt.Promedio ESTRATO 1',
                                       backgroundColor: 'red',
                                       data: data.es1,
                                       borderColor: 'red',
@@ -622,7 +622,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pes2 = {
-                                      label: 'Punt.ESTRATO 2',
+                                      label: 'Punt.Promedio ESTRATO 2',
                                       backgroundColor: 'blue',
                                       data: data.es2,
                                       borderColor: 'blue',
@@ -632,7 +632,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pes3 = {
-                                      label: 'Punt.ESTRATO 3',
+                                      label: 'Punt.Promedio ESTRATO 3',
                                       backgroundColor: 'yellow',
                                       data: data.es3,
                                       borderColor: 'yellow',
@@ -642,7 +642,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pes4 = {
-                                      label: 'Punt.ESTRATO 4',
+                                      label: 'Punt.Promedio ESTRATO 4',
                                       backgroundColor: 'green',
                                       data: data.es4,
                                       borderColor: 'green',
@@ -652,7 +652,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pes5 = {
-                                      label: 'Punt.ESTRATO 5',
+                                      label: 'Punt.Promedio ESTRATO 5',
                                       backgroundColor: 'brown',
                                       data: data.es5,
                                       borderColor: 'brown',
@@ -662,7 +662,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pes6 = {
-                                      label: 'Punt.ESTRATO 6',
+                                      label: 'Punt.Promedio ESTRATO 6',
                                       backgroundColor: 'black',
                                       data: data.es6,
                                       borderColor: 'black',
@@ -672,7 +672,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pn = {
-                                      label: 'Punt.NINGUNO',
+                                      label: 'Punt.Promedio NINGUNO',
                                       backgroundColor: 'red',
                                       data: data.n,
                                       borderColor: 'red',
@@ -681,7 +681,7 @@ $(document).ready(function (){
                                       yAxisID: 'B'
                                   }
                                   var PPI = {
-                                      label: 'Punt.PRIMARIA INCOMPLETA',
+                                      label: 'Punt.Promedio PRIMARIA INCOMPLETA',
                                       backgroundColor: 'blue',
                                       data: data.PI,
                                       borderColor: 'blue',
@@ -691,7 +691,7 @@ $(document).ready(function (){
                                   }
 
                                   var PPC = {
-                                      label: 'Punt.PRIMARIA COMPLETA',
+                                      label: 'Punt.Promedio PRIMARIA COMPLETA',
                                       backgroundColor: 'green',
                                       data: data.PC,
                                       borderColor: 'green',
@@ -701,7 +701,7 @@ $(document).ready(function (){
                                   }
 
                                   var PBI = {
-                                      label: 'Punt.SECUNDARIA BACHILLERATO IMCOMPLETO',
+                                      label: 'Punt.Promedio SECUNDARIA BACHILLERATO IMCOMPLETO',
                                       backgroundColor: 'yellow',
                                       data: data.BI,
                                       borderColor: 'yellow',
@@ -711,7 +711,7 @@ $(document).ready(function (){
                                   }
 
                                   var PBC = {
-                                      label: 'Punt.SECUNDARIA BACHILLERATO COMPLETO',
+                                      label: 'Punt.Promedio SECUNDARIA BACHILLERATO COMPLETO',
                                       backgroundColor: 'brown',
                                       data: data.BC,
                                       borderColor: 'brown',
@@ -721,7 +721,7 @@ $(document).ready(function (){
                                   }
 
                                   var PETI = {
-                                      label: 'Punt.EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
+                                      label: 'Punt.Promedio EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
                                       backgroundColor: 'pink',
                                       data: data.ETI,
                                       borderColor: 'pink',
@@ -731,7 +731,7 @@ $(document).ready(function (){
                                   }
 
                                   var PETC = {
-                                      label: 'Punt.EDUCACION TECNICA O TECNOLOGICA COMPLETA',
+                                      label: 'Punt.Promedio EDUCACION TECNICA O TECNOLOGICA COMPLETA',
                                       backgroundColor: 'purple',
                                       data: data.ETC,
                                       borderColor: 'purple',
@@ -741,7 +741,7 @@ $(document).ready(function (){
                                   }
 
                                   var PEPI = {
-                                      label: 'Punt.EDUCACION PROFECIONAL INCOMPLETA',
+                                      label: 'Punt.Promedio EDUCACION PROFECIONAL INCOMPLETA',
                                       backgroundColor: 'orange',
                                       data: data.EPI,
                                       borderColor: 'orange',
@@ -751,7 +751,7 @@ $(document).ready(function (){
                                   }
 
                                   var PEPC = {
-                                      label: 'Punt.EDUCACION PROFECIONAL COMPLETA',
+                                      label: 'Punt.Promedio EDUCACION PROFECIONAL COMPLETA',
                                       backgroundColor: 'violet',
                                       data: data.EPC,
                                       borderColor: 'violet',
@@ -761,7 +761,7 @@ $(document).ready(function (){
                                   }
 
                                   var Ppostgrado = {
-                                      label: 'Punt.POSTGRADO',
+                                      label: 'Punt.Promedio POSTGRADO',
                                       backgroundColor: 'gray',
                                       data: data.postgrado,
                                       borderColor: 'gray',
@@ -771,7 +771,7 @@ $(document).ready(function (){
                                   }
 
                                   var Pnosabe = {
-                                      label: 'Punt.NO SABE',
+                                      label: 'Punt.Promedio NO SABE',
                                       backgroundColor: 'black',
                                       data: data.nosabe,
                                       borderColor: 'gray',
@@ -862,7 +862,7 @@ $(document).ready(function (){
                                                   // }
                                                   scaleLabel: {
                                                       display: true,
-                                                      labelString: 'Puntaje'
+                                                      labelString: 'Puntaje Promedio'
                                                   }
                                               }]
                                           },
@@ -888,11 +888,13 @@ $(document).ready(function (){
                                     var graph=document.getElementById("grafic-gest");
                                     var btn=document.getElementById("btn_resetZoom");
                                     var tb=document.getElementById("container");
+                                    var tbd=document.getElementById("btn_download");
                                     if(ban==1){
 
                                         graph.style.display='none';
                                         btn.style.display='none';
                                         tb.style.display='block';
+                                        tbd.style.display='none';
                                         const tableContainer = document.getElementById('container');
                                         const xAxis = grafica.data.labels;
                                         const yAxis = grafica.data.datasets;
@@ -938,6 +940,7 @@ $(document).ready(function (){
                                         graph.style.display='block';
                                         btn.style.display='block';
                                         tb.style.display='none';
+                                        tbd.style.display='block';
                                     }
 
                               }

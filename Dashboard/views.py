@@ -13,7 +13,7 @@ from django.contrib.auth.models import Group
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, TemplateView
-from django.db.models import Avg, Count, Sum, Q
+from django.db.models import Avg, Count, Sum, Q, Func
 from django.http import JsonResponse, HttpResponse  # libreria para manejar json
 
 from Dashboard.forms import CreateUserForm
@@ -28,6 +28,9 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+class Round(Func):
+ function = 'ROUND'
+ template='%(function)s(%(expressions)s, 2)'
 
 # Create your views here.
 @login_required(login_url='login')
@@ -641,7 +644,7 @@ def Gestion(request):
     ano = request.GET['ano']
     if (ano == "TODOS"):
         if (message == "TODOS"):
-            result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion', 'id_tiempo__ano').annotate(prom=Avg(puntaje),
+            result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion', 'id_tiempo__ano').annotate(prom=Round(Avg(puntaje)),
                                                                                            conta=Count(
                                                                                                puntaje)).order_by(
                 'id_lugar__cole_mcpio_ubicacion')
@@ -651,12 +654,12 @@ def Gestion(request):
                 contador.append(entry['conta'])
         else:
             if (inst == "General"):
-                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede', 'id_tiempo__ano').annotate(prom=Avg(puntaje),
+                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede', 'id_tiempo__ano').annotate(prom=Round(Avg(puntaje)),
                                                                                                  conta=Count(
                                                                                                      puntaje)).filter(
                     id_lugar__cole_mcpio_ubicacion=message).order_by('id_lugar__cole_mcpio_ubicacion')
             else:
-                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
+                result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Round(Avg(puntaje)),
                                                                                                  conta=Count(
                                                                                                      puntaje)).filter(
                     id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by('id_lugar__cole_mcpio_ubicacion')
@@ -666,7 +669,7 @@ def Gestion(request):
                 contador.append(entry['conta'])
     else:
             if (message == "TODOS"):
-                result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg(puntaje),
+                result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Round(Avg(puntaje)),
                                                                                                conta=Count(
                                                                                                    puntaje)).filter(
                     id_tiempo__ano=ano).order_by('id_lugar__cole_mcpio_ubicacion')
@@ -676,12 +679,12 @@ def Gestion(request):
                     contador.append(entry['conta'])
             else:
                 if (inst == "General"):
-                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
+                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Round(Avg(puntaje)),
                                                                                                      conta=Count(
                                                                                                          puntaje)).filter(
                         id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano).order_by('id_lugar__cole_mcpio_ubicacion')
                 else:
-                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Avg(puntaje),
+                    result = FactSaber11.objects.values('id_institucion__cole_nombre_sede').annotate(prom=Round(Avg(puntaje)),
                                                                                                      conta=Count(
                                                                                                          puntaje)).filter(
                         id_lugar__cole_mcpio_ubicacion=message, id_tiempo__ano=ano,

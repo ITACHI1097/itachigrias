@@ -364,6 +364,10 @@ $(document).ready(function (){
                                     }
                                 }
                             }
+                            if(graf=="tabla"){
+                                graf="bar";
+                                ban=1;
+                            }
                             window.grafica = new Chart(ctx,{
                               type: graf,
                               data: dato,
@@ -405,9 +409,16 @@ $(document).ready(function (){
                                 }
                               }
                             });
-                            if(graf=="Tabla"){
-                                var graph=document.getElementById("grafic-gest");
+                            var graph=document.getElementById("grafic-gest");
+                            var btn=document.getElementById("btn_resetZoom");
+                            var tb=document.getElementById("container");
+                            var tbd=document.getElementById("btn_download");
+                            if(ban==1){
+
                                 graph.style.display='none';
+                                btn.style.display='none';
+                                tb.style.display='block';
+                                tbd.style.display='none';
                                 const tableContainer = document.getElementById('container');
                                 const xAxis = grafica.data.labels;
                                 const yAxis = grafica.data.datasets;
@@ -430,16 +441,30 @@ $(document).ready(function (){
                                     return memo;
                                 }, '');
 
-                                const table = ` <div class="card shadow mb-4">
-                                                        <div class="card-body">
-                                                            <div class="table-responsive">
-                                                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">${tableHeader}${tableBody}</table>
+                                const table = ` <div class="container-fluid">
+                                                    <div class="card shadow mb-4">
+                                                            <div class="card-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="1"><thead>${tableHeader}</thead><tbody>${tableBody}</tbody></table>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>`;
+                                                    <script>
+                                                        $('#dataTable').DataTable({
+                                                            "pagingType": "full_numbers"
+                                                        });
+                                                    </script>
+                                                </div>`;
+
 
                                 tableContainer.innerHTML = table;
+                                ban=0;
 
+                            }else{
+                                graph.style.display='block';
+                                btn.style.display='block';
+                                tb.style.display='none';
+                                tbd.style.display='block';
                             }
 
                         }
