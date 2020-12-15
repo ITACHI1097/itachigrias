@@ -206,7 +206,7 @@ def subir(request):
 
             # df.columns = [c.lower() for c in df.columns]
             from sqlalchemy import create_engine
-            engine = create_engine('postgresql://postgres:1234@localhost:5432/icfes-1')
+            engine = create_engine('postgresql://postgres:1234@localhost:5432/icfes-1') #revisar para coneccion en amazon web service
 
             df.to_sql("table_temp", engine)
             try:

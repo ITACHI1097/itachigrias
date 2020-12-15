@@ -3,12 +3,17 @@
 {% block head %}
     <script src="{% static 'js/general.js' %}"></script>
     <script src="http://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
+    <link href="https://cdn.webdatarocks.com/latest/webdatarocks.min.css" rel="stylesheet"> <script src="https://cdn.webdatarocks.com/latest/webdatarocks.toolbar.min.js"></script> <script src="https://cdn.webdatarocks.com/latest/webdatarocks.js"></script>
+
     <style>
 	canvas {
 		-moz-user-select: none;
 		-webkit-user-select: none;
 		-ms-user-select: none;
 	}
+    tr { display: block; float: left; }
+    th, td { display: block;}
+
 	</style>
 {% endblock %}
 {% block body %}
@@ -37,6 +42,7 @@
         <select id="graf" name="graf" class="form-control col-md-5 select2">
           <option value="tabla">Tabla</option>
           <option value="bar">Barras</option>
+          <option value="horizontalBar">Barras Horizontales</option>
           <option value="pie">Pastel</option>
           <option value="line">Linea</option>
           <option value="radar">Radar</option>
@@ -153,8 +159,12 @@
             <canvas id="grafic-gest" data-url="{% url 'Dashboard' %}" width="450" height="200" ></canvas>
               <div id='container'></div>
           </div>
+            <div id="pivot-table-container"></div>
         </div>
+
+
     </div>
+
     <script>
         $(function (){
            $('.select2').select2({

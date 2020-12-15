@@ -437,7 +437,7 @@ $(document).ready(function (){
                                         xAxis.reduce((memo, entry) => {
                                             memo += `<th>${entry}</th>`;
                                             return memo;
-                                        }, '<th>METRICAS</th>')
+                                        }, '<th>METRICAS:</th>')
                                     }</tr>`;
 
                                     const tableBody = yAxis.reduce((memo, entry) => {
@@ -450,12 +450,19 @@ $(document).ready(function (){
 
                                         return memo;
                                     }, '');
-
+                                    console.log(data);
                                     const table = ` <div class="container-fluid">
                                                         <div class="card shadow mb-4">
                                                                 <div class="card-body">
                                                                     <div class="table-responsive">
-                                                                        <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="1"><thead>${tableHeader}</thead><tbody>${tableBody}</tbody></table>
+                                                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                                            <thead>
+                                                                                ${tableHeader}
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                ${tableBody}
+                                                                            </tbody>
+                                                                        </table>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -469,6 +476,46 @@ $(document).ready(function (){
 
                                     tableContainer.innerHTML = table;
                                     ban=0;
+
+                                     // var tbl = $('#dataTable');
+                                     // var tbody = tbl.find('tbody');
+                                     // var oldWidth = tbody.find('tr:first td').length;
+                                     // var oldHeight = tbody.find('tr').length;
+                                     // var newWidth = oldHeight;
+                                     // var newHeight = oldWidth;
+                                     // var thead = tbl.find('thead');
+                                     // var oldWidthH = thead.find('tr:first th').length;
+                                     // var oldHeightH = thead.find('tr').length;
+                                     // var newWidthH = oldHeightH;
+                                     // var newHeightH = oldWidthH;
+                                     //
+                                     // var jqOldCells = tbody.find('td');
+                                     //
+                                     // var newTbody = $("<tbody></tbody>");
+                                     // for(var y=0; y<newHeight; y++)
+                                     // {
+                                     //  var newRow = $("<tr></tr>");
+                                     //  for(var x=0; x<newWidth; x++)
+                                     //  {
+                                     //   newRow.append(jqOldCells.eq((oldWidth*x)+y));
+                                     //  }
+                                     //  newTbody.append(newRow);
+                                     // }
+                                     //
+                                     // tbody.replaceWith(newTbody);
+                                     //
+                                     // var jqOldCellsH = thead.find('th');
+                                     // var newThead = $("<thead></thead>");
+                                     // for (var y=0; y<newHeightH; y++)
+                                     // {
+                                     //     var newRowH = $("<tr></tr>");
+                                     //     for (var x=0; x<newWidthH; x++)
+                                     //     {
+                                     //         newRowH.append(jqOldCellsH.eq((oldWidthH*x)+y));
+                                     //     }
+                                     //     newThead.append(newRowH);
+                                     // }
+                                     // thead.replaceWith(newThead);
 
                                   }else{
                                     graph.style.display='block';
@@ -868,14 +915,14 @@ $(document).ready(function (){
                                           },
                                           pan: {
                                               enabled: true,
-                                              mode: "x",
+                                              mode: "xy",
                                               speed: 10,
                                               threshold: 10
                                           },
                                           zoom: {
                                               enabled: true,
                                               drag: false,
-                                              mode: "x",
+                                              mode: "xy",
                                               speed: 0.01,
                                               // sensitivity: 0.1,
                                               limits: {
@@ -903,7 +950,7 @@ $(document).ready(function (){
                                             xAxis.reduce((memo, entry) => {
                                                 memo += `<th>${entry}</th>`;
                                                 return memo;
-                                            }, '<th>METRICAS</th>')
+                                            }, '<th>METRICAS:</th>')
                                         }</tr>`;
 
                                         const tableBody = yAxis.reduce((memo, entry) => {
@@ -917,11 +964,11 @@ $(document).ready(function (){
                                             return memo;
                                         }, '');
 
-                                        const table = ` <div class="container-fluid">
+                                        const table = ` <div id="tabla" class="container-fluid">
                                                             <div class="card shadow mb-4">
                                                                     <div class="card-body">
                                                                         <div class="table-responsive">
-                                                                            <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="1"><thead>${tableHeader}</thead><tbody>${tableBody}</tbody></table>
+                                                                            <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0"><thead>${tableHeader}</thead><tbody>${tableBody}</tbody></table>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -944,6 +991,49 @@ $(document).ready(function (){
                                     }
 
                               }
+
+                            // var pivot = new WebDataRocks({
+                            //     container: "#pivot-table-container",
+                            //     toolbar: true,
+                            //     report: {
+                            //         dataSource: {
+                            //             data: "{% url 'punt-anio' %}",
+                            //         },
+                            //         // slice: {
+                            //         //     // "reportFilters": [{
+                            //         //     //     "uniqueName": "Date.Month"
+                            //         //     // }],
+                            //         //     rows: [{
+                            //         //             uniqueName: "labels"
+                            //         //         },
+                            //         //         // {
+                            //         //         //     "uniqueName": "Segment"
+                            //         //         // }
+                            //         //     ],
+                            //         //     columns: [{
+                            //         //             uniqueName: "data"
+                            //         //         },
+                            //         //         // {
+                            //         //         //     "uniqueName": "Date.Year"
+                            //         //         // }
+                            //         //     ],
+                            //         //     // "measures": [{
+                            //         //     //     "uniqueName": "Profit",
+                            //         //     //     "aggregation": "sum"
+                            //         //     // }]
+                            //         // }
+                            //     }
+                            // });
+                            // function getData(){
+                            //     return [
+                            //         {
+                            //             labels:data.labels
+                            //         },
+                            //         {
+                            //             data:data.datasets
+                            //         }
+                            //     ]
+                            // }
 
                         }
                     })
