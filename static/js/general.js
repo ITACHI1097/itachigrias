@@ -396,6 +396,11 @@ $(document).ready(function (){
                                               yAxes: [{
                                                   id: 'A',
                                                   position: 'left',
+                                                  ticks: {
+                                                    min: 0,
+
+                                                    //callback: function(value) { return value + "%" }
+                                                  },
                                                   scaleLabel: {
                                                       display: true,
                                                       labelString: (metrica == "Puntaje") ? 'Puntaje Promedio' : 'Cantidad'
@@ -895,6 +900,11 @@ $(document).ready(function (){
 
                                                   // type: 'linear',
                                                   position: 'left',
+                                                  ticks: {
+                                                    min: 0,
+
+                                                    //callback: function(value) { return value + "%" }
+                                                  },
                                                   scaleLabel: {
                                                       display: true,
                                                       labelString: 'Cantidad'

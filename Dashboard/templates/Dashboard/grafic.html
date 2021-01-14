@@ -43,7 +43,14 @@
                     </div>
                     <div id="collapseA" class="collapse show" aria-labelledby="headingA" data-parent="#accordionExample">
                         <div class="card-body">
-                            <canvas id="lect-criticC" data-url="{% url 'lect-CriticC' %}" width="800" height="450" ></canvas>
+                            <select id="op" name="op" class="form-control col-md-4 select2" style="float: right;" onchange="op();">
+                              <option value="grafica">Grafica</option>
+                              <option value="tabla">Tabla</option>
+                            </select>
+                            <button class="btn btn-outline-primary" id="btn_resetZoom" onclick="resetzoom();">Reset Zoom</button>
+
+                            <canvas id="graf" data-url="{% url 'lect-CriticC' %}" width="800" height="450" ></canvas>
+                            <div id='container' style="display: none;"></div>
                         </div>
                     </div>
                 </div>
@@ -55,7 +62,13 @@
                     </div>
                     <div id="collapseB" class="collapse" aria-labelledby="headingB" data-parent="#accordionExample">
                         <div class="card-body">
+                            <select id="opestu_anio" name="opestu_anio" class="form-control col-md-4 select2" style="float: right;" onchange="opestu_anio();">
+                              <option value="grafica">Grafica</option>
+                              <option value="tabla">Tabla</option>
+                            </select>
+                            <button class="btn btn-outline-primary" id="btn_resetZoom" onclick="window.estuanio.resetZoom();">Reset Zoom</button>
                             <canvas id="estu-anio" data-url="{% url 'estu-anio' %}" width="800" height="450" ></canvas>
+                            <div id='containerestu_anio' style="display: none;"></div>
                         </div>
                     </div>
                 </div>
@@ -67,19 +80,49 @@
                     </div>
                     <div id="collapseC" class="collapse" aria-labelledby="headingC" data-parent="#accordionExample">
                         <div class="card-body">
+                            <select id="opestu_edad" name="opestu_edad" class="form-control col-md-4 select2" style="float: right;" onchange="opestu_edad();">
+                              <option value="grafica">Grafica</option>
+                              <option value="tabla">Tabla</option>
+                            </select>
+                            <button class="btn btn-outline-primary" id="btn_resetZoom" onclick="window.estu_edad.resetZoom();">Reset Zoom</button>
                             <canvas id="estu-edad" data-url="{% url 'estu-edad' %}" width="800" height="450" ></canvas>
+                            <div id='containerestu_edad' style="display: none;"></div>
                         </div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header" id="headingD">
                         <h2 class="mb-0">
-                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseD"><i class="fa fa-plus"></i> Puntaje global y numero de estudiantes por municipio</button>
+                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseD"><i class="fa fa-plus"></i> Número de estudiantes que presentaron la prueba de sociales y ciudadanas, por rango de edad y desempeño</button>
                         </h2>
                     </div>
                     <div id="collapseD" class="collapse" aria-labelledby="headingD" data-parent="#accordionExample">
                         <div class="card-body">
+                            <select id="opciu_edad" name="opciu_edad" class="form-control col-md-4 select2" style="float: right;" onchange="opciu_edad();">
+                              <option value="grafica">Grafica</option>
+                              <option value="tabla">Tabla</option>
+                            </select>
+                            <button class="btn btn-outline-primary" id="btn_resetZoom" onclick="window.ciu_edad.resetZoom();">Reset Zoom</button>
                             <canvas id="desemp-ciu-edad" data-url="{% url 'desemp-ciu-edad' %}" width="800" height="450" ></canvas>
+                            <div id='containerciu_edad' style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingE">
+                        <h2 class="mb-0">
+                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseE"><i class="fa fa-plus"></i> Puntaje Global por Municipio y Año</button>
+                        </h2>
+                    </div>
+                    <div id="collapseE" class="collapse" aria-labelledby="headingE" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <select id="opmun_ano" name="opmun_ano" class="form-control col-md-4 select2" style="float: right;" onchange="opmun_ano();">
+                              <option value="grafica">Grafica</option>
+                              <option value="tabla">Tabla</option>
+                            </select>
+                            <button class="btn btn-outline-primary" id="btn_resetZoom" onclick="window.mun_ano.resetZoom();">Reset Zoom</button>
+                            <canvas id="global-mun-ano" data-url="{% url 'global-mun-ano' %}" width="800" height="450" ></canvas>
+                            <div id='containermun_ano' style="display: none;"></div>
                         </div>
                     </div>
                 </div>

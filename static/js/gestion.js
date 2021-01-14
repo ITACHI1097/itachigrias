@@ -173,6 +173,11 @@ $(document).ready(function (){
                                 },
                                 scales: {
                                      yAxes: [{
+                                          ticks: {
+                                                    min: 0,
+
+                                                    //callback: function(value) { return value + "%" }
+                                                  },
                                           scaleLabel: {
                                               display: true,
                                               labelString: 'Puntaje'
