@@ -31,6 +31,9 @@
         {% block body %}
         <body id="page-top" onload="cargarFunciones()"></body>
         {% endblock %}
+        {% block titulo %}
+            <h1>Cubos</h1>
+        {% endblock %}
         {% block content %}
         <div class="container-fluid" ></div>
         <div class="bs-example">
@@ -38,17 +41,16 @@
                 <div class="card">
                     <div class="card-header" id="headingA">
                         <h2 class="mb-0">
-                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseA"><i class="fa fa-plus"></i> Puntaje lectura critica por municipio</button>
+                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseA"><i class="fa fa-plus"></i> Puntaje lectura critica por municipio y año</button>
                         </h2>
                     </div>
-                    <div id="collapseA" class="collapse show" aria-labelledby="headingA" data-parent="#accordionExample">
+                    <div id="collapseA" class="collapse" aria-labelledby="headingA" data-parent="#accordionExample">
                         <div class="card-body">
                             <select id="op" name="op" class="form-control col-md-4 select2" style="float: right;" onchange="op();">
                               <option value="grafica">Grafica</option>
                               <option value="tabla">Tabla</option>
                             </select>
-                            <button class="btn btn-outline-primary" id="btn_resetZoom" onclick="resetzoom();">Reset Zoom</button>
-
+                            <button class="btn btn-outline-primary" id="btn_resetZoom" onclick="window.grafica.resetZoom();">Reset Zoom</button>
                             <canvas id="graf" data-url="{% url 'lect-CriticC' %}" width="800" height="450" ></canvas>
                             <div id='container' style="display: none;"></div>
                         </div>
@@ -75,7 +77,7 @@
                 <div class="card">
                     <div class="card-header" id="headingC">
                         <h2 class="mb-0">
-                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseC"><i class="fa fa-plus"></i> Número de estudiantes por rangos de edades</button>
+                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseC"><i class="fa fa-plus"></i> Porcentajes de estudiantes por rangos de edades del 2012 al {{ ano }}</button>
                         </h2>
                     </div>
                     <div id="collapseC" class="collapse" aria-labelledby="headingC" data-parent="#accordionExample">
@@ -93,7 +95,7 @@
                 <div class="card">
                     <div class="card-header" id="headingD">
                         <h2 class="mb-0">
-                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseD"><i class="fa fa-plus"></i> Número de estudiantes que presentaron la prueba de sociales y ciudadanas, por rango de edad y desempeño</button>
+                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseD"><i class="fa fa-plus"></i> Número de estudiantes que presentaron la prueba de sociales y ciudadanas, por rango de edad y desempeño del 2012 al {{ ano }}</button>
                         </h2>
                     </div>
                     <div id="collapseD" class="collapse" aria-labelledby="headingD" data-parent="#accordionExample">

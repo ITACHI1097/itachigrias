@@ -91,7 +91,20 @@ def obando(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin','usuario'])
 def grafic(request):
-    return render(request, "Dashboard/grafic.html")
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select max(ano) from dim_tiempo;"
+    cur.execute(sql)
+    row = cur.fetchone()
+    cur.close()
+    conn.close()
+    ano = row[0]
+    print(ano)
+    context = {
+        'ano': ano,
+
+    }
+    return render(request, "Dashboard/grafic.html", context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
@@ -650,7 +663,7 @@ def Gestion(request):
             result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion', 'id_tiempo__ano').annotate(prom=Round(Avg(puntaje)),
                                                                                            conta=Count(
                                                                                                puntaje)).order_by(
-                'id_lugar__cole_mcpio_ubicacion')
+                'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
             for entry in result:
                 label.append(entry['id_lugar__cole_mcpio_ubicacion']+ " : " + entry['id_tiempo__ano'])  # guarda nombre del departamento ya agrupado
                 dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por municipio)
@@ -660,12 +673,12 @@ def Gestion(request):
                 result = FactSaber11.objects.values('id_institucion__cole_nombre_sede', 'id_tiempo__ano').annotate(prom=Round(Avg(puntaje)),
                                                                                                  conta=Count(
                                                                                                      puntaje)).filter(
-                    id_lugar__cole_mcpio_ubicacion=message).order_by('id_lugar__cole_mcpio_ubicacion')
+                    id_lugar__cole_mcpio_ubicacion=message).order_by('id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
             else:
                 result = FactSaber11.objects.values('id_institucion__cole_nombre_sede', 'id_tiempo__ano').annotate(prom=Round(Avg(puntaje)),
                                                                                                  conta=Count(
                                                                                                      puntaje)).filter(
-                    id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by('id_lugar__cole_mcpio_ubicacion')
+                    id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by('id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
             for entry in result:
                 label.append(entry['id_institucion__cole_nombre_sede']+ " : " + entry['id_tiempo__ano'])  # guarda nombre del departamento ya agrupado
                 dato.append(entry['prom'])  # guarda promedio de cada grupo creado(por inst)
@@ -801,7 +814,7 @@ def GestionC(request):
                 result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion', 'id_tiempo__ano').annotate(
                     conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),
                     conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).order_by(
-                    'id_lugar__cole_mcpio_ubicacion')
+                    'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                 for entry in result:
                     label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
                     Cfemenino.append(entry['conta1'])
@@ -813,7 +826,7 @@ def GestionC(request):
                         conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
                         conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
                         conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="MALA"))).order_by(
-                        'id_lugar__cole_mcpio_ubicacion')
+                        'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                     for entry in result:
                         label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
                         Cticbuena.append(entry['conta1'])
@@ -831,7 +844,7 @@ def GestionC(request):
                                          filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
                             conta3=Count('id_estudiante',
                                          filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).order_by(
-                            'id_lugar__cole_mcpio_ubicacion')
+                            'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                         for entry in result:
                             label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
                             CHmedio.append(entry['conta1'])
@@ -849,7 +862,7 @@ def GestionC(request):
                                 conta4=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
                                 conta5=Count('id_estudiante',
                                              filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).order_by(
-                                'id_tiempo__ano', 'id_lugar__cole_mcpio_ubicacion')
+                                'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                             for entry in result:
                                 label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
                                 Ce17.append(entry['conta1'])
@@ -870,7 +883,7 @@ def GestionC(request):
                                     conta5=Count('id_estudiante', filter=Q(id_estudiante__fami_estrato_vivienda="5")),
                                     conta6=Count('id_estudiante',
                                                  filter=Q(id_estudiante__fami_estrato_vivienda="6"))).order_by(
-                                    'id_lugar__cole_mcpio_ubicacion')
+                                    'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                                 for entry in result:
                                     label.append(
                                         entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
@@ -916,7 +929,7 @@ def GestionC(request):
                                         conta11=Count('id_estudiante',
                                                       filter=Q(id_estudiante__fami_max_nivel_educa_padres="NO SABE"))
                                     ).order_by(
-                                        'id_lugar__cole_mcpio_ubicacion')
+                                        'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                                     for entry in result:
                                         label.append(
                                             entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
@@ -938,7 +951,7 @@ def GestionC(request):
                     result = FactSaber11.objects.values('id_institucion__cole_nombre_sede', 'id_tiempo__ano').annotate(
                         conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),
                         conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(
-                        id_lugar__cole_mcpio_ubicacion=message).order_by('id_institucion__cole_nombre_sede')
+                        id_lugar__cole_mcpio_ubicacion=message).order_by('id_institucion__cole_nombre_sede','id_tiempo__ano')
                     for entry in result:
                         label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
                         Cfemenino.append(entry['conta1'])
@@ -952,7 +965,7 @@ def GestionC(request):
                             conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
                             conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="MALA"))).filter(
                             id_lugar__cole_mcpio_ubicacion=message).order_by(
-                            'id_institucion__cole_nombre_sede')
+                            'id_institucion__cole_nombre_sede','id_tiempo__ano')
                         for entry in result:
                             label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
                             Cticbuena.append(entry['conta1'])
@@ -970,7 +983,7 @@ def GestionC(request):
                                 conta3=Count('id_estudiante',
                                              filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).filter(
                                 id_lugar__cole_mcpio_ubicacion=message).order_by(
-                                'id_institucion__cole_nombre_sede')
+                                'id_institucion__cole_nombre_sede','id_tiempo__ano')
                             for entry in result:
                                 label.append(
                                     entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
@@ -990,7 +1003,7 @@ def GestionC(request):
                                     conta5=Count('id_estudiante',
                                                  filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).filter(
                                     id_lugar__cole_mcpio_ubicacion=message).order_by(
-                                    'id_tiempo__ano', 'id_institucion__cole_nombre_sede')
+                                    'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                 for entry in result:
                                     label.append(
                                         entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
@@ -1017,7 +1030,7 @@ def GestionC(request):
                                         conta6=Count('id_estudiante',
                                                      filter=Q(id_estudiante__fami_estrato_vivienda="6"))).filter(
                                         id_lugar__cole_mcpio_ubicacion=message).order_by(
-                                        'id_institucion__cole_nombre_sede')
+                                        'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                     for entry in result:
                                         label.append(
                                             entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
@@ -1066,7 +1079,7 @@ def GestionC(request):
                                                               id_estudiante__fami_max_nivel_educa_padres="NO SABE"))
                                         ).filter(
                                             id_lugar__cole_mcpio_ubicacion=message).order_by(
-                                            'id_institucion__cole_nombre_sede')
+                                            'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                         for entry in result:
                                             label.append(
                                                 entry['id_institucion__cole_nombre_sede'] + " : " + entry[
@@ -1089,7 +1102,7 @@ def GestionC(request):
                         conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),
                         conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(
                         id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
-                        'id_institucion__cole_nombre_sede')
+                        'id_institucion__cole_nombre_sede','id_tiempo__ano')
                     for entry in result:
                         label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
                         Cfemenino.append(entry['conta1'])
@@ -1102,7 +1115,7 @@ def GestionC(request):
                             conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
                             conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="MALA"))).filter(
                             id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
-                            'id_institucion__cole_nombre_sede')
+                            'id_institucion__cole_nombre_sede','id_tiempo__ano')
                         for entry in result:
                             label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
                             Cticbuena.append(entry['conta1'])
@@ -1120,7 +1133,7 @@ def GestionC(request):
                                 conta3=Count('id_estudiante',
                                              filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).filter(
                                 id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
-                                'id_institucion__cole_nombre_sede')
+                                'id_institucion__cole_nombre_sede','id_tiempo__ano')
                             for entry in result:
                                 label.append(
                                     entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
@@ -1141,7 +1154,7 @@ def GestionC(request):
                                                  filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).filter(
                                     id_lugar__cole_mcpio_ubicacion=message,
                                     id_institucion__cole_nombre_sede=inst).order_by(
-                                    'id_tiempo__ano', 'id_institucion__cole_nombre_sede')
+                                    'id_tiempo__ano', 'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                 for entry in result:
                                     label.append(
                                         entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
@@ -1169,7 +1182,7 @@ def GestionC(request):
                                                      filter=Q(id_estudiante__fami_estrato_vivienda="6"))).filter(
                                         id_lugar__cole_mcpio_ubicacion=message,
                                         id_institucion__cole_nombre_sede=inst).order_by(
-                                        'id_institucion__cole_nombre_sede')
+                                        'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                     for entry in result:
                                         label.append(
                                             entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
@@ -1219,7 +1232,7 @@ def GestionC(request):
                                         ).filter(
                                             id_lugar__cole_mcpio_ubicacion=message,
                                             id_institucion__cole_nombre_sede=inst).order_by(
-                                            'id_institucion__cole_nombre_sede')
+                                            'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                         for entry in result:
                                             label.append(
                                                 entry['id_institucion__cole_nombre_sede'] + " : " + entry[
@@ -1839,17 +1852,168 @@ def tot_est(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin','usuario'])
 def critic_chart(request):  # vista donde se maneja la grafica y donde se fabrica el json
-    label = []
-    data = []
-    result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Avg('punt_lec_crit')).order_by(
-        '-prom')  # consulta que agrupa y saca promedio de lo agrupado con llaves foraneas
-    for entry in result:  # cada vez que obtenga resultado de la consulta
-        label.append(entry['id_lugar__cole_mcpio_ubicacion'])  # guarda nombre del departamento ya agrupado
-        data.append(entry['prom'])  # guarda promedio de cada grupo creado(por departamento)
+    # label = []
+    # data = []
+    # result = FactSaber11.objects.values('id_lugar__cole_mcpio_ubicacion').annotate(prom=Round(Avg('punt_lec_crit'))).order_by(
+    #     '-prom')  # consulta que agrupa y saca promedio de lo agrupado con llaves foraneas
+    # for entry in result:  # cada vez que obtenga resultado de la consulta
+    #     label.append(entry['id_lugar__cole_mcpio_ubicacion'])  # guarda nombre del departamento ya agrupado
+    #     data.append(entry['prom'])  # guarda promedio de cada grupo creado(por departamento)
+    #
+    # return JsonResponse(data={  # manda en tipo json los resultados
+    #     'labels': label,
+    #     'data': data,
+    # })
 
-    return JsonResponse(data={  # manda en tipo json los resultados
+    label = []
+    punt2012 = []
+    punt2013 = []
+    punt2014 = []
+    punt2015 = []
+    punt2016 = []
+    punt2017 = []
+    punt2018 = []
+    punt2019 = []
+    punt2020 = []
+    punt2021 = []
+    punt2022 = []
+    punt2023 = []
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2019' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        label.append(r[0])
+        punt2019.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2012' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2012.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2013' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2013.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2014' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2014.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2015' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2015.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2016' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2016.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2017' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2017.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2018' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2018.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2020' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2020.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2021' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2021.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2022' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2022.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2023' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2023.append(r[1])
+
+    return JsonResponse(data={
         'labels': label,
-        'data': data,
+        'punt2012': punt2012,
+        'punt2013': punt2013,
+        'punt2014': punt2014,
+        'punt2015': punt2015,
+        'punt2016': punt2016,
+        'punt2017': punt2017,
+        'punt2018': punt2018,
+        'punt2019': punt2019,
+        'punt2020': punt2020,
+        'punt2021': punt2021,
+        'punt2022': punt2022,
+        'punt2023': punt2023,
     })
 
 

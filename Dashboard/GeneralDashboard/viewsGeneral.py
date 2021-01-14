@@ -165,7 +165,7 @@ def Dashboard(request):
                     prom2=Round(Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO"))),
                     conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),
                     conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).order_by(
-                    'id_lugar__cole_mcpio_ubicacion')
+                    'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                 for entry in result:
                     label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
                     femenino.append(entry['prom1'])
@@ -182,7 +182,7 @@ def Dashboard(request):
                         conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="BUENA")),
                         conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
                         conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="MALA"))).order_by(
-                        'id_lugar__cole_mcpio_ubicacion')
+                        'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                     for entry in result:
                         label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
                         ticbuena.append(entry['prom1'])
@@ -203,7 +203,7 @@ def Dashboard(request):
                             conta1=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO MEDIO")),
                             conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vive="HACINAMIENTO CRITICO")),
                             conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).order_by(
-                            'id_lugar__cole_mcpio_ubicacion')
+                            'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                         for entry in result:
                             label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
                             Hmedio.append(entry['prom1'])
@@ -228,7 +228,7 @@ def Dashboard(request):
                                 conta3=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="20 A 28")),
                                 conta4=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="MAYORES DE 28")),
                                 conta5=Count('id_estudiante', filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).order_by(
-                                'id_tiempo__ano','id_lugar__cole_mcpio_ubicacion')
+                                'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                             for entry in result:
                                 label.append(entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
                                 e17.append(entry['prom1'])
@@ -259,7 +259,7 @@ def Dashboard(request):
                                     conta4=Count('id_estudiante', filter=Q(id_estudiante__fami_estrato_vivienda="4")),
                                     conta5=Count('id_estudiante', filter=Q(id_estudiante__fami_estrato_vivienda="5")),
                                     conta6=Count('id_estudiante', filter=Q(id_estudiante__fami_estrato_vivienda="6"))).order_by(
-                                    'id_lugar__cole_mcpio_ubicacion')
+                                    'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                                 for entry in result:
                                     label.append(
                                         entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
@@ -314,7 +314,7 @@ def Dashboard(request):
                                         conta11=Count('id_estudiante',
                                                      filter=Q(id_estudiante__fami_max_nivel_educa_padres="NO SABE"))
                                         ).order_by(
-                                        'id_lugar__cole_mcpio_ubicacion')
+                                        'id_lugar__cole_mcpio_ubicacion','id_tiempo__ano')
                                     for entry in result:
                                         label.append(
                                             entry['id_lugar__cole_mcpio_ubicacion'] + " : " + entry['id_tiempo__ano'])
@@ -349,7 +349,7 @@ def Dashboard(request):
                         prom2=Round(Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO"))),
                         conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),
                         conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(
-                        id_lugar__cole_mcpio_ubicacion=message).order_by('id_institucion__cole_nombre_sede')
+                        id_lugar__cole_mcpio_ubicacion=message).order_by('id_institucion__cole_nombre_sede','id_tiempo__ano')
                     for entry in result:
                         label.append(entry['id_institucion__cole_nombre_sede']+" : "+entry['id_tiempo__ano'])
                         femenino.append(entry['prom1'])
@@ -368,7 +368,7 @@ def Dashboard(request):
                             conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
                             conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="MALA"))).filter(
                             id_lugar__cole_mcpio_ubicacion=message).order_by(
-                            'id_institucion__cole_nombre_sede')
+                            'id_institucion__cole_nombre_sede','id_tiempo__ano')
                         for entry in result:
                             label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
                             ticbuena.append(entry['prom1'])
@@ -392,7 +392,7 @@ def Dashboard(request):
                                 conta3=Count('id_estudiante',
                                              filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).filter(
                                 id_lugar__cole_mcpio_ubicacion=message).order_by(
-                                'id_institucion__cole_nombre_sede')
+                                'id_institucion__cole_nombre_sede','id_tiempo__ano')
                             for entry in result:
                                 label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
                                 Hmedio.append(entry['prom1'])
@@ -419,7 +419,7 @@ def Dashboard(request):
                                     conta5=Count('id_estudiante',
                                                  filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).filter(
                                     id_lugar__cole_mcpio_ubicacion=message).order_by(
-                                    'id_tiempo__ano', 'id_institucion__cole_nombre_sede')
+                                    'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                 for entry in result:
                                     label.append(
                                         entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
@@ -457,7 +457,7 @@ def Dashboard(request):
                                         conta6=Count('id_estudiante',
                                                      filter=Q(id_estudiante__fami_estrato_vivienda="6"))).filter(
                                         id_lugar__cole_mcpio_ubicacion=message).order_by(
-                                        'id_institucion__cole_nombre_sede')
+                                        'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                     for entry in result:
                                         label.append(
                                             entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
@@ -534,7 +534,7 @@ def Dashboard(request):
                                                               id_estudiante__fami_max_nivel_educa_padres="NO SABE"))
                                             ).filter(
                                             id_lugar__cole_mcpio_ubicacion=message).order_by(
-                                                'id_institucion__cole_nombre_sede')
+                                                'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                         for entry in result:
                                             label.append(
                                                 entry['id_institucion__cole_nombre_sede'] + " : " + entry[
@@ -569,7 +569,7 @@ def Dashboard(request):
                         prom2=Round(Avg(puntaje, filter=Q(id_estudiante__estu_genero="FEMENINO"))),
                         conta1=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="FEMENINO")),
                         conta2=Count('id_estudiante', filter=Q(id_estudiante__estu_genero="MASCULINO"))).filter(
-                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by('id_institucion__cole_nombre_sede')
+                        id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by('id_institucion__cole_nombre_sede','id_tiempo__ano')
                     for entry in result:
                         label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
                         femenino.append(entry['prom1'])
@@ -587,7 +587,7 @@ def Dashboard(request):
                             conta2=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="REGULAR")),
                             conta3=Count('id_estudiante', filter=Q(id_estudiante__eco_condicion_tic="MALA"))).filter(
                             id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
-                            'id_institucion__cole_nombre_sede')
+                            'id_institucion__cole_nombre_sede','id_tiempo__ano')
                         for entry in result:
                             label.append(entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
                             ticbuena.append(entry['prom1'])
@@ -611,7 +611,7 @@ def Dashboard(request):
                                 conta3=Count('id_estudiante',
                                              filter=Q(id_estudiante__eco_condicion_vive="SIN HACINAMIENTO"))).filter(
                                 id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
-                                'id_institucion__cole_nombre_sede')
+                                'id_institucion__cole_nombre_sede','id_tiempo__ano')
                             for entry in result:
                                 label.append(
                                     entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
@@ -639,7 +639,7 @@ def Dashboard(request):
                                     conta5=Count('id_estudiante',
                                                  filter=Q(id_estudiante__estu_rango_edad="MENORES DE 17"))).filter(
                                     id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
-                                    'id_tiempo__ano', 'id_institucion__cole_nombre_sede')
+                                    'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                 for entry in result:
                                     label.append(
                                         entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
@@ -677,7 +677,7 @@ def Dashboard(request):
                                         conta6=Count('id_estudiante',
                                                      filter=Q(id_estudiante__fami_estrato_vivienda="6"))).filter(
                                         id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
-                                        'id_institucion__cole_nombre_sede')
+                                        'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                     for entry in result:
                                         label.append(
                                             entry['id_institucion__cole_nombre_sede'] + " : " + entry['id_tiempo__ano'])
@@ -754,7 +754,7 @@ def Dashboard(request):
                                                               id_estudiante__fami_max_nivel_educa_padres="NO SABE"))
                                         ).filter(
                                             id_lugar__cole_mcpio_ubicacion=message, id_institucion__cole_nombre_sede=inst).order_by(
-                                            'id_institucion__cole_nombre_sede')
+                                            'id_institucion__cole_nombre_sede','id_tiempo__ano')
                                         for entry in result:
                                             label.append(
                                                 entry['id_institucion__cole_nombre_sede'] + " : " + entry[
