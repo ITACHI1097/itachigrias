@@ -17,7 +17,7 @@ $(document).ready(function (){
                             var ctx = $graficGest[0].getContext("2d");
 
                             var masculino = {
-                                label: 'Cantidad Masculino',
+                                label: 'Número de Estudiantes Masculino',
                                 backgroundColor: 'red',
                                 data:data.Cmasculino,
                                 borderColor: 'red',
@@ -27,7 +27,7 @@ $(document).ready(function (){
                             }
 
                             var femenino = {
-                                label: 'Cantidad Femenino',
+                                label: 'Número de Estudiantes Femenino',
                                 backgroundColor: 'blue',
                                 data:data.Cfemenino,
                                 borderColor: 'blue',
@@ -37,7 +37,7 @@ $(document).ready(function (){
                             }
 
                             var ticbuena = {
-                                label: 'Cantidad Buena',
+                                label: 'Número de Estudiantes Buena',
                                 backgroundColor: 'green',
                                 data:data.Cticbuena,
                                 borderColor: 'green',
@@ -47,7 +47,7 @@ $(document).ready(function (){
                             }
 
                             var ticregular = {
-                                label: 'Cantidad REGULAR',
+                                label: 'Número de Estudiantes REGULAR',
                                 backgroundColor: 'yellow',
                                 data:data.Cticregular,
                                 borderColor: 'yellow',
@@ -57,7 +57,7 @@ $(document).ready(function (){
                             }
 
                             var ticmala = {
-                                label: 'Cantidad Mala',
+                                label: 'Número de Estudiantes Mala',
                                 backgroundColor: 'red',
                                 data:data.Cticmala,
                                 borderColor: 'red',
@@ -67,7 +67,7 @@ $(document).ready(function (){
                             }
 
                             var vivbuena = {
-                                label: 'Cant.Hacinamiento Medio',
+                                label: 'Número de Estudiantes en Hacinamiento Medio',
                                 backgroundColor: 'green',
                                 data:data.CHmedio,
                                 borderColor: 'green',
@@ -77,7 +77,7 @@ $(document).ready(function (){
                             }
 
                             var vivregular = {
-                                label: 'Cant.Hacinamiento Critico',
+                                label: 'Número de Estudiantes en Hacinamiento Critico',
                                 backgroundColor: 'red',
                                 data:data.CHcritico,
                                 borderColor: 'red',
@@ -87,7 +87,7 @@ $(document).ready(function (){
                             }
 
                             var vivmala = {
-                                label: 'Cant.Sin Hacinamiento',
+                                label: 'Número de Estudiantes Sin Hacinamiento',
                                 backgroundColor: 'black',
                                 data:data.CHsin,
                                 borderColor: 'black',
@@ -97,7 +97,7 @@ $(document).ready(function (){
                             }
 
                             var e17 = {
-                                label: 'Cantidad de 17',
+                                label: 'Número de Estudiantes de 17 años',
                                 backgroundColor: 'blue',
                                 data:data.Ce17,
                                 borderColor: 'blue',
@@ -107,7 +107,7 @@ $(document).ready(function (){
                             }
 
                             var e18y19 = {
-                                label: 'Cantidad de 18 Y 19',
+                                label: 'Número de Estudiantes de 18 Y 19 años',
                                 backgroundColor: 'red',
                                 data:data.Ce18y19,
                                 borderColor: 'red',
@@ -117,7 +117,7 @@ $(document).ready(function (){
                             }
 
                             var e20a28 = {
-                                label: 'Cantidad de 20 A 28',
+                                label: 'Número de Estudiantes entre 20 Y 28 años',
                                 backgroundColor: 'green',
                                 data:data.Ce20a28,
                                 borderColor: 'green',
@@ -127,7 +127,7 @@ $(document).ready(function (){
                             }
 
                             var emayoresde28 = {
-                                label: 'Cant.MAYORES DE 28',
+                                label: 'Número de Estudiantes MAYORES DE 28 años',
                                 backgroundColor: 'yellow',
                                 data:data.Cemayoresde28,
                                 borderColor: 'yellow',
@@ -137,7 +137,7 @@ $(document).ready(function (){
                             }
 
                             var emenoresde17 = {
-                                label: 'Cant.MENORES DE 17',
+                                label: 'Número de Estudiantes MENORES DE 17 años',
                                 backgroundColor: 'brown',
                                 data:data.Cemenoresde17,
                                 borderColor: 'brown',
@@ -147,7 +147,7 @@ $(document).ready(function (){
                             }
 
                             var es1 = {
-                                label: 'Cant.ESTRATO 1',
+                                label: 'Número de Estudiantes en ESTRATO 1',
                                 backgroundColor: 'red',
                                 data:data.Ces1,
                                 borderColor: 'red',
@@ -157,7 +157,7 @@ $(document).ready(function (){
                             }
 
                             var es2 = {
-                                label: 'Cant.ESTRATO 2',
+                                label: 'Número de Estudiantes en ESTRATO 2',
                                 backgroundColor: 'blue',
                                 data:data.Ces2,
                                 borderColor: 'blue',
@@ -167,7 +167,7 @@ $(document).ready(function (){
                             }
 
                             var es3 = {
-                                label: 'Cant.ESTRATO 3',
+                                label: 'Número de Estudiantes en ESTRATO 3',
                                 backgroundColor: 'yellow',
                                 data:data.Ces3,
                                 borderColor: 'yellow',
@@ -177,7 +177,7 @@ $(document).ready(function (){
                             }
 
                             var es4 = {
-                                label: 'Cant.ESTRATO 4',
+                                label: 'Número de Estudiantes en ESTRATO 4',
                                 backgroundColor: 'green',
                                 data:data.Ces4,
                                 borderColor: 'green',
@@ -187,7 +187,7 @@ $(document).ready(function (){
                             }
 
                             var es5 = {
-                                label: 'Cant.ESTRATO 5',
+                                label: 'Número de Estudiantes en ESTRATO 5',
                                 backgroundColor: 'brown',
                                 data:data.Ces5,
                                 borderColor: 'brown',
@@ -197,7 +197,7 @@ $(document).ready(function (){
                             }
 
                             var es6 = {
-                                label: 'Cant.ESTRATO 6',
+                                label: 'Número de Estudiantes en ESTRATO 6',
                                 backgroundColor: 'black',
                                 data:data.Ces6,
                                 borderColor: 'black',
@@ -207,7 +207,7 @@ $(document).ready(function (){
                             }
 
                             var n = {
-                                label: 'Cant.NINGUNO',
+                                label: 'Número de NINGUNO',
                                 backgroundColor: 'red',
                                 data:data.Cn,
                                 borderColor: 'red',
@@ -216,7 +216,7 @@ $(document).ready(function (){
                                 yAxisID: 'A'
                             }
                             var PI = {
-                                label: 'Cant.PRIMARIA INCOMPLETA',
+                                label: 'Número de PRIMARIA INCOMPLETA',
                                 backgroundColor: 'blue',
                                 data:data.CPI,
                                 borderColor: 'blue',
@@ -226,7 +226,7 @@ $(document).ready(function (){
                             }
 
                             var PC = {
-                                label: 'Cant.PRIMARIA COMPLETA',
+                                label: 'Número de PRIMARIA COMPLETA',
                                 backgroundColor: 'green',
                                 data:data.CPC,
                                 borderColor: 'green',
@@ -236,7 +236,7 @@ $(document).ready(function (){
                             }
 
                             var BI = {
-                                label: 'Cant.SECUNDARIA BACHILLERATO IMCOMPLETO',
+                                label: 'Número de SECUNDARIA BACHILLERATO IMCOMPLETO',
                                 backgroundColor: 'yellow',
                                 data:data.CBI,
                                 borderColor: 'yellow',
@@ -246,7 +246,7 @@ $(document).ready(function (){
                             }
 
                             var BC = {
-                                label: 'Cant.SECUNDARIA BACHILLERATO COMPLETO',
+                                label: 'Número de SECUNDARIA BACHILLERATO COMPLETO',
                                 backgroundColor: 'brown',
                                 data:data.CBC,
                                 borderColor: 'brown',
@@ -256,7 +256,7 @@ $(document).ready(function (){
                             }
 
                             var ETI = {
-                                label: 'Cant.EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
+                                label: 'Número de EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
                                 backgroundColor: 'pink',
                                 data:data.CETI,
                                 borderColor: 'pink',
@@ -266,7 +266,7 @@ $(document).ready(function (){
                             }
 
                             var ETC = {
-                                label: 'Cant.EDUCACION TECNICA O TECNOLOGICA COMPLETA',
+                                label: 'Número de EDUCACION TECNICA O TECNOLOGICA COMPLETA',
                                 backgroundColor: 'purple',
                                 data:data.CETC,
                                 borderColor: 'purple',
@@ -276,7 +276,7 @@ $(document).ready(function (){
                             }
 
                             var EPI = {
-                                label: 'Cant.EDUCACION PROFECIONAL INCOMPLETA',
+                                label: 'Número de EDUCACION PROFECIONAL INCOMPLETA',
                                 backgroundColor: 'orange',
                                 data:data.CEPI,
                                 borderColor: 'orange',
@@ -286,7 +286,7 @@ $(document).ready(function (){
                             }
 
                             var EPC = {
-                                label: 'Cant.EDUCACION PROFECIONAL COMPLETA',
+                                label: 'Número de EDUCACION PROFECIONAL COMPLETA',
                                 backgroundColor: 'violet',
                                 data:data.CEPC,
                                 borderColor: 'violet',
@@ -296,7 +296,7 @@ $(document).ready(function (){
                             }
 
                             var postgrado = {
-                                label: 'Cant.POSTGRADO',
+                                label: 'Número de POSTGRADO',
                                 backgroundColor: 'gray',
                                 data:data.Cpostgrado,
                                 borderColor: 'gray',
@@ -306,7 +306,7 @@ $(document).ready(function (){
                             }
 
                             var nosabe = {
-                                label: 'Cant.NO SABE',
+                                label: 'Número de NO SABE',
                                 backgroundColor: 'black',
                                 data:data.Cnosabe,
                                 borderColor: 'black',
@@ -391,7 +391,7 @@ $(document).ready(function (){
                                                   },
                                           scaleLabel: {
                                               display: true,
-                                              labelString: 'Cantidad'
+                                              labelString: 'Número de Estudiantes'
                                           }
                                      }]
                                 },
