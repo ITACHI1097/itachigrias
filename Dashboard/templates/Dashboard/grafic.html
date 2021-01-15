@@ -128,6 +128,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-header" id="headingF">
+                        <h2 class="mb-0">
+                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseF"><i class="fa fa-plus"></i> Porcentaje de Estudiantes por Genero y Año</button>
+                        </h2>
+                    </div>
+                    <div id="collapseF" class="collapse" aria-labelledby="headingF" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <select id="opgen_ano" name="opgen_ano" class="form-control col-md-4 select2" style="float: right;" onchange="opgen_ano();">
+                              <option value="grafica">Grafica</option>
+                              <option value="tabla">Tabla</option>
+                            </select>
+                            <button class="btn btn-outline-primary" id="btn_resetZoom" onclick="window.gen_ano.resetZoom();">Reset Zoom</button>
+                            <canvas id="global-gen-ano" data-url="{% url 'genero-anio' %}" width="800" height="450" ></canvas>
+                            <div id='containergen_ano' style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

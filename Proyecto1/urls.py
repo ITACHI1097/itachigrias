@@ -18,6 +18,7 @@ from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from Dashboard.GeneralDashboard import viewsGeneral
+from Dashboard.cubos import viewsCubos
 from Dashboard import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
@@ -49,6 +50,7 @@ urlpatterns = [
     path('subir/', views.subir, name='subir'),
     path('general/', viewsGeneral.generalDashboard, name='generalDashboard'),
     path('general-dashboard/', viewsGeneral.Dashboard, name='Dashboard'),
+    path('genero-anio/', viewsCubos.generoAno, name='genero-anio'),
     # path('grafic/Dashboard/prueba.html', views.prueba)
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='Dashboard/password_reset.html'), name='reset_password'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name='Dashboard/password_reset_sent.html'), name='password_reset_done'),

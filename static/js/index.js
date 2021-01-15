@@ -1135,6 +1135,165 @@ function opmun_ano(){
 
 }
 
+function gen_ano() {
+  var $genano = $("#global-gen-ano");
+    $.ajax({
+        url: $genano.data("url"),
+      success: function (data) {
+
+        var ctx = $genano[0].getContext("2d");
+
+        var masculino = {
+          label: 'Masculino',
+          backgroundColor: 'red',
+          data:data.masculino,
+          borderColor: 'red',
+          lineTension: 0,
+          fill: false,
+        }
+
+        var femenino = {
+          label: 'Femenino',
+          backgroundColor: 'blue',
+          data:data.femenino,
+          borderColor: 'blue',
+          lineTension: 0,
+          fill: false,
+        }
+
+        window.gen_ano = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: data.labels,
+            datasets: [masculino,femenino]
+          },
+          options: {
+            tooltips: {
+                callbacks: {
+                    title: function (tooltipItem, data) {
+                        return data['labels'][tooltipItem[0]['index']];
+                    },
+
+                    label: function (tooltipItems, data) {
+                        // var dataset = data.datasets[tooltipItem.datasetIndex];
+                        // var dataset = data['datasets'][0];
+                        // total = data['masculino'][tooltipItem[0]['index']] + data['femenino'][tooltipItem[0]['index']];
+                        // var percent = Math.round((dataset['data'][tooltipItem['index']] / total * 100))
+                        //var percent = 'hola'//Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
+                        return tooltipItems.yLabel+ '%';
+                    }
+                },
+            },
+            responsive: true,
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Porcentaje de Estudiantes por Genero y Año'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 100,
+                        callback: function (value) {
+                            return value + "%"
+                        }
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Percentage"
+                    }
+                }]
+            },
+
+              pan: {
+                  enabled: true,
+                  mode: "xy",
+                  speed: 10,
+                  threshold: 10
+              },
+              zoom: {
+                enabled: true,
+                drag: false,
+                mode: "xy",
+                speed: 0.01,
+                // sensitivity: 0.1,
+                limits: {
+                  max: 10,
+                  min: 0.5
+                }
+              }
+          }
+        });
+      }
+    });
+}
+function opgen_ano(){
+  var graph=document.getElementById("global-gen-ano");
+  var btn=document.getElementById("btn_resetZoom");
+  var tb=document.getElementById("containergen_ano");
+  var select = document.getElementById("opgen_ano");
+  if (select.value == "tabla"){
+    graph.style.display='none';
+    btn.style.display='none';
+    tb.style.display='block';
+    const tableContainer = document.getElementById('containergen_ano');
+    const xAxis = gen_ano.data.labels;
+    const yAxis = gen_ano.data.datasets;
+
+    const tableHeader = `<tr>${
+        xAxis.reduce((memo, entry) => {
+            memo += `<th>${entry}</th>`;
+            return memo;
+        }, '<th>AÑO:</th>')
+    }</tr>`;
+
+    const tableBody = yAxis.reduce((memo, entry) => {
+        const rows = entry.data.reduce((memo, entry) => {
+            memo += `<td>${entry}</td>`
+            return memo;
+        }, '');
+
+        memo += `<tr><td>${entry.label}</td>${rows}</tr>`;
+
+        return memo;
+    }, '');
+
+    const table = ` 
+                    <div id="tabla" class="container-fluid">
+                        <div class="card shadow mb-6">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                ${tableHeader}
+                                            </thead>
+                                            <tbody>
+                                                ${tableBody}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        <script>
+                            $('#dataTable').DataTable({
+                                "pagingType": "full_numbers"
+                            });
+                        </script>
+                    </div>`;
+
+    // removeAttr('style');
+    tableContainer.innerHTML = table;
+    ban=0;
+  }else{
+    graph.style.display='block';
+    btn.style.display='block';
+    tb.style.display='none';
+  }
+
+}
 
 function cargarFunciones(){
    lectura_critic_ciudad();
@@ -1142,6 +1301,7 @@ function cargarFunciones(){
    estu_Edad();
    desemp_ciu_edad();
    global_mun_ano();
+   gen_ano();
 }
 
 function cargaFuncionesPrincipal(){
