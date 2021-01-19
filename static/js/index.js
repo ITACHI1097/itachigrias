@@ -264,7 +264,7 @@ function lectura_critic_ciudad(){
         }
 
         let dato;
-        if (data.punt2017[0] != null | data.punt2018[0] != null | data.punt2019[0] != null | data.punt2020[0] != null | data.punt2021[0] != null | data.punt2022[0] != null | data.punt2023[0] != null){
+        if (data.punt2017[0] != null || data.punt2018[0] != null || data.punt2019[0] != null || data.punt2020[0] != null || data.punt2021[0] != null || data.punt2022[0] != null || data.punt2023[0] != null){
             dato = {
               labels: data.labels,
               datasets: [punt2012,punt2013,punt2014,punt2015,punt2016,punt2017]
@@ -311,7 +311,7 @@ function lectura_critic_ciudad(){
         else
           dato = {
               labels: data.labels,
-              datasets: [punt2019]
+              datasets: [punt2012,punt2013,punt2014,punt2015,punt2016]
           }
 
         window.grafica = new Chart(ctx, {
@@ -986,7 +986,7 @@ function global_mun_ano() {
         }
 
         let dato;
-        if (data.punt2017[0] != null | data.punt2018[0] != null | data.punt2019[0] != null | data.punt2020[0] != null | data.punt2021[0] != null | data.punt2022[0] != null | data.punt2023[0] != null){
+        if (data.punt2017[0] != null || data.punt2018[0] != null || data.punt2019[0] != null || data.punt2020[0] != null || data.punt2021[0] != null || data.punt2022[0] != null || data.punt2023[0] != null){
             dato = {
               labels: data.labels,
               datasets: [punt2012,punt2013,punt2014,punt2015,punt2016,punt2017]
@@ -1028,12 +1028,10 @@ function global_mun_ano() {
             }
           }
         }
-
-
         else
           dato = {
               labels: data.labels,
-              datasets: [punt2019]
+              datasets: [punt2012,punt2013,punt2014,punt2015,punt2016]
           }
 
         window.mun_ano = new Chart(ctx, {

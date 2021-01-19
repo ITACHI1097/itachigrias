@@ -1879,16 +1879,7 @@ def critic_chart(request):  # vista donde se maneja la grafica y donde se fabric
     punt2022 = []
     punt2023 = []
 
-    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2019' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
-    cur.execute(sql)
-    row = cur.fetchall()
-    cur.close()
-    conn.close()
-    for r in row:
-        label.append(r[0])
-        punt2019.append(r[1])
+
 
     conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -1898,6 +1889,7 @@ def critic_chart(request):  # vista donde se maneja la grafica y donde se fabric
     cur.close()
     conn.close()
     for r in row:
+        label.append(r[0])
         punt2012.append(r[1])
 
     conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
@@ -1959,6 +1951,17 @@ def critic_chart(request):  # vista donde se maneja la grafica y donde se fabric
     conn.close()
     for r in row:
         punt2018.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_lec_crit),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2019' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+
+        punt2019.append(r[1])
 
     conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -2208,16 +2211,7 @@ def global_mun_ano(request):
     desmp = []
     cont = []
 
-    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    sql = "select cole_mcpio_ubicacion,round(avg(punt_global),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2019' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
-    cur.execute(sql)
-    row = cur.fetchall()
-    cur.close()
-    conn.close()
-    for r in row:
-        label.append(r[0])
-        punt2019.append(r[1])
+
 
     conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -2227,6 +2221,7 @@ def global_mun_ano(request):
     cur.close()
     conn.close()
     for r in row:
+        label.append(r[0])
         punt2012.append(r[1])
 
     conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
@@ -2288,6 +2283,16 @@ def global_mun_ano(request):
     conn.close()
     for r in row:
         punt2018.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,round(avg(punt_global),2) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2019' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2019.append(r[1])
 
     conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
