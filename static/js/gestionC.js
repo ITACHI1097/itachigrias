@@ -421,7 +421,7 @@ $(document).ready(function (){
                             if(ban==1){
 
                                 graph.style.display='none';
-                                btn.style.display='none';
+                                btn.style.display='block';
                                 tb.style.display='block';
                                 tbd.style.display='none';
                                 const tableContainer = document.getElementById('container');
