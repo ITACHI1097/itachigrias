@@ -10,6 +10,7 @@ $(document).ready(function (){
                     var inst = document.getElementById("inst").options[document.getElementById("inst").selectedIndex].text;
                     let cat = document.getElementById("categoria").options[document.getElementById("categoria").selectedIndex].text;
                     let metrica = document.getElementById("metrica").options[document.getElementById("metrica").selectedIndex].text;
+                    let ban=0;
                     $.ajax({
                         url: $(this).attr('action'),
                         type: $(this).attr('method'),
@@ -18,17 +19,135 @@ $(document).ready(function (){
 
                         success: function (data) {
                             var ctx = $graficGest[0].getContext("2d");
+                            function getRandomColor() {
+                                var letters = "0123456789ABCDEF".split("");
+                                var color = "#";
+                                for (var i = 0; i < 6; i++ ) {
+                                  color += letters[Math.floor(Math.random() * 16)];
+                                }
+                                return color;
+                            }
 
-
-
+                              var contador = {
+                                label: 'Cantidad',
+                                  backgroundColor: [
+                                    'blue',
+                                    'red',
+                                    'green',
+                                    'yellow',
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                  ],
+                                  data:data.contador,
+                                yAxisID: 'A'
+                              }
+                              var promedio = {
+                                label: 'Puntaje',
+                                  backgroundColor: [
+                                    'blue',
+                                    'red',
+                                    'green',
+                                    'yellow',
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                    getRandomColor(),
+                                  ],
+                                  data:data.promedio,
+                                yAxisID: 'A'
+                            }
 
                               var masculino = {
                                   label: (metrica == "Puntaje") ? 'Puntaje Promedio Masculino' : 'Número de Estudiantes Masculino',
                                   backgroundColor: 'red',
-
-                                  // data:dato1
                                   data: (metrica == "Puntaje") ? data.masculino : data.Cmasculino,
-                                  borderColor: 'red',
+                                  borderColor: graf=="line"||graf=="radar"?'red':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -38,9 +157,8 @@ $(document).ready(function (){
                               var femenino = {
                                   label: (metrica == "Puntaje") ? 'Puntaje Promedio Femenino' : 'Número de Estudiantes Femenino',
                                   backgroundColor: 'blue',
-                                  // data:dato2,
                                   data: (metrica == "Puntaje") ? data.femenino : data.Cfemenino,
-                                  borderColor: 'blue',
+                                  borderColor: graf=="line"||graf=="radar"?'blue':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -50,7 +168,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Puntaje Promedio Buena' : 'Número de Estudiantes Buena',
                                   backgroundColor: 'green',
                                   data: (metrica == "Puntaje") ? data.ticbuena : data.Cticbuena,
-                                  borderColor: 'green',
+                                  borderColor: graf=="line"||graf=="radar"?'green':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -60,7 +178,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Puntaje Promedio REGULAR' : 'Número de Estudiantes REGULAR',
                                   backgroundColor: 'yellow',
                                   data: (metrica == "Puntaje") ? data.ticregular : data.Cticregular,
-                                  borderColor: 'yellow',
+                                  borderColor: graf=="line"||graf=="radar"?'yellow':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -70,7 +188,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Puntaje Promedio Mala' : 'Número de Estudiantes Mala',
                                   backgroundColor: 'red',
                                   data: (metrica == "Puntaje") ? data.ticmala : data.Cticmala,
-                                  borderColor: 'red',
+                                  borderColor: graf=="line"||graf=="radar"?'red':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -80,7 +198,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio Hacinamiento Medio' : 'Número de Estudiantes en Hacinamiento Medio',
                                   backgroundColor: 'green',
                                   data: (metrica == "Puntaje") ? data.Hmedio : data.CHmedio,
-                                  borderColor: 'green',
+                                  borderColor: graf=="line"||graf=="radar"?'green':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -90,7 +208,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio Hacinamiento Critico' : 'Número de Estudiantes en Hacinamiento Critico',
                                   backgroundColor: 'red',
                                   data: (metrica == "Puntaje") ? data.Hcritico : data.CHcritico,
-                                  borderColor: 'red',
+                                  borderColor: graf=="line"||graf=="radar"?'red':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -100,7 +218,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio Sin Hacinamiento' : 'Número de Estudiantes Sin Hacinamiento',
                                   backgroundColor: 'black',
                                   data: (metrica == "Puntaje") ? data.Hsin : data.CHsin,
-                                  borderColor: 'black',
+                                  borderColor: graf=="line"||graf=="radar"?'black':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -110,7 +228,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Puntaje Promedio de 17' : 'Número de Estudiantes de 17 años',
                                   backgroundColor: 'blue',
                                   data: (metrica == "Puntaje") ? data.e17 : data.Ce17,
-                                  borderColor: 'blue',
+                                  borderColor: graf=="line"||graf=="radar"?'blue':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -120,7 +238,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Puntaje Promedio de 18 Y 19' : 'Número de Estudiantes de 18 Y 19 años',
                                   backgroundColor: 'red',
                                   data: (metrica == "Puntaje") ? data.e18y19 : data.Ce18y19,
-                                  borderColor: 'red',
+                                  borderColor: graf=="line"||graf=="radar"?'red':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -130,7 +248,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Puntaje Promedio de 20 A 28' : 'Número de Estudiantes entre 20 Y 28 años',
                                   backgroundColor: 'green',
                                   data: (metrica == "Puntaje") ? data.e20a28 : data.Ce20a28,
-                                  borderColor: 'green',
+                                  borderColor: graf=="line"||graf=="radar"?'green':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -140,7 +258,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio MAYORES DE 28' : 'Número de Estudiantes MAYORES DE 28 años',
                                   backgroundColor: 'yellow',
                                   data: (metrica == "Puntaje") ? data.emayoresde28 : data.Cemayoresde28,
-                                  borderColor: 'yellow',
+                                  borderColor: graf=="line"||graf=="radar"?'yellow':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -150,7 +268,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio MENORES DE 17' : 'Número de Estudiantes MENORES DE 17 años',
                                   backgroundColor: 'brown',
                                   data: (metrica == "Puntaje") ? data.emenoresde17 : data.Cemenoresde17,
-                                  borderColor: 'brown',
+                                  borderColor: graf=="line"||graf=="radar"?'brown':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -160,7 +278,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 1' : 'Número de Estudiantes en ESTRATO 1',
                                   backgroundColor: 'red',
                                   data: (metrica == "Puntaje") ? data.es1 : data.Ces1,
-                                  borderColor: 'red',
+                                  borderColor: graf=="line"||graf=="radar"?'red':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -170,7 +288,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 2' : 'Número de Estudiantes en ESTRATO 2',
                                   backgroundColor: 'blue',
                                   data: (metrica == "Puntaje") ? data.es2 : data.Ces2,
-                                  borderColor: 'blue',
+                                  borderColor: graf=="line"||graf=="radar"?'blue':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -180,7 +298,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 3' : 'Número de Estudiantes en ESTRATO 3',
                                   backgroundColor: 'yellow',
                                   data: (metrica == "Puntaje") ? data.es3 : data.Ces3,
-                                  borderColor: 'yellow',
+                                  borderColor: graf=="line"||graf=="radar"?'yellow':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -190,7 +308,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 4' : 'Número de Estudiantes en ESTRATO 4',
                                   backgroundColor: 'green',
                                   data: (metrica == "Puntaje") ? data.es4 : data.Ces4,
-                                  borderColor: 'green',
+                                  borderColor: graf=="line"||graf=="radar"?'green':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -200,7 +318,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 5' : 'Número de Estudiantes en ESTRATO 5',
                                   backgroundColor: 'brown',
                                   data: (metrica == "Puntaje") ? data.es5 : data.Ces5,
-                                  borderColor: 'brown',
+                                  borderColor: graf=="line"||graf=="radar"?'brown':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -210,7 +328,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio ESTRATO 6' : 'Número de Estudiantes en ESTRATO 6',
                                   backgroundColor: 'black',
                                   data: (metrica == "Puntaje") ? data.es6 : data.Ces6,
-                                  borderColor: 'black',
+                                  borderColor: graf=="line"||graf=="radar"?'black':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -220,7 +338,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio NINGUNO' : 'Número de NINGUNO',
                                   backgroundColor: 'red',
                                   data: (metrica == "Puntaje") ? data.n : data.Cn,
-                                  borderColor: 'red',
+                                  borderColor: graf=="line"||graf=="radar"?'red':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -229,7 +347,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio PRIMARIA INCOMPLETA' : 'Número de PRIMARIA INCOMPLETA',
                                   backgroundColor: 'blue',
                                   data: (metrica == "Puntaje") ? data.PI : data.CPI,
-                                  borderColor: 'blue',
+                                  borderColor: graf=="line"||graf=="radar"?'blue':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -239,7 +357,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio PRIMARIA COMPLETA' : 'Número de PRIMARIA COMPLETA',
                                   backgroundColor: 'green',
                                   data: (metrica == "Puntaje") ? data.PC : data.CPC,
-                                  borderColor: 'green',
+                                  borderColor: graf=="line"||graf=="radar"?'green':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -249,7 +367,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio SECUNDARIA BACHILLERATO IMCOMPLETO' : 'Número de SECUNDARIA BACHILLERATO IMCOMPLETO',
                                   backgroundColor: 'yellow',
                                   data: (metrica == "Puntaje") ? data.BI : data.CBI,
-                                  borderColor: 'yellow',
+                                  borderColor: graf=="line"||graf=="radar"?'yellow':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -259,7 +377,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio SECUNDARIA BACHILLERATO COMPLETO' : 'Número de SECUNDARIA BACHILLERATO COMPLETO',
                                   backgroundColor: 'brown',
                                   data: (metrica == "Puntaje") ? data.BC : data.CBC,
-                                  borderColor: 'brown',
+                                  borderColor: graf=="line"||graf=="radar"?'brown':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -269,7 +387,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio EDUCACION TECNICA O TECNOLOGICA INCOMPLETA' : 'Número de EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
                                   backgroundColor: 'pink',
                                   data: (metrica == "Puntaje") ? data.ETI : data.CETI,
-                                  borderColor: 'pink',
+                                  borderColor: graf=="line"||graf=="radar"?'pink':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -279,7 +397,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio EDUCACION TECNICA O TECNOLOGICA COMPLETA' : 'Número de EDUCACION TECNICA O TECNOLOGICA COMPLETA',
                                   backgroundColor: 'purple',
                                   data: (metrica == "Puntaje") ? data.ETC : data.CETC,
-                                  borderColor: 'purple',
+                                  borderColor: graf=="line"||graf=="radar"?'purple':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -289,7 +407,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio EDUCACION PROFECIONAL INCOMPLETA' : 'Número de EDUCACION PROFECIONAL INCOMPLETA',
                                   backgroundColor: 'orange',
                                   data: (metrica == "Puntaje") ? data.EPI : data.CEPI,
-                                  borderColor: 'orange',
+                                  borderColor: graf=="line"||graf=="radar"?'orange':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -299,7 +417,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio EDUCACION PROFECIONAL COMPLETA' : 'Número de EDUCACION PROFECIONAL COMPLETA',
                                   backgroundColor: 'violet',
                                   data: (metrica == "Puntaje") ? data.EPC : data.CEPC,
-                                  borderColor: 'violet',
+                                  borderColor: graf=="line"||graf=="radar"?'violet':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -309,7 +427,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio POSTGRADO' : 'Número de POSTGRADO',
                                   backgroundColor: 'gray',
                                   data: (metrica == "Puntaje") ? data.postgrado : data.Cpostgrado,
-                                  borderColor: 'gray',
+                                  borderColor: graf=="line"||graf=="radar"?'gray':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -319,7 +437,7 @@ $(document).ready(function (){
                                   label: (metrica == "Puntaje") ? 'Punt.Promedio NO SABE' : 'Número de NO SABE',
                                   backgroundColor: 'black',
                                   data: (metrica == "Puntaje") ? data.nosabe : data.Cnosabe,
-                                  borderColor: 'black',
+                                  borderColor: graf=="line"||graf=="radar"?'black':'white',
                                   lineTension: 0,
                                   fill: false,
                                   yAxisID: 'A'
@@ -375,7 +493,16 @@ $(document).ready(function (){
                                       }
                                   }
                               }
+
+
                               if (metrica != "Puntaje y Número de Estudiantes") {
+                                  if(ano!="TODOS" && muni!="TODOS" && inst!="General"){
+                                dato = {
+                                    labels: data.labels,
+                                    // datasets: [promedio]
+                                    datasets: (metrica == "Puntaje") ? [promedio]:[contador]
+                                }
+                              }
                                     if(graf=="tabla"){
                                         graf="bar";
                                         ban=1;
@@ -384,6 +511,14 @@ $(document).ready(function (){
                                       type: graf,
                                       data: dato,
                                       options: {
+                                          tooltips: {
+                                            callbacks: {
+                                                label: function(item, data) {
+                                                    console.log(data.labels, item);
+                                                    return graf=="pie"||graf=="polarArea"||graf=="doughnut"?data.datasets[item.datasetIndex].label+ ": "+ data.labels[item.index]+ ": "+ data.datasets[item.datasetIndex].data[item.index]:data.datasets[item.datasetIndex].label+ ": "+ data.datasets[item.datasetIndex].data[item.index];
+                                                }
+                                            },
+                                          },
                                           responsive: true,
                                           legend: {
                                               position: 'top',
@@ -457,7 +592,10 @@ $(document).ready(function (){
                                     }, '');
                                     console.log(data);
                                     const table = ` <div class="container-fluid">
-                                                        <div class="card shadow mb-4">
+                                                        <div class="card shadow mb-6">
+                                                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                          <h6 class="m-0 font-weight-bold text-dark">METRICA: ${metrica}&nbsp;&nbsp;&nbsp;PUNTAJE: ${punt}&nbsp;&nbsp;&nbsp;CATEGORIA: ${cat}&nbsp;&nbsp;&nbsp;AÑO: ${ano}&nbsp;&nbsp;&nbsp;<br> <br>MUNICIPIO: ${muni}&nbsp;&nbsp;&nbsp;INSTITUCION: ${inst}</h6>
+                                                        </div>
                                                                 <div class="card-body">
                                                                     <div class="table-responsive">
                                                                         <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -493,9 +631,8 @@ $(document).ready(function (){
                                   var Pmasculino = {
                                       label: 'Puntaje Promedio Masculino',
                                       backgroundColor: 'red',
-                                      // data:dato1
                                       data: data.masculino,
-                                      borderColor: 'red',
+                                      borderColor: graf=="line"||graf=="radar"?'red':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -505,9 +642,8 @@ $(document).ready(function (){
                                   var Pfemenino = {
                                       label: 'Puntaje Promedio Femenino',
                                       backgroundColor: 'blue',
-                                      // data:dato2,
                                       data: data.femenino,
-                                      borderColor: 'blue',
+                                      borderColor: graf=="line"||graf=="radar"?'blue':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -517,7 +653,7 @@ $(document).ready(function (){
                                       label: 'Puntaje Promedio Buena',
                                       backgroundColor: 'green',
                                       data: data.ticbuena,
-                                      borderColor: 'green',
+                                      borderColor: graf=="line"||graf=="radar"?'green':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -527,7 +663,7 @@ $(document).ready(function (){
                                       label: 'Puntaje Promedio REGULAR',
                                       backgroundColor: 'yellow',
                                       data: data.ticregular,
-                                      borderColor: 'yellow',
+                                      borderColor: graf=="line"||graf=="radar"?'yellow':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -537,7 +673,7 @@ $(document).ready(function (){
                                       label: 'Puntaje Promedio Mala',
                                       backgroundColor: 'red',
                                       data: data.ticmala,
-                                      borderColor: 'red',
+                                      borderColor: graf=="line"||graf=="radar"?'red':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -547,7 +683,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio Hacinamiento Medio',
                                       backgroundColor: 'green',
                                       data: data.Hmedio,
-                                      borderColor: 'green',
+                                      borderColor: graf=="line"||graf=="radar"?'green':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -557,7 +693,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio Hacinamiento Critico',
                                       backgroundColor: 'red',
                                       data: data.Hcritico,
-                                      borderColor: 'red',
+                                      borderColor: graf=="line"||graf=="radar"?'red':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -567,7 +703,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio Sin Hacinamiento',
                                       backgroundColor: 'black',
                                       data: data.Hsin,
-                                      borderColor: 'black',
+                                      borderColor: graf=="line"||graf=="radar"?'black':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -577,7 +713,7 @@ $(document).ready(function (){
                                       label: 'Puntaje Promedio de 17',
                                       backgroundColor: 'blue',
                                       data: data.e17,
-                                      borderColor: 'blue',
+                                      borderColor: graf=="line"||graf=="radar"?'blue':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -587,7 +723,7 @@ $(document).ready(function (){
                                       label: 'Puntaje Promedio de 18 Y 19',
                                       backgroundColor: 'red',
                                       data: data.e18y19,
-                                      borderColor: 'red',
+                                      borderColor: graf=="line"||graf=="radar"?'red':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -597,7 +733,7 @@ $(document).ready(function (){
                                       label: 'Puntaje Promedio de 20 A 28',
                                       backgroundColor: 'green',
                                       data: data.e20a28,
-                                      borderColor: 'green',
+                                      borderColor: graf=="line"||graf=="radar"?'green':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -607,7 +743,7 @@ $(document).ready(function (){
                                       label: 'Puntaje Promedio MAYORES DE 28',
                                       backgroundColor: 'yellow',
                                       data: data.emayoresde28,
-                                      borderColor: 'yellow',
+                                      borderColor: graf=="line"||graf=="radar"?'yellow':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -617,7 +753,7 @@ $(document).ready(function (){
                                       label: 'Puntaje Promedio de MENORES DE 17',
                                       backgroundColor: 'brown',
                                       data: data.emenoresde17,
-                                      borderColor: 'brown',
+                                      borderColor: graf=="line"||graf=="radar"?'brown':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -627,7 +763,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio ESTRATO 1',
                                       backgroundColor: 'red',
                                       data: data.es1,
-                                      borderColor: 'red',
+                                      borderColor: graf=="line"||graf=="radar"?'red':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -637,7 +773,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio ESTRATO 2',
                                       backgroundColor: 'blue',
                                       data: data.es2,
-                                      borderColor: 'blue',
+                                      borderColor: graf=="line"||graf=="radar"?'blue':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -647,7 +783,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio ESTRATO 3',
                                       backgroundColor: 'yellow',
                                       data: data.es3,
-                                      borderColor: 'yellow',
+                                      borderColor: graf=="line"||graf=="radar"?'yellow':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -657,7 +793,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio ESTRATO 4',
                                       backgroundColor: 'green',
                                       data: data.es4,
-                                      borderColor: 'green',
+                                      borderColor: graf=="line"||graf=="radar"?'green':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -667,7 +803,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio ESTRATO 5',
                                       backgroundColor: 'brown',
                                       data: data.es5,
-                                      borderColor: 'brown',
+                                      borderColor: graf=="line"||graf=="radar"?'brown':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -677,7 +813,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio ESTRATO 6',
                                       backgroundColor: 'black',
                                       data: data.es6,
-                                      borderColor: 'black',
+                                      borderColor: graf=="line"||graf=="radar"?'black':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -687,7 +823,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio NINGUNO',
                                       backgroundColor: 'red',
                                       data: data.n,
-                                      borderColor: 'red',
+                                      borderColor: graf=="line"||graf=="radar"?'red':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -696,7 +832,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio PRIMARIA INCOMPLETA',
                                       backgroundColor: 'blue',
                                       data: data.PI,
-                                      borderColor: 'blue',
+                                      borderColor: graf=="line"||graf=="radar"?'blue':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -706,7 +842,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio PRIMARIA COMPLETA',
                                       backgroundColor: 'green',
                                       data: data.PC,
-                                      borderColor: 'green',
+                                      borderColor: graf=="line"||graf=="radar"?'green':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -716,7 +852,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio SECUNDARIA BACHILLERATO IMCOMPLETO',
                                       backgroundColor: 'yellow',
                                       data: data.BI,
-                                      borderColor: 'yellow',
+                                      borderColor: graf=="line"||graf=="radar"?'yellow':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -726,7 +862,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio SECUNDARIA BACHILLERATO COMPLETO',
                                       backgroundColor: 'brown',
                                       data: data.BC,
-                                      borderColor: 'brown',
+                                      borderColor: graf=="line"||graf=="radar"?'brown':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -736,7 +872,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio EDUCACION TECNICA O TECNOLOGICA INCOMPLETA',
                                       backgroundColor: 'pink',
                                       data: data.ETI,
-                                      borderColor: 'pink',
+                                      borderColor: graf=="line"||graf=="radar"?'pink':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -746,7 +882,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio EDUCACION TECNICA O TECNOLOGICA COMPLETA',
                                       backgroundColor: 'purple',
                                       data: data.ETC,
-                                      borderColor: 'purple',
+                                      borderColor: graf=="line"||graf=="radar"?'purple':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -756,7 +892,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio EDUCACION PROFECIONAL INCOMPLETA',
                                       backgroundColor: 'orange',
                                       data: data.EPI,
-                                      borderColor: 'orange',
+                                      borderColor: graf=="line"||graf=="radar"?'orange':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -766,7 +902,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio EDUCACION PROFECIONAL COMPLETA',
                                       backgroundColor: 'violet',
                                       data: data.EPC,
-                                      borderColor: 'violet',
+                                      borderColor: graf=="line"||graf=="radar"?'violet':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -776,7 +912,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio POSTGRADO',
                                       backgroundColor: 'gray',
                                       data: data.postgrado,
-                                      borderColor: 'gray',
+                                      borderColor: graf=="line"||graf=="radar"?'gray':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -786,7 +922,7 @@ $(document).ready(function (){
                                       label: 'Punt.Promedio NO SABE',
                                       backgroundColor: 'black',
                                       data: data.nosabe,
-                                      borderColor: 'gray',
+                                      borderColor: graf=="line"||graf=="radar"?'gray':'white',
                                       lineTension: 0,
                                       fill: false,
                                       yAxisID: 'B'
@@ -840,12 +976,26 @@ $(document).ready(function (){
                                         graf="bar";
                                         ban=1;
                                   }
+                                  if(ano!="TODOS" && muni!="TODOS" && inst!="General"){
+                                    dato2 = {
+                                        labels: data.labels,
+                                        datasets: [promedio,contador]
+                                    }
+                                  }
                                   window.grafica = new Chart(ctx, {
 
                                       type: graf,
                                       data: dato2,
 
                                       options: {
+                                          tooltips: {
+                                            callbacks: {
+                                                label: function(item, data) {
+                                                    console.log(data.labels, item);
+                                                    return graf=="pie"||graf=="polarArea"||graf=="doughnut"?data.datasets[item.datasetIndex].label+ ": "+ data.labels[item.index]+ ": "+ data.datasets[item.datasetIndex].data[item.index]:data.datasets[item.datasetIndex].label+ ": "+ data.datasets[item.datasetIndex].data[item.index];
+                                                }
+                                            },
+                                          },
                                           responsive: true,
                                           legend: {
                                               position: 'top',
@@ -936,6 +1086,9 @@ $(document).ready(function (){
 
                                         const table = ` <div id="tabla" class="container-fluid">
                                                             <div class="card shadow mb-4">
+                                                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                              <h6 class="m-0 font-weight-bold text-dark">METRICA: ${metrica}&nbsp;&nbsp;&nbsp;PUNTAJE: ${punt}&nbsp;&nbsp;&nbsp;CATEGORIA: ${cat}&nbsp;&nbsp;&nbsp;AÑO: ${ano}&nbsp;&nbsp;&nbsp;<br> <br>MUNICIPIO: ${muni}&nbsp;&nbsp;&nbsp;INSTITUCION: ${inst}</h6>
+                                                            </div>
                                                                     <div class="card-body">
                                                                         <div class="table-responsive">
                                                                             <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">

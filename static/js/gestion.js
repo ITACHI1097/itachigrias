@@ -163,6 +163,14 @@ $(document).ready(function (){
                                 datasets: [puntaje]
                               },
                               options: {
+                                tooltips: {
+                                    callbacks: {
+                                        label: function(item, data) {
+                                            console.log(data.labels, item);
+                                            return graf=="pie"||graf=="polarArea"||graf=="doughnut"?data.datasets[item.datasetIndex].label+ ": "+ data.labels[item.index]+ ": "+ data.datasets[item.datasetIndex].data[item.index]:data.datasets[item.datasetIndex].label+ ": "+ data.datasets[item.datasetIndex].data[item.index];
+                                        }
+                                    },
+                                },
                                 responsive: true,
                                 legend: {
                                   position: 'top',
@@ -237,6 +245,10 @@ $(document).ready(function (){
 
                                 const table = ` <div class="container-fluid">
                                                     <div class="card shadow mb-4">
+                                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                      <h6 class="m-0 font-weight-bold text-dark">PUNTAJE: ${punt}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AÑO: ${ano}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MUNICIPIO: ${muni}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSTITUCION: ${inst}</h6>
+                                
+                                                    </div>
                                                             <div class="card-body">
                                                                 <div class="table-responsive">
                                                                     <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="1"><thead>${tableHeader}</thead><tbody>${tableBody}</tbody></table>
