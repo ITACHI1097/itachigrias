@@ -47,7 +47,7 @@ function graficPrincipal(){
             },
             title: {
               display: true,
-              text: 'Puntaje Promedio global y numero de estudiantes por municipio'
+              text: 'Puntaje Promedio global y número de estudiantes por municipio'
             }
           }
         });
@@ -137,7 +137,7 @@ function tot_est(){
             },
             title: {
               display: false,
-              // text: 'Puntaje global y numero de estudiantes por municipio'
+              // text: 'Puntaje global y número de estudiantes por municipio'
             }
           }
         });
