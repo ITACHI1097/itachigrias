@@ -219,6 +219,7 @@ def subir(request):
                                 (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '452215000492') ].index)
             except pd.errors.ParserError:
                 print("Error con delimitador")
+                messages.success(request, 'Error con delimitador')
                 from shutil import rmtree
                 rmtree(BASE_DIR + '/media/icfes')
             # df.columns = [c.lower() for c in df.columns]
