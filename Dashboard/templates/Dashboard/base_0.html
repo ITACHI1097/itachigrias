@@ -101,6 +101,10 @@
 {#                          Settings#}
 {#                        </a>#}
                            {% if request.user.groups.all.0.name == "admin" %}
+                               <hr class="sidebar-divider my-0">
+                               <div class="sidebar-heading">
+                            <FONT SIZE=1>ADMIN</font>
+                          </div>
                         <a class="dropdown-item" href="{% url 'register' %}">
                           <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                           Crear Cuenta
