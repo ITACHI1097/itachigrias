@@ -1293,6 +1293,270 @@ function opgen_ano(){
 
 }
 
+function num_mun_ano() {
+  var $nummunano = $("#num-mun-ano");
+    $.ajax({
+        url: $nummunano.data("url"),
+      success: function (data) {
+
+        var ctx = $nummunano[0].getContext("2d");
+
+        var punt2012 = {
+          label: '2012',
+          backgroundColor: 'gray',
+          data:data.punt2012,
+          borderColor: 'gray',
+          lineTension: 0,
+          fill: false,
+        }
+
+        var punt2013 = {
+          label: '2013',
+          backgroundColor: 'black',
+          data:data.punt2013,
+          borderColor: 'black',
+          lineTension: 0,
+          fill: false,
+        }
+
+        var punt2014 = {
+          label: '2014',
+          backgroundColor: 'orange',
+          data:data.punt2014,
+          borderColor: 'orange',
+          lineTension: 0,
+          fill: false,
+        }
+
+        var punt2015 = {
+          label: '2015',
+          backgroundColor: 'purple',
+          data:data.punt2015,
+          borderColor: 'purple',
+          lineTension: 0,
+          fill: false,
+        }
+
+        var punt2016 = {
+          label: '2016',
+          backgroundColor: 'green',
+          data:data.punt2016,
+          borderColor: 'green',
+          lineTension: 0,
+          fill: false,
+        }
+
+        var punt2017 = {
+          label: '2017',
+          backgroundColor: 'violet',
+          data:data.punt2017,
+          borderColor: 'violet',
+          lineTension: 0,
+          fill: false,
+        }
+
+        var punt2018 = {
+          label: '2018',
+          backgroundColor: 'brown',
+          data:data.punt2018,
+          borderColor: 'brown',
+          lineTension: 0,
+          fill: false,
+        }
+
+        var punt2019 = {
+          label: '2019',
+          backgroundColor: 'red',
+          data:data.punt2019,
+          borderColor: 'red',
+          lineTension: 0,
+          fill: false,
+        };
+
+        var punt2020 = {
+          label: '2020',
+          backgroundColor: 'yellow',
+          data:data.punt2020,
+          borderColor: 'yellow',
+          lineTension: 0,
+          fill: false,
+        };
+
+        var punt2021 = {
+          label: '2021',
+          backgroundColor: 'blue',
+          data:data.punt2021,
+          borderColor: 'blue',
+          lineTension: 0,
+          fill: false,
+        }
+
+        var punt2022 = {
+          label: '2022',
+          backgroundColor: 'gray',
+          data:data.punt2022,
+          borderColor: 'gray',
+          lineTension: 0,
+          fill: false,
+        }
+
+        var punt2023 = {
+          label: '2023',
+          backgroundColor: 'violet',
+          data:data.punt2023,
+          borderColor: 'violet',
+          lineTension: 0,
+          fill: false,
+        }
+
+        let dato;
+        if (data.punt2017[0] != null || data.punt2018[0] != null || data.punt2019[0] != null || data.punt2020[0] != null || data.punt2021[0] != null || data.punt2022[0] != null || data.punt2023[0] != null){
+            dato = {
+              labels: data.labels,
+              datasets: [punt2012,punt2013,punt2014,punt2015,punt2016,punt2017]
+            }
+          if (data.punt2018[0] != null){
+              dato = {
+              labels: data.labels,
+              datasets: [punt2012,punt2013,punt2014,punt2015,punt2016,punt2017,punt2018]
+            }
+          }
+          if (data.punt2019[0] != null){
+              dato = {
+              labels: data.labels,
+              datasets: [punt2012,punt2013,punt2014,punt2015,punt2016,punt2017,punt2018,punt2019]
+            }
+          }
+          if (data.punt2020[0] != null){
+              dato = {
+              labels: data.labels,
+              datasets: [punt2012,punt2013,punt2014,punt2015,punt2016,punt2017,punt2018,punt2019,punt2020]
+            }
+          }
+          if (data.punt2021[0] != null){
+              dato = {
+              labels: data.labels,
+              datasets: [punt2012,punt2013,punt2014,punt2015,punt2016,punt2017,punt2018,punt2019,punt2020,punt2021]
+            }
+          }
+          if (data.punt2022[0] != null){
+              dato = {
+              labels: data.labels,
+              datasets: [punt2012,punt2013,punt2014,punt2015,punt2016,punt2017,punt2018,punt2019,punt2020,punt2021,punt2022]
+            }
+          }
+          if (data.punt2023[0] != null){
+              dato = {
+              labels: data.labels,
+              datasets: [punt2012,punt2013,punt2014,punt2015,punt2016,punt2017,punt2018,punt2019,punt2020,punt2021,punt2022,punt2023]
+            }
+          }
+        }
+        else
+          dato = {
+              labels: data.labels,
+              datasets: [punt2012,punt2013,punt2014,punt2015,punt2016]
+          }
+
+        window.num_mun_ano = new Chart(ctx, {
+          type: 'line',
+          data: dato,
+          options: {
+            responsive: true,
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Numero de estudiantes que presentaron la prueba por Municipio y Año'
+            },
+              pan: {
+                  enabled: true,
+                  mode: "xy",
+                  speed: 10,
+                  threshold: 10
+              },
+              zoom: {
+                enabled: true,
+                drag: false,
+                mode: "xy",
+                speed: 0.01,
+                // sensitivity: 0.1,
+                limits: {
+                  max: 10,
+                  min: 0.5
+                }
+              }
+          }
+        });
+      }
+    });
+}
+function opnum_mun_ano(){
+  var graph=document.getElementById("num-mun-ano");
+  var btn=document.getElementById("btn_resetZoom");
+  var tb=document.getElementById("containernum_mun_ano");
+  var select = document.getElementById("opnum_mun_ano");
+  if (select.value == "tabla"){
+    graph.style.display='none';
+    btn.style.display='none';
+    tb.style.display='block';
+    const tableContainer = document.getElementById('containernum_mun_ano');
+    const xAxis = mun_ano.data.labels;
+    const yAxis = mun_ano.data.datasets;
+
+    const tableHeader = `<tr>${
+        xAxis.reduce((memo, entry) => {
+            memo += `<th>${entry}</th>`;
+            return memo;
+        }, '<th>AÑO:</th>')
+    }</tr>`;
+
+    const tableBody = yAxis.reduce((memo, entry) => {
+        const rows = entry.data.reduce((memo, entry) => {
+            memo += `<td>${entry}</td>`
+            return memo;
+        }, '');
+
+        memo += `<tr><td>${entry.label}</td>${rows}</tr>`;
+
+        return memo;
+    }, '');
+
+    const table = ` 
+                    <div id="tabla" class="container-fluid">
+                        <div class="card shadow mb-6">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                ${tableHeader}
+                                            </thead>
+                                            <tbody>
+                                                ${tableBody}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        <script>
+                            $('#dataTable').DataTable({
+                                "pagingType": "full_numbers"
+                            });
+                        </script>
+                    </div>`;
+
+    // removeAttr('style');
+    tableContainer.innerHTML = table;
+    ban=0;
+  }else{
+    graph.style.display='block';
+    btn.style.display='block';
+    tb.style.display='none';
+  }
+
+}
+
 function cargarFunciones(){
    lectura_critic_ciudad();
    estu_anio();
@@ -1300,6 +1564,7 @@ function cargarFunciones(){
    desemp_ciu_edad();
    global_mun_ano();
    gen_ano();
+   num_mun_ano();
 }
 
 function cargaFuncionesPrincipal(){

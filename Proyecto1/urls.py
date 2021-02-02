@@ -46,6 +46,7 @@ urlpatterns = [
     path('estu-edad/', views.est_edad, name='estu-edad'),
     path('desemp-ciu-edad/', views.desemp_ciu_edad, name='desemp-ciu-edad'),
     path('global-mun-ano/', views.global_mun_ano, name='global-mun-ano'),
+    path('num-mun-ano/', viewsCubos.num_mun_ano, name='num-mun-ano'),
     path('grafic/', views.grafic, name='grafic'),
     path('subir/', views.subir, name='subir'),
     path('general/', viewsGeneral.generalDashboard, name='generalDashboard'),

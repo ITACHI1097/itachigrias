@@ -54,3 +54,164 @@ def generoAno(request):
         'masculino': masculino,
         'femenino': femenino,
     })
+
+def num_mun_ano(request):
+    label = []
+    punt2012 = []
+    punt2013 = []
+    punt2014 = []
+    punt2015 = []
+    punt2016 = []
+    punt2017 = []
+    punt2018 = []
+    punt2019 = []
+    punt2020 = []
+    punt2021 = []
+    punt2022 = []
+    punt2023 = []
+    # .filter(id_pru_soc_ciu__desemp_soc_ciu='MINIMO')
+    satisfactorio = []
+    minimo = []
+    insuficiente = []
+    desmp = []
+    cont = []
+
+
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2012' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        label.append(r[0])
+        punt2012.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2013' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2013.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2014' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2014.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2015' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2015.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2016' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2016.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2017' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2017.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2018' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2018.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2019' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2019.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2020' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2020.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2021' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2021.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2022' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2022.append(r[1])
+
+    conn = psycopg2.connect(database='icfes-1', user='postgres', password='1234', host='localhost', port=5432)
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    sql = "select cole_mcpio_ubicacion,count(fact_saber11.id_estudiante) from dim_tiempo,dim_lugares,fact_saber11 where dim_tiempo.id_tiempo=fact_saber11.id_tiempo and dim_lugares.id_lugar=fact_saber11.id_lugar and ano='2023' group by(cole_mcpio_ubicacion,ano) order by(cole_mcpio_ubicacion);"
+    cur.execute(sql)
+    row = cur.fetchall()
+    cur.close()
+    conn.close()
+    for r in row:
+        punt2023.append(r[1])
+
+
+    return JsonResponse(data={
+        'labels': label,
+        'punt2012': punt2012,
+        'punt2013': punt2013,
+        'punt2014': punt2014,
+        'punt2015': punt2015,
+        'punt2016': punt2016,
+        'punt2017': punt2017,
+        'punt2018': punt2018,
+        'punt2019': punt2019,
+        'punt2020': punt2020,
+        'punt2021': punt2021,
+        'punt2022': punt2022,
+        'punt2023': punt2023,
+    })

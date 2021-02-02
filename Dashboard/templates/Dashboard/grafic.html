@@ -146,6 +146,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-header" id="headingH">
+                        <h2 class="mb-0">
+                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseH"><i class="fa fa-plus"></i> Número de estudiantes que presentaron la prueba por municipio y año </button>
+                        </h2>
+                    </div>
+                    <div id="collapseH" class="collapse" aria-labelledby="headingH" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <select id="opnum_mun_ano" name="opnum_mun_ano" class="form-control col-md-4 select2" style="float: right;" onchange="opnum_mun_ano();">
+                              <option value="grafica">Grafica</option>
+                              <option value="tabla">Tabla</option>
+                            </select>
+                            <button class="btn btn-outline-primary" id="btn_resetZoom" onclick="window.num_mun_ano.resetZoom();">Reset Zoom</button>
+                            <canvas id="num-mun-ano" data-url="{% url 'num-mun-ano' %}" width="800" height="450" ></canvas>
+                            <div id='containernum_mun_ano' style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
