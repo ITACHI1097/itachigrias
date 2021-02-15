@@ -130,7 +130,7 @@ def subir(request):
             print(mensaje)
             f2.close()
             try:
-                df = pd.read_csv(str(BASE_DIR+'/media/icfes/data.txt'), encoding='unicode_escape', sep=";", dtype='unicode')
+                df = pd.read_csv(str(BASE_DIR+'/media/icfes/data.txt'), sep=";", dtype='unicode')
                 df = df.drop(df[df['ESTU_DEPTO_PRESENTACION'] != 'NARIÑO'].index)
                 df = df.drop(df[(df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152022000084') &
                                 (df['COLE_COD_DANE_ESTABLECIMIENTO'] != '152210000261') &
